@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css2?family=Candal&family=Lora:ital,wght@1,600&display=swap"
+        rel="stylesheet">
+    <!-- Awesome font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  
+    <link rel="stylesheet" href="../../css/admin.css">
+</head>
+  <body>
+
+    <!-- HEADERR---------- -->
+    <header>
+            <a href="../../index.html"><span class="logo-text"><h1>HieuTran</h1></span></a>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="navId">
+         
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">HieuTran</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Dashboard</a>
+                        <div class="dropdown-divider brk"></div>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </li>
+                
+            </ul>    
+    </header>
+    <!-- END//HEADER---------- -->
+
+    <!-- PAGE-WRAPPER -->
+    <div class="container page-wrapper">
+        <div class="row main-content">
+            <div class="col-md-2 menu-bar">
+                <ul>
+                    <li><a href="../posts/index.html">Manage Posts</a></li>
+                    <li><a href="../users/index.html">Manage Users</a></li>
+                    <li><a href="../topics/index.html">Manage Topics</a></li>
+                </ul>
+                
+            </div>
+
+            <!-- NOI DUNG HIEN THI -->
+            <div class="col-md-10 admin-content">
+                <div class="btn-group">
+                <a class="btn btn-primary" href="create.html" role="button">Add Post</a>
+                <a class="btn btn-primary" href="index.html" role="button">Manage Post</a>
+                </div>
+                <div class="content-table">
+                    <h2>Add Post</h2>
+                    <form action="" method="post">
+                        <label for="tt">Title</label>
+                        <input type="text" name="title" class="text-input">
+                        <label for="bd">Content</label>
+                        <textarea name="" rows="15" class="text-input"></textarea>
+                        <label for="bd">Topics</label>
+                        <select name="topics" class="custom-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <br>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- END//PAGEWRAPPER------------ -->
+
+    <!-- Optional JavaScript -->
+        <!-- Slider script
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
+
+    <!-- CUSTOM    -->
+    <script type="text/javascript" src="js/script.js"></script>
+    
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    
+</body>
+</html>

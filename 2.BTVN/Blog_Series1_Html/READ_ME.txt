@@ -1,0 +1,3 @@
+- Trang web được publish trên: https://hieutran2k.000webhostapp.com/
+- chuyển trang đăng ký (Register.html) khi ấn vào HieuTran trên navbar.
+- Chuyển được trang Dashboard.

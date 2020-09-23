@@ -1,0 +1,137 @@
+body,html{
+    padding: 0px auto;
+   height: 100%;
+   
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Candal',sans-serif;
+}
+
+p{
+    font-family: 'Lora',serif;
+}
+.text-input{
+    width: 100%;
+    height: auto;
+    font-size: 1.3em;
+}
+
+.area-input{
+    width: 100%;
+}
+/* HEADER */
+
+header{
+    width: 100%;
+    height: 66px;
+    background-color: #4bc8e7;
+    
+}
+.logo{
+    box-sizing: border-box;
+}
+.logo-text{
+    float: left;
+    height: 66px;
+    padding: 7px;
+    color:yellow;
+
+  
+}
+
+.nav{
+    float: right;
+    height: 100%;
+    /* overflow: hidden; */
+    
+}
+
+.nav li{
+    padding-right: 0px;
+    height: 66px;
+    
+    
+}
+
+.nav li a{
+    height: 66px;
+    color:yellow;
+    font-size: 1.2em;
+    padding-top: 15px;
+    
+}
+
+.nav li a:hover{
+    background-color: white;
+    color:#272547;
+}
+.dropdown-menu{
+    background-color: #4bc8e7;
+    
+}
+
+
+
+
+
+/* Main-page */
+
+/* Maincontent */
+.page-wrapper{
+    width: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    background-color:#f6f6f6;
+    height: 100%;
+}
+
+.main-content{
+
+    height: 100%;
+    
+}
+.admin-content{
+    display: block;
+    height: 100%;
+    padding: 45px 80px;
+    overflow: scroll;
+}
+.admin-content .content-table{
+    margin-top: 30px;
+}
+.admin-content .content-table h2{
+    text-align: center;
+}
+.btn-group a{
+    margin-left: 10px;
+}
+
+/* menu-bar */
+
+.menu-bar{
+    background-color: #366c7e;
+    padding: 0px;
+}
+
+.menu-bar ul{
+    margin:0px;
+    padding: 0px;
+}
+.menu-bar ul li{
+    list-style: none;
+
+}
+.menu-bar ul li a{
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    border-bottom: 1px solid #004044;
+    color:whitesmoke    
+}
+.menu-bar ul li a:hover{
+    background-color: #272547;
+}
+
+
+
