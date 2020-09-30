@@ -1,4 +1,6 @@
-<?php include('path.php');?>
+<?php include('path.php');
+    include($ROOT_PATH . '/app/database/db.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +20,9 @@
     
     <!-- TODO:INCLUDES HEADER HERE -->
 
-    <?php include(ROOT_PATH . "/app/includes/header.php");?>
+    <?php include($ROOT_PATH . "/app/includes/header.php");?>
+    <?php include($ROOT_PATH . "/app/includes/message.php");?>
+    
 
     <!-- SLIDER   -->
     <div class="page-wrapper">
@@ -171,7 +175,7 @@
 
     <!--Footer-->
 
-    <?php include(ROOT_PATH . "/app/includes/footer.php");?>
+    <?php include($ROOT_PATH . "/app/includes/footer.php");?>
 
     <!--END-Footer-->
 

@@ -1,8 +1,8 @@
 <?php
-
+    session_start();
     require('connect.php');
 
-
+    
     function dd($value){
         echo "<pre>", print_r($value,true), "</pre>";
         die();
@@ -10,11 +10,18 @@
 
     function executeQuery($sql,$data){
         global $conn;
-        $stmt =$conn->prepare($sql);
+
+        if($stmt =$conn->prepare($sql)){
          $values= array_values($data);
          $types=str_repeat('s',count($values));
          $stmt->bind_param($types,...$values);
          $stmt->execute();
+        }
+        else
+        {
+        echo "Prepare failed: (". $conn->errno.") ".$conn->error."<br>";
+        die();
+        }
          return $stmt;
     }
     // SELECT
@@ -85,7 +92,8 @@
         $i++;
         }      
         $stmt =executeQuery($sql,$data);
-        echo "thanh kong";
+        $id = $stmt->insert_id;
+        return $id;
     }
 
     function update($table,$id,$data){
@@ -118,14 +126,10 @@
     }
     $data=[
         'admin' => 0,
-        'username' => 'Hieu2',
-        'email' => 'loavng@gmail.com',
-        'password' => 'long29345',
+        'username' => 'hieu',
 
     ];
    
-    $id=delete('users',6);
-    dd($id);
     
     
 
