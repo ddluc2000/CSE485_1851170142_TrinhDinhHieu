@@ -23,7 +23,7 @@ function loginUser($user){
 
     if($_SESSION['admin']){
 
-        header('location: '. $BASE_URL.'/admin/dashboard.php');
+        header('location: '. $BASE_URL.'/index.php');
         
     }
     else{
