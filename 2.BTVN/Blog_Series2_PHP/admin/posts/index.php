@@ -1,6 +1,6 @@
 
 <?php include("../../path.php");?>
-
+<?php include($ROOT_PATH . "/app/controllers/posts.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +35,9 @@
             <div class="content">
 
                 <h2 class="page-title">Manage Posts</h2>
+
+                <?php include($ROOT_PATH . "/app/includes/message.php");?>
+
                 <table>
                     <thead>
                         <th>SN</th>
@@ -43,22 +46,24 @@
                         <th colspan="3">Action</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>This is the first Post</td>
-                            <td>HieuTran</td>
-                            <td><a href="#" Class="edit" >Edit</a></td>
-                            <td><a href="#" Class="delete">Delete</a></td>
-                            <td><a href="#" Class="publish">Publish</a></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>This is the second Post</td>
-                            <td>HieuTran</td>
-                            <td><a href="#" Class="edit" >Edit</a></td>
-                            <td><a href="#" Class="delete">Delete</a></td>
-                            <td><a href="#" Class="publish">Publish</a></td>
-                        </tr>
+                        
+                            <?php foreach($posts as $key => $post):?>
+                            <tr>
+                                <td><?php echo $post['id'];?></td>
+                                <td><?php echo $post['title'];?></td>
+                                <td>HieuTran</td>
+                                <td><a href="edit.php?id=<?php echo $post['id'];?>" Class="edit" >Edit</a></td>
+                                <td><a href="edit.php?delete_id=<?php echo $post['id'];?>" Class="delete">Delete</a></td>
+                                
+                                <?php if($post['published']):
+                                ?>
+                                <td><a href="edit.php?published=0&p_id=<?php echo $post['id']?>" Class="unpublish">Unpublish</a></td>
+                                <?php else: ?>
+                                    <td><a href="edit.php?published=1&p_id=<?php echo $post['id']?>" Class="publish">Publish</a></td>
+                                <?php endif;?> 
+                            </tr>
+                            <?php endforeach;?>
+                        
                     </tbody>
                 </table>
             </div>

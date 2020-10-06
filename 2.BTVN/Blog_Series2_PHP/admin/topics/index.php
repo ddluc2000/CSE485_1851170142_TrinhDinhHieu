@@ -50,7 +50,7 @@
                             <td><?php echo $key + 1;?></td>
                             <td><?php echo $topic['name'];?></td>
                             <td><a href="edit.php?id=<?php echo $topic['id'];?>" Class="edit" >Edit</a></td>
-                            <td><a href="#" Class="delete">Delete</a></td>
+                            <td><a href="index.php?del_id=<?php echo $topic['id'];?>" Class="delete">Delete</a></td>
                         </tr>
                         <?php endforeach;?>
                         

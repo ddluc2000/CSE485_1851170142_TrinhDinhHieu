@@ -1,6 +1,6 @@
 
 <?php include("../../path.php");?>
-
+<?php include($ROOT_PATH."/app/controllers/users.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +36,7 @@
 
                 <h2 class="page-title">Add User</h2>
                 
-                <form action="create.html" method="post">
+                <form action="create.php" method="post">
                     <div>
                         <label>Username</label>
                         <input type="text" name="username" class="text-input">
@@ -54,15 +54,13 @@
                         <input type="password" name="passwordConf" class="text-input">
                     </div>
                     <div>
-                        <label>Role</label>
-                        <select name="topic">
-                            <option value="Admin">Admin</option>
-                            <option value="Author">Author</option>
-                        </select>
+                        
+                        <input type="checkbox" name="admin">
+                        Admin
                     </div>
 
                     <div>
-                        <button type="submit" class="btn btn_submit">Add User</button>
+                        <button type="submit" name="create-admin" class="btn btn_submit">Add User</button>
                     </div>
                 </form>
             </div>

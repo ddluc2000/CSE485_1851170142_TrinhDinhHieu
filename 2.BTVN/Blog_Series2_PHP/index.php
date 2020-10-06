@@ -1,5 +1,8 @@
-<?php include('path.php');
-    include($ROOT_PATH . '/app/database/db.php');
+<?php 
+    include('path.php');
+    include($ROOT_PATH . "/app/controllers/topics.php");
+    include_once($ROOT_PATH . '/app/database/db.php');
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -157,11 +160,17 @@
                     <div class="section topics">
                         <h2 class="section-title">Topics</h2>
                         <ul>
-                            <li><a href="#">Music</a></li>
-                            <li><a href="#">Picture</a></li>
+                            <?php foreach($topics as $key => $topic):?>
+                                <li><a href="#"><?php echo $topic['name'];?></a></li>
+                            </tr>
+                            <?php endforeach;?>
+                            
+
+
+                            <!-- <li><a href="#">Picture</a></li>
                             <li><a href="#">Relax</a></li>
                             <li><a href="#">Games</a></li>
-                            <li><a href="#">Community</a></li>
+                            <li><a href="#">Community</a></li> -->
                         </ul>
                     </div>
 
