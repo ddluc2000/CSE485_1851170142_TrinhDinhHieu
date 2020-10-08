@@ -1,6 +1,8 @@
 
 <?php include("../../path.php");?>
-<?php include($ROOT_PATH . "/app/controllers/posts.php");?>
+<?php include($ROOT_PATH . "/app/controllers/posts.php");
+adminOnly();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +37,7 @@
             <div class="content">
 
                 <h2 class="page-title">Edit Post</h2>
-                
+                <?php include($ROOT_PATH . "/app/helpers/formErrors.php");?>
                 <form action="edit.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?php echo $id ;?>">   
                 <div>

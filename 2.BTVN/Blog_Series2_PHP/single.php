@@ -1,4 +1,14 @@
 <?php include('path.php');?>
+
+<?php include($ROOT_PATH . "/app/controllers/posts.php");
+    
+    if(isset($_GET['id'])){
+        $post= selectOne('posts',['id' => $_GET['id']]);
+    }
+    $topics = selectAll('topics');
+    $posts=selectAll('posts',['published' => 1]);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Candal&family=Lora:ital,wght@1,600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Single Post</title>
+    <title><?php echo $post['title'];?></title>
 </head>
 
 <body>
@@ -24,38 +34,9 @@
 
     <!-- maincontent-->
             <div class="main-content single">
-                <h1 class="post-title">This is title of the website</h1>
+                <h1 class="post-title"><?php echo $post['title'];?></h1>
                 <div class="post-content">
-                    <p>Every Day is the good day.Hope you have a good day!Good luck! You're welcome</p>
-                    <p>Every Day is the good day.Hope you have a good day!Good luck! You're welcome</p>
-                    <p>Every Day is the good day.You're welcome</p>
-                    <p>Every Day is the good day.You're welcome</p>
-                    <p>You're welcome</p>
-                    <p>Hope you have a good day!Good luck! You're welcome</p>
-                    <p>Every Day is the good day.Hope you have a good day!Good luck!</p>
-                    <p>Every Day is the good day.Hope you have a good day!Good luck! You're welcome</p>
-                    <p>Every Day is the good day.Hope you have a good day!Good luck! You're welcome</p>
-                    
-                    <p>Every Day is the good day.Hope you have a good day!Good luck! You're welcome</p>
-                    <p>Every Day is the good day.Hope you have a good day!Good luck! You're welcome</p>
-                    <p>Every Day is the good day.You're welcome</p>
-                    <p>Every Day is the good day.You're welcome</p>
-                    <p>You're welcome</p>
-                    <p>Hope you have a good day!Good luck! You're welcome</p>
-                    <p>Every Day is the good day.Hope you have a good day!Good luck!</p>
-                    <p>Every Day is the good day.Hope you have a good day!Good luck! You're welcome</p>
-                    <p>Every Day is the good day.Hope you have a good day!Good luck! You're welcome</p>
-                    
-                    <p>Every Day is the good day.Hope you have a good day!Good luck! You're welcome</p>
-                    <p>Every Day is the good day.Hope you have a good day!Good luck! You're welcome</p>
-                    <p>Every Day is the good day.You're welcome</p>
-                    <p>Every Day is the good day.You're welcome</p>
-                    <p>You're welcome</p>
-                    <p>Hope you have a good day!Good luck! You're welcome</p>
-                    <p>Every Day is the good day.Hope you have a good day!Good luck!</p>
-                    <p>Every Day is the good day.Hope you have a good day!Good luck! You're welcome</p>
-                    <p>Every Day is the good day.Hope you have a good day!Good luck! You're welcome</p>
-                    
+                    <?php echo html_entity_decode($post['body']);?>
                 </div>
             </div>
     <!--//End Maincontent-->
@@ -63,35 +44,20 @@
             <div class="sidebar single">
                 <div class="section popular">
                     <h2 class="section-title">Popular</h2>
+                    <?php foreach($posts as $p):?>
                     <div class="post clearfix">
-                        <img src="assets/image/img1.png" alt="123">
-                        <a href="#" class="title"><h4>How to handsome like HieuTran?</h4></a>
+                        <img src="<?php echo $BASE_URL . '/assets/image/'.$p['image'];?>" alt="123">
+                        <a href="#" class="title"><h4><?php echo $p['title'];?></h4></a>
                     </div>
-                    <div class="post clearfix">
-                        <img src="assets/image/imag2.jpg" alt="123">
-                        <a href="#" class="title"><h4>How to handsome like HieuTran?</h4></a>
-                    </div>
-                    <div class="post clearfix">
-                        <img src="assets/image/img3.png" alt="123">
-                        <a href="#" class="title"><h4>How to handsome like HieuTran?</h4></a>
-                    </div>
-                    <div class="post clearfix">
-                        <img src="assets/image/img4.png" alt="234">
-                        <a href="#" class="title"><h4>How to handsome like HieuTran?</h4></a>
-                    </div>
-                    <div class="post clearfix">
-                        <img src="assets/image/img5.png" alt="345">
-                        <a href="#" class="title"><h4>How to handsome like HieuTran?</h4></a>
-                    </div>
+                    <?php endforeach;?>
                 </div>
                     <div class="section topics">
                         <h2 class="section-title">Topics</h2>
                         <ul>
-                            <li><a href="index.html">Music</a></li>
-                            <li><a href="index.html">Picture</a></li>
-                            <li><a href="index.html">Relax</a></li>
-                            <li><a href="index.html">Games</a></li>
-                            <li><a href="index.html">Community</a></li>
+                            <?php foreach($topics as $key => $topic):?>
+                                <li><a href="<?php echo $BASE_URL . "/index.php?t_id=" . $topic['id'] . '&name='.$topic['name'];?>"><?php echo $topic['name'];?></a></li>
+                            
+                            <?php endforeach;?>
                         </ul>
                     </div>
 

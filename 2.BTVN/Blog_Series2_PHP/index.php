@@ -2,7 +2,21 @@
     include('path.php');
     include($ROOT_PATH . "/app/controllers/topics.php");
     include_once($ROOT_PATH . '/app/database/db.php');
-    
+    $postsTitle='Recent Posts';
+    // dd($posts);
+
+    if(isset($_GET['t_id'])){
+        $posts = getPostsByTopicId($_GET['t_id']);
+        $postsTitle='You searched for topic: '.$_GET['name'];
+    }
+    else if(isset($_POST['search-term'])){
+        $posts=searchPosts($_POST['search-term']);
+        $postsTitle='You searched for "'.$_POST['search-term'].'"';
+    }
+    else{
+        $posts=getPublishedPosts();
+    }
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,57 +48,18 @@
             <i class="fas fa-chevron-right next slick-arrow" style=""></i>
             <i class="fas fa-chevron-left prev slick-arrow" style=""></i>
             <div class="post-wrapper">
-
+            <?php foreach($posts as $post):?>
                 <div class="post">
-                    <img src="assets/image/img1.png" alt="Beautyful girl" class="slider-image">
+                    <img src="<?php echo $BASE_URL . '/assets/image/'.$post['image'];?>" alt="Beautyful girl" class="slider-image">
                     <div class="post-info">
-                        <h4><a href="single.html">Every day is the good day!</a></h4>
-                        <i class="author">Hieu Tran</i>
+                        <h4><a href="single.php?id=<?php echo $post['id'];?>"><?php echo $post['title'];?></a></h4>
+                        <i class="author"><?php echo $post['username'];?></i>
                         &nbsp;
-                        <i class="calender">09/09/2020</i>
+                        <i class="calender"><?php echo date('F j, Y',strtotime($post['created_at'])); ?></i>
                     </div>
                 </div>
+                <?php endforeach;?>
 
-                <div class="post">
-                    <img src="assets/image/imag2.jpg" alt="Beautyful girl" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single.html">Hello Guys</a></h4>
-                        <i class="author">Hieu Tran</i>
-                        &nbsp;
-                        <i class="calender">09/09/2020</i>
-                    </div>
-                </div>
-
-                <div class="post">
-                    <img src="assets/image/img3.png" alt="Beautyful girl" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single.html">Welcome to my Blog</a></h4>
-                        <i class="author">Hieu Tran</i>
-                        &nbsp;
-                        <i class="calender">09/09/2020</i>
-                    </div>
-                </div>
-
-                <div class="post">
-                    <img src="assets/image/img4.png" alt="Beautyful girl" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single.html">You're welcome</a></h4>
-                        <i class="author">Hieu Tran</i>
-                        &nbsp;
-                        <i class="calender">09/09/2020</i>
-                    </div>
-                </div>
-
-                <div class="post">
-                    <img src="assets/image/img5.png" alt="Beautyful girl" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single.html">Every day is the good day!</a></h4>
-                        <i class="author">Hieu Tran</i>
-                        &nbsp;
-                        <i class="calender">09/09/2020</i>
-                    </div>
-
-                </div>
             </div>
         </div>
 
@@ -95,74 +70,38 @@
 
                 <!-- maincontent-->
                 <div class="main-content">
-                    <h1 class="recent-post-title">Recents Posts</h1>
+                    <h1 class="recent-post-title"><?php echo $postsTitle;?></h1>
 
+                    <?php foreach($posts as $post):?>
                     <div class="post">
-                        <img src="assets/image/img1.png" alt="" class="post-image">
+                        <img src="<?php echo $BASE_URL . '/assets/image/'.$post['image'];?>" alt="" class="post-image">
                         <div class="post-preview">
-                            <h2><a href="single.html">Welcome to my Blog</a></h2>
-                            <i class="author">HieuTran</i>
+                            <h2><a href="single.php?id=<?php echo $post['id'];?>"><?php echo $post['title'];?></a></h2>
+                            <i class="author"><?php echo $post['username'];?></i>
                             &nbsp;
-                            <i class="calendar">09/09/2020</i>
-                            <p class="preview-text">Hello everybody, this is my Blog. It so beautiful.</p>
-                            <a href="single.html" class="btn read-more">Read More</a>
+                            <i class="calendar"><?php echo date('F j, Y',strtotime($post['created_at'])); ?></i>
+                            <p class="preview-text"><?php echo html_entity_decode(substr($post['body'],0,150).'...');?></p>
+                            <a href="single.php?id=<?php echo $post['id'];?>" class="btn read-more">Read More</a>
                         </div>
                     </div>
+                    <?php endforeach;?>
+                    
 
-                    <div class="post">
-                        <img src="assets/image/imag2.jpg" alt="" class="post-image">
-                        <div class="post-preview">
-                            <h2><a href="single.html">Every day is the good day!</a></h2>
-                            <i class="author">HieuTran</i>
-                            &nbsp;
-                            <i class="calendar">09/09/2020</i>
-                            <p class="preview-text">Hello everybody, this is my Blog. It so beautiful.</p>
-                            <a href="single.html" class="btn read-more">Read More</a>
-                        </div>
-                    </div>
-
-                    <div class="post">
-                        <img src="assets/image/img3.png" alt="" class="post-image">
-                        <div class="post-preview">
-                            <h2><a href="single.html">Every day is the good day!</a></h2>
-                            <i class="author">HieuTran</i>
-                            &nbsp;
-                            <i class="calendar">09/09/2020</i>
-                            <p class="preview-text">Hello everybody, this is my Blog. It so beautiful.</p>
-                            <a href="single.html" class="btn read-more">Read More</a>
-                        </div>
-                    </div>
-
-                    <div class="post">
-                        <img src="assets/image/img4.png" alt="" class="post-image">
-                        <div class="post-preview">
-                            <h2><a href="single.html">Beautyful Girl</a></h2>
-                            <i class="author">HieuTran</i>
-                            &nbsp;
-                            <i class="calendar">09/09/2020</i>
-                            <p class="preview-text">This is a Beautiful Girl on the internet!</p>
-                            <a href="single.html" class="btn read-more">Read More</a>
-                        </div>
-                    </div>
-                </div>
+                </div>    
 
                 <!--//End Maincontent-->
                 <div class="sidebar">
-                    <audio controls autoplay loop preload="auto" class="audio">
-                        <source src="music/easylove.mp3" type="audio/mp3">
-                    </audio>
                     <div class="section search">
                         <h2 class="section-title">Search</h2>
-                        <form action="index.html" method="post">
-                            <input type="text" name="txt_search" class="text-input" placeholder="Search ...">
+                        <form action="index.php" method="post">
+                            <input type="text" name="search-term" class="text-input" placeholder="Search ...">
                         </form>
                     </div>
                     <div class="section topics">
                         <h2 class="section-title">Topics</h2>
                         <ul>
                             <?php foreach($topics as $key => $topic):?>
-                                <li><a href="#"><?php echo $topic['name'];?></a></li>
-                            </tr>
+                                <li><a href="<?php echo $BASE_URL . "/index.php?t_id=" . $topic['id'] . '&name='.$topic['name'];?>"><?php echo $topic['name'];?></a></li>
                             <?php endforeach;?>
                             
 
@@ -179,7 +118,7 @@
 
             </div>
             <!--//End Content-->
-        </div>
+    </div>
     
 
     <!--Footer-->

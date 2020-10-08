@@ -1,6 +1,7 @@
 
 <?php include("../../path.php");?>
-<?php include($ROOT_PATH."/app/controllers/users.php");?>
+<?php include($ROOT_PATH."/app/controllers/users.php");
+adminOnly();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +36,7 @@
             <div class="content">
 
                 <h2 class="page-title">Add User</h2>
-                
+                    <?php include($ROOT_PATH . "/app/helpers/formErrors.php");?>
                 <form action="create.php" method="post">
                     <div>
                         <label>Username</label>

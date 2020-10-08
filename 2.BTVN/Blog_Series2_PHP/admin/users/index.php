@@ -1,6 +1,7 @@
 
 <?php include("../../path.php");?>
-<?php include($ROOT_PATH . "/app/controllers/users.php");?>
+<?php include($ROOT_PATH . "/app/controllers/users.php");
+adminOnly();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +32,6 @@
                 <a href="create.php" class="btn btn_submit">Add User</a>
                 <a href="index.php" class="btn btn_submit">Manage Users</a>
             </div>
-
             <div class="content">
 
                 <h2 class="page-title">Manage Users</h2>
@@ -50,7 +50,7 @@
                             <td><?php echo $key +1;?></td>
                             <td><?php echo $user['username'];?></td>
                             <td><?php echo $user['email'];?></td>
-                            <td><a href="#" Class="edit" >Edit</a></td>
+                            <td><a href="edit.php?admin_id=<?php echo $user['id'];?>" Class="edit" >Edit</a></td>
                             <td><a href="index.php?delete_id=<?php echo $user['id'];?>" Class="delete">Delete</a></td>
                             </tr>
                             

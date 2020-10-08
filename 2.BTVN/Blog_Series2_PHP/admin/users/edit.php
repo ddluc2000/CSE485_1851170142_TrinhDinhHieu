@@ -1,6 +1,7 @@
 
 <?php include("../../path.php");?>
-
+<?php include($ROOT_PATH . "/app/controllers/users.php");
+adminOnly();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,41 +29,47 @@
         <!--Admin content-->
         <div class="admin-content">
             <div class="button-group">
-                <a href="create.html" class="btn btn_submit">Add User</a>
-                <a href="index.html" class="btn btn_submit">Manage Users</a>
+                <a href="create.php" class="btn btn_submit">Add User</a>
+                <a href="index.php" class="btn btn_submit">Manage Users</a>
             </div>
 
             <div class="content">
 
-                <h2 class="page-title">Add User</h2>
-                
-                <form action="create.html" method="post">
+                <h2 class="page-title">Edit User</h2>
+                <?php include($ROOT_PATH . "/app/helpers/formErrors.php");?>
+                <form action="edit.php" method="post">
+                <input type="hidden" name="id" value="<?php echo $id;?>">
                     <div>
                         <label>Username</label>
-                        <input type="text" name="username" class="text-input">
+                        <input type="text" name="username" value="<?php echo $username;?>"class="text-input">
                     </div>
                     <div>
                         <label>Email</label>
-                        <input type="email" name="email" class="text-input">
+                        <input type="email" name="email" value="<?php echo $email;?>" class="text-input">
                     </div>
                     <div>
                         <label>Password</label>
-                        <input type="password" name="password" class="text-input">
+                        <input type="password" name="password" value="<?php echo $password;?>" class="text-input">
                     </div>
                     <div>
                         <label>Confirm Password</label>
-                        <input type="password" name="passwordConf" class="text-input">
-                    </div>
-                    <div>
-                        <label>Role</label>
-                        <select name="topic">
-                            <option value="Admin">Admin</option>
-                            <option value="Author">Author</option>
-                        </select>
+                        <input type="password" name="passwordConf" value="<?php echo $passwordConf;?>" class="text-input">
                     </div>
 
+                    <?php if($admin):?>
                     <div>
-                        <button type="submit" class="btn btn_submit">Add User</button>
+                        <input type="checkbox" name="admin" checked>
+                        Admin
+                    </div>
+                    <?php else: ?>
+                    <div>
+                        <input type="checkbox" name="admin">
+                        Admin
+                    </div>
+                    <?php endif;?>
+
+                    <div>
+                        <button type="submit" name="update-user"class="btn btn_submit">Update User</button>
                     </div>
                 </form>
             </div>

@@ -1,6 +1,8 @@
 
 <?php include("../../path.php");?>
-<?php include($ROOT_PATH . "/app/controllers/topics.php");?>
+<?php include($ROOT_PATH . "/app/controllers/topics.php");
+adminOnly();
+?>
 
 
 <!DOCTYPE html>

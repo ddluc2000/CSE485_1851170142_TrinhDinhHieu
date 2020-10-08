@@ -5,16 +5,19 @@
 
         <i class="fa fa-bars menu-toggle"></i>
         <ul class="nav">
+        <?php if(isset($_SESSION['username'])):?>
             <li>
                 <a href="../../register.html">
                 <i class="fa fa-user"></i>
-                Hieu Tran
+                <?php echo $_SESSION['username']; ?>
                 <i class="fa fa-chevron-down" style="font-size: .8em;"></i></a>
                 <ul>
-                    <li><a href="#" class="logout">Logout</a></li>
+                    <li><a href="<?php echo $BASE_URL.'/logout.php';?>" class="logout">Logout</a></li>
                 </ul>
 
             </li>
+        <?php endif;?>
         </ul>
+
 
     </header>
