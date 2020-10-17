@@ -9,20 +9,42 @@ global $ROOT_PATH; ?>
     </div>
     <div class="main-page container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="main-content col-md-12">
+                <?php foreach ($zones as $zone):?>
                     <!-- de nghi dung khung khac ko dung media -->
-                    <div class="block-container border border-success">
+                    <div class="zone block-container border border-success">
+                        <!-- header zone -->
                         <div class="block-header border-bottom border-warning">
-                        viet gi do
+                        <h5><?php echo $zone['title'];?></h5>
+                        <p><?php echo $zone['description']; ?></p>
                         </div>
-                        <div class="block-body">
-
-                        noi dung gi do
+                        <!-- body zone -->
+                        <div class="block-body ">
+                        <?php foreach ($topics as $topic):?>
+                        <?php if($topic['zone_id']===$zone['zone_id']):?>
+                            <div class="topic-content">
+                                <span><i class="far fa-comments icon"></i></span>
+                                <div class="topic-body">
+                                    <div class="topic-title"><h5><a href="#"><?php echo $topic['title'];?></a></h5></div>
+                                        <?php foreach ($mitopics as $mitopic):?>
+                                        <?php if($mitopic['topic_id']===$topic['topic_id']):?>
+                                        <div class="mtopic-tt">
+                                            <span><i class="far fa-comments m-icon"></i></span>
+                                            <a href=""><?php echo $mitopic['title']; ?></a>
+                                        </div>
+                                        <?php endif; ?>
+                                        <?php endforeach;?>
+                                    
+                                </div>                
+                            </div>
+                        <?php endif; ?>
+                        <?php endforeach;?>
                         </div>
+                          <!-- end bodyzone -->
                     </div>
-                      
-
-                    <!-- truoc zone -->
+                    <!-- end zone -->
+                   
+                <?php endforeach;?>
             </div>
         </div>
     </div>

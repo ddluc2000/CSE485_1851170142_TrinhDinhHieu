@@ -37,10 +37,43 @@ header .nav .nav-item a{
     width: 100%;
     min-height: 100%;
 }
-.card img{
-    max-height: 60px;
-    max-width: 60px;
+
+.main-content{
+    padding:0px;
 }
-.card{
+
+.zone{
+    margin-top: 10px;
+}
+/* icon */
+.icon{
+    font-size: 50px;
+}
+.m-icon{
+    font-size: 25px;
+}
+
+.topic-content{
     display: flex;
+    border-bottom: 1px solid rgb(141, 127, 127);
+}
+
+.topic-body{
+    width: 50%;
+}
+.mtopic-tt{
+    display: inline-block;
+
+    width: auto;
+}
+
+
+/* FOOTER */
+footer{
+    margin-top: 20px;
+    border: 1px solid red;
+    padding: 20px;
+    background-color: #54838a;
+    /* de height auto sau */
+    height: 70px;
 }
