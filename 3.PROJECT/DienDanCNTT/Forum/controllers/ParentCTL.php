@@ -34,7 +34,7 @@ class ParentCTL
 
     
     //import file view tương ứng, xử lý biến $books tại view này
-    require_once 'views/test.php';
+    require_once 'views/id_topics.php';
   }
 }
 

@@ -1,3 +1,13 @@
+body{
+    padding:0px auto;
+
+}
+
+*{
+    box-sizing: border-box;
+}
+
+/* HEADER */
 header{
     border: 1px solid red;
     padding: 20px;
@@ -35,7 +45,7 @@ header .nav .nav-item a{
     margin-top: 20px;
     border: 1px solid brown;
     width: 100%;
-    min-height: 100%;
+    min-height: 751px;
 }
 
 .main-content{

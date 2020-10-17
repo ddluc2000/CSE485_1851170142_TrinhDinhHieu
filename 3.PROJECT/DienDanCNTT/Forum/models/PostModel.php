@@ -2,15 +2,18 @@
     require_once("model.php");
 
 
-    class MitopicModel{
-        private $mitopic_id;
+    class PostModel{
+        private $post_id;
         private $title;
-        private $description;
+        private $body;
+        private $tags;
         private $topic_id;
-        public $connection;
-        const TABLE="mitopics";
+        private $mitopic_id;
         
-        function MitopicModel(){
+        public $connection;
+        const TABLE="posts";
+        
+        function PostModel(){
             $this->connection=openConnect();
             if(!$this->connection)
             die("khong ket loi dc");
@@ -39,8 +42,8 @@
         
     }
 
-    // $tp=new TopicModel();
-    // $rs=$tp->selectAll(['zone_id'=>1]);
+    // $tp=new PostModel();
+    // $rs=$tp->selectAll();
     // print_r($rs);
 
 
