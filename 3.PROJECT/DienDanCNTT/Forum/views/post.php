@@ -43,7 +43,7 @@ global $ROOT_PATH; ?>
                                     <?php endif;?>
                                     <div class="grb-post btn-group" role="group" aria-label="">
                                     <!-- if isset id=post id -->
-                                        <?php if($_SESSION['id']==$post['user_id']||$_SESSION['admin']==1):?>
+                                        <?php if(isset($_SESSION['id'])&&($_SESSION['id']==$post['user_id']||$_SESSION['admin']==1)):?>
                                         <a class="btn btn-primary" href="<?php echo $BASE_URL."/index.php?controller=posts&action=edit_p&p_id=".$post['post_id'];?>" role="button">Edit</a>
                                         <!-- k thi thoi -->
                                         <a name="" id="" class="btn btn-primary" href="<?php echo $BASE_URL."/index.php?controller=posts&action=delete_p&p_id=".$post['post_id'];?>" role="button">Delete</a>
@@ -82,7 +82,7 @@ global $ROOT_PATH; ?>
                                     <hr>
                                     <div class="grb-post btn-group" role="group" aria-label="">
                                         <!-- check cai gi do trc da -->
-                                        <?php if($_SESSION['id']==$comment['user_id']):?>
+                                        <?php if(isset($_SESSION['id'])&&$_SESSION['id']==$comment['user_id']):?>
                                         <a class="btn btn-primary" href="<?php echo $BASE_URL."/index.php?controller=posts&action=delete_c&cm_id=".$comment['cm_id'];?>" role="button">Delete</a>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId">
