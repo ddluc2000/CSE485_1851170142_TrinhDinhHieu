@@ -22,6 +22,11 @@ global $ROOT_PATH; ?>
                                 <div class="mitopic-tt"><a href="<?php echo $BASE_URL."/index.php?controller=topics&action=mtp_index&mtp_id=".$mitopic['mitopic_id'];?>"><?php echo $mitopic['title'];?></a></div>
                             </div>      
                             <?php endforeach;?>   
+                            <br>
+                            <!-- nut dieu huong o day -->
+                            <a name="" class="btn btn-primary" href="<?php echo $BASE_URL."/index.php?controller=posts&action=create&tp_id=".$data['topic_id'];?>" role="button">Create Post</a>
+                            <br>
+                            <br>
                             <div class="post-body border border-success">
                             <!-- post -->
                                 <?php foreach ($posts as $post):?>

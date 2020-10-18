@@ -44,6 +44,16 @@
             return $result;
         }
         
+        // lay thang mi topic theo id;
+        function selectOne($mtpid){
+            $sql="SELECT * FROM ". self::TABLE . " WHERE mitopic_id='$mtpid' LIMIT 1";
+
+            $rs=mysqli_query($this->connection,$sql);
+            $result=mysqli_fetch_assoc($rs);
+            closeConnect($this->connection);
+            return $result;
+            // chưa xử lý có đk
+        }
     }
 
     // $tp=new TopicModel();

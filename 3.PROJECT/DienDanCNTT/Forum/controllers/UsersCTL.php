@@ -32,9 +32,12 @@ class UsersCTL
         $userModel = new UserModel();
         $user = $userModel->selectByUn($_POST['username']);
         if($user&&$user['password']===$_POST['password'])
-        {
-                $_SESSION['username']=$user['username'];
+        {       
                 $_SESSION['id']=$user['user_id'];
+                $_SESSION['username']=$user['username'];
+                $_SESSION['fullname']=$user['fullname'];
+                $_SESSION['admin']=$user['admin'];
+                $_SESSION['create_at']=$user['create_at'];
                 $_SESSION['message']="ban da dang nhap thanh cong!";
                 // type
                 header("location:".$ROOT_PATH."index.php");
@@ -53,7 +56,9 @@ class UsersCTL
           
           unset($_SESSION['id']);
           unset($_SESSION['username']);
-          unset($_SESSION['message']);
+          unset($_SESSION['fullname']);
+          unset($_SESSION['admin']);
+          unset($_SESSION['create_at']);
           // phan van giua require_once home hay dung header
           header("location:".$ROOT_PATH."index.php");
           exit();

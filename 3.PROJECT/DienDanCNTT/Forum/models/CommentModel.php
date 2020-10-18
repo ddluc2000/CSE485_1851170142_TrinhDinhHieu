@@ -36,6 +36,36 @@
             // chưa xử lý có đk
         }
         
+        function create($data=[]){
+                $sql="INSERT INTO ". self::TABLE;
+                $i=0;
+                foreach($data as $key=>$value){
+                    if($i==0){
+                        $sql=$sql." SET $key='$value'";
+                    }
+                    else{
+                        $sql=$sql." ,$key='$value'";
+                    }
+                    $i++;
+                }
+                $rs=mysqli_query($this->connection,$sql);
+                closeConnect($this->connection);
+                return 1;
+        }
+
+        function deleteAll($p_id){
+            $sql="DELETE FROM comments WHERE post_id=".$p_id;
+            mysqli_query($this->connection,$sql);
+            closeConnect($this->connection);
+            return 1;
+        }
+
+        function deleteOne($cm_id){
+            $sql="DELETE FROM comments WHERE cm_id=".$cm_id;
+            mysqli_query($this->connection,$sql);
+            closeConnect($this->connection);
+            return 1;
+        }
     }
 
 
