@@ -2,40 +2,24 @@
     require_once("model.php");
 
 
-    class PostModel{
-        private $post_id;
-        private $title;
-        private $create_at;
-        private $body;
-        private $tags;
-        private $status;
+    class UserModel{
         private $user_id;
-        private $topic_id;
-        private $mitopic_id; 
+        private $username;
+        private $fullname;
+        private $email;
+        private $password;
+        private $code;
+        private $create_at;
+        private $admin;
+        private $status;
         public $connection;
-        const TABLE="posts";
+        const TABLE="users";
         
-        function PostModel(){
+        function UserModel(){
             $this->connection=openConnect();
             if(!$this->connection)
             die("khong ket loi dc");
             
-        }
-
-        function getPostInTP($tp_id){
-            $sql="SELECT p.*,u.username,u.user_id FROM posts As p JOIN users as u ON p.user_id=u.user_id WHERE p.topic_id='$tp_id'";
-            $rs=mysqli_query($this->connection,$sql);
-            $result=mysqli_fetch_all($rs,MYSQLI_ASSOC);
-            closeConnect($this->connection);
-            return $result;
-        }
-
-        function getPostInMTP($mtp_id){
-            $sql="SELECT p.*,u.username,u.user_id FROM posts As p JOIN users as u ON p.user_id=u.user_id WHERE p.mitopic_id='$mtp_id'";
-            $rs=mysqli_query($this->connection,$sql);
-            $result=mysqli_fetch_all($rs,MYSQLI_ASSOC);
-            closeConnect($this->connection);
-            return $result;
         }
 
         function selectAll($data=[]){
@@ -58,13 +42,21 @@
         }
         
         function selectOne($id){
-            $sql="SELECT * FROM ". self::TABLE . " WHERE post_id='$id' LIMIT 1";
-
+            $sql="SELECT * FROM ". self::TABLE . " WHERE user_id='$id' LIMIT 1";
             $rs=mysqli_query($this->connection,$sql);
             $result=mysqli_fetch_assoc($rs);
             closeConnect($this->connection);
             return $result;
             // chưa xử lý có đk
+        }
+
+        function selectByUn($username){
+            $sql="SELECT * FROM ". self::TABLE . " WHERE username='$username' LIMIT 1";
+
+            $rs=mysqli_query($this->connection,$sql);
+            $result=mysqli_fetch_assoc($rs);
+            closeConnect($this->connection);
+            return $result;
         }
         
     }

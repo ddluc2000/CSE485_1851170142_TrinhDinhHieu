@@ -1,5 +1,7 @@
     <footer>
-        
+        <div class="footer-page">
+          
+        </div>
     </footer>
     
     <!-- Optional JavaScript -->

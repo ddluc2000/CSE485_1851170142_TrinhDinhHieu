@@ -35,7 +35,13 @@
             // chưa xử lý có đk
         }
 
-        
+        function getNamebyId($tp_id){
+            $sql="SELECT title FROM ". self::TABLE ." WHERE topic_id='$tp_id'";
+            $rs=mysqli_query($this->connection,$sql);
+            $result=mysqli_fetch_assoc($rs);
+            closeConnect($this->connection);
+            return $result;
+        }
     }
 
     // $tp=new TopicModel();

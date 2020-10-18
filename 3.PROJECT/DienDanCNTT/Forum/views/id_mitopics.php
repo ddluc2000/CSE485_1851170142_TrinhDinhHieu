@@ -4,36 +4,46 @@ global $ROOT_PATH; ?>
     <title>Forum CSE</title>
 <?php include($ROOT_PATH."/includes/headerp2.php");?>
 <!-- VIET BODY LUON O DAY -->
-    <div class="main-page container">
-        <div class="row">
-            <div class="main-content col-md-12">
-                <!-- topic header(title) -->
-                <div class="topic-title">
-                    <h3>Topic nao do!</h3>
-                </div>
+    <div class="page-wrapper">
+        <div class="main-page container">
+            <div class="row">
+                <div class="main-content col-md-12">
+                    <!-- topic header(title) -->
+                    <div class="topic-title">
+                        <h3><?php echo $mtpname['title'];?></h3>
+                    </div>
 
-                    <!-- de nghi dung khung khac ko dung media -->
-                    <div class="zone block-container border border-success">
-                        <!-- body zone -->
-                        <div class="block-body">   
+                        <!-- de nghi dung khung khac ko dung media -->
+                        <div class="zone block-container border border-success">
+                            <!-- body zone -->
+                            <div class="block-body">   
                             <div class="post-body border border-success">
                             <!-- post -->
                                 <?php foreach ($posts as $post):?>
-                                <div class="post-content">
-                                    <div class="post-title"><?php echo $post['title'];?></div>
-                                    <div class="post-info">
+                                <div class="post-content-tp d-flex border border-dark">
+                                    <img src="assets/images/img1.jpeg" alt="123" height="50px" width="55px" class="rounded-circle">
+                                    <div class="post-tp">
+                                        <div class="post-title-tp"><a href="<?php echo $BASE_URL."/index.php?controller=posts&action=index&p_id=".$post['post_id'];?>"><?php echo $post['title'];?></a></div>
+                                        <div class="post-info-tp">
+                                    
                                     <!-- chen gi do cua post o day -->
-                                            <p><?php echo $post['tags'];?></p>
+                                            <?php echo $post['username'];?>
+                                            <?php echo $post['create_at'];?>
+                                        </div>
+                                    </div>
+                                    <div class="statics">
+                                        Lượt xem trả lời các thứ
                                     </div>
                                 </div>
                                 <?php endforeach;?> 
-                            </div>
+                                </div>
 
+                            </div>
+                            <!-- end bodyzone -->
                         </div>
-                          <!-- end bodyzone -->
-                    </div>
-                    <!-- end zone -->
-                   
+                        <!-- end zone -->
+                    
+                </div>
             </div>
         </div>
     </div>

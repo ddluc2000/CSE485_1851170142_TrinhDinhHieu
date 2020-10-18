@@ -31,6 +31,10 @@ header .nav .nav-item a{
 
 }
 
+header .nav li ul{
+    list-style: none;
+}
+
 /* SLIDER */
 .slider{
     margin-top: 20px;
@@ -41,11 +45,13 @@ header .nav .nav-item a{
 
 
 /* MAIN-PAGE */
+.page-wrapper{
+    min-height: 751px;
+}
 .main-page{
     margin-top: 20px;
     border: 1px solid brown;
     width: 100%;
-    min-height: 751px;
 }
 
 .main-content{
@@ -79,11 +85,42 @@ header .nav .nav-item a{
 
 
 /* FOOTER */
-footer{
+.footer-page{
     margin-top: 20px;
     border: 1px solid red;
     padding: 20px;
     background-color: #54838a;
     /* de height auto sau */
     height: 70px;
+}
+
+/* POST */
+.post-content{
+    width: 100%;
+}
+
+.footer-post{
+    height: 70px;
+    position: relative;
+}
+.grb-post{
+    position: absolute;
+    right: 0px;
+    bottom: 6px;
+}
+
+.comment-body,.post-body{
+    min-height: 185px;
+}
+/* Topics */
+.mtopic-content{
+    display: flex;
+}
+
+.post-content-tp{
+    padding:10px;
+}
+
+.post-title-tp,.post-info-tp{
+    padding-left: 10px;
 }

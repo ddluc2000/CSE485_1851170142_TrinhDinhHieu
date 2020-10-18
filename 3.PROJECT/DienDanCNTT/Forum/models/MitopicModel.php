@@ -36,6 +36,13 @@
             // chưa xử lý có đk
         }
 
+        function getNamebyId($mtp_id){
+            $sql="SELECT title FROM ". self::TABLE ." WHERE mitopic_id='$mtp_id'";
+            $rs=mysqli_query($this->connection,$sql);
+            $result=mysqli_fetch_assoc($rs);
+            closeConnect($this->connection);
+            return $result;
+        }
         
     }
 

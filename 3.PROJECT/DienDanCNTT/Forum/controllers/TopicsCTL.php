@@ -1,6 +1,7 @@
 <?php
 require_once 'models/PostModel.php';
 require_once 'models/MitopicModel.php';
+require_once 'models/TopicModel.php';
 class TopicsCTL
 {
   public function index()
@@ -10,11 +11,13 @@ class TopicsCTL
       $data=[
         'topic_id'=>$_GET['tp_id']
       ];
+      // select by id and=>get name of tp_id
       $postModel = new PostModel();
-      $posts = $postModel->selectAll($data);
+      $posts = $postModel->getPostInTP($data['topic_id']);
       $mitopicModel = new MitopicModel();
       $mitopics= $mitopicModel->selectAll($data);
-  
+      $topicModel = new TopicModel();
+      $tpname = $topicModel->getNamebyId($data['topic_id']);
       require_once 'views/id_topics.php';
     }
   }
@@ -27,8 +30,11 @@ class TopicsCTL
         'mitopic_id'=>$_GET['mtp_id']
       ];
       $postModel = new PostModel();
-      $posts = $postModel->selectAll($data);
-  
+      $mitopicModel = new MitopicModel();
+      // select by id and=>get name of mtp_id
+      $posts = $postModel->getPostInMTP($data['mitopic_id']);
+
+      $mtpname = $mitopicModel->getNamebyId($data['mitopic_id']);
       require_once 'views/id_mitopics.php';
     }
     //controller gọi model, model sẽ truy vấn dữ liệu và trả về cho controller
