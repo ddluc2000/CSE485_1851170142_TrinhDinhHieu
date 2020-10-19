@@ -1,0 +1,13 @@
+.user-content{
+    border:1px solid red;
+    display: flex;
+}
+
+.user-content img{
+    width: 200px;
+    height: 200px;
+}
+
+.user-content .user-info{
+    margin-left: 20px;
+}

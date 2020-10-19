@@ -6,6 +6,7 @@
         private $post_id;
         private $title;
         private $create_at;
+        private $edit_at;
         private $body;
         private $tags;
         private $status;
@@ -14,13 +15,32 @@
         private $mitopic_id; 
         public $connection;
         const TABLE="posts";
-        
-        function PostModel(){
+
+
+        function PostModel($title="",$body="",$tags="",$user_id="",$topic_id="",$mitopic_id="",$edit_at=""){
+            $this->title=$title;
+            // $this->create_at=$create_at;
+            $this->body=$body;
+            $this->tags=$tags;
+            $this->user_id=$user_id;
+            $this->topic_id=$topic_id;
+            $this->mitopic_id=$mitopic_id;
+            $this->edit_at=$edit_at;
             $this->connection=openConnect();
             if(!$this->connection)
             die("khong ket loi dc");
             
         }
+
+        function create(){
+            $sql="INSERT INTO ". self::TABLE . " SET title='$this->title' ,body='$this->body', tags='$this->tags', user_id='$this->user_id', topic_id='$this->topic_id'";
+            if($this->mitopic_id!="") $sql=$sql." , mitopic_id='$this->mitopic_id'";
+            $rs=mysqli_query($this->connection,$sql);
+            closeConnect($this->connection);
+            return 1;
+        }
+
+        // CHUA CHUAN HOA LAI
 
         function getPostInTP($tp_id){
             $sql="SELECT p.*,u.username,u.user_id FROM posts As p JOIN users as u ON p.user_id=u.user_id WHERE p.topic_id='$tp_id' ORDER BY p.post_id DESC";
@@ -57,7 +77,7 @@
             // chưa xử lý có đk
         }
         
-        function selectOne($id){
+        function getOne($id){
             $sql="SELECT * FROM ". self::TABLE . " WHERE post_id='$id' LIMIT 1";
 
             $rs=mysqli_query($this->connection,$sql);
@@ -67,35 +87,10 @@
             // chưa xử lý có đk
         }
 
-        function create($data=[]){
-            $sql="INSERT INTO ". self::TABLE;
-            $i=0;
-            foreach($data as $key=>$value){
-                if($i==0){
-                    $sql=$sql." SET $key='$value'";
-                }
-                else{
-                    $sql=$sql." ,$key='$value'";
-                }
-                $i++;
-            }
-            $rs=mysqli_query($this->connection,$sql);
-            closeConnect($this->connection);
-            return 1;
-        }
+        
 
-        function update($p_id,$data=[]){
-            $sql="UPDATE ".self::TABLE;
-            $i=0;
-            foreach($data as $key=>$value){
-                if($i==0){
-                    $sql=$sql." SET $key='$value'";
-                }
-                else{
-                    $sql=$sql.", $key='$value'";
-                }
-                $i++;
-            }
+        function update($p_id){
+            $sql="UPDATE ". self::TABLE . " SET title='$this->title' ,body='$this->body', tags='$this->tags', edit_at='$this->edit_at'";
             $sql=$sql." WHERE post_id=".$p_id;
             mysqli_query($this->connection,$sql);
             closeConnect($this->connection);

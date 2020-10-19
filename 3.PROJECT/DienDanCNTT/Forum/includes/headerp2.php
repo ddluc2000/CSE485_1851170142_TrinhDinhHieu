@@ -22,7 +22,7 @@ global $BASE_URL; ?>
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['username'];?></a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#tab2Id">Action</a>
+                    <a class="dropdown-item" href="http://localhost:88/Forum/index.php?controller=users&action=index&u_id=<?php echo $_SESSION['id'];?>">Profile</a>
                     <a class="dropdown-item" href="#tab3Id">Another action</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="<?php echo $BASE_URL."/index.php?controller=users&action=logout";?>">Logout</a>

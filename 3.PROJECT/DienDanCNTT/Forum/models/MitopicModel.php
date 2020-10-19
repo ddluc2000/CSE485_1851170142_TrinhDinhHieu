@@ -45,7 +45,7 @@
         }
         
         // lay thang mi topic theo id;
-        function selectOne($mtpid){
+        function getOne($mtpid){
             $sql="SELECT * FROM ". self::TABLE . " WHERE mitopic_id='$mtpid' LIMIT 1";
 
             $rs=mysqli_query($this->connection,$sql);

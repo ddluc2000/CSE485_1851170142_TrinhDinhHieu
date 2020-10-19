@@ -15,7 +15,11 @@
         public $connection;
         const TABLE="users";
         
-        function UserModel(){
+        function UserModel($username='',$fullname='',$email='',$password='',$admin=''){
+            $this->username=$username;
+            $this->fullname=$fullname;
+            $this->email=$email;
+            $this->password=$password;
             $this->connection=openConnect();
             if(!$this->connection)
             die("khong ket loi dc");
@@ -41,7 +45,7 @@
             // chưa xử lý có đk
         }
         
-        function selectOne($id){
+        function getOne($id){
             $sql="SELECT * FROM ". self::TABLE . " WHERE user_id='$id' LIMIT 1";
             $rs=mysqli_query($this->connection,$sql);
             $result=mysqli_fetch_assoc($rs);

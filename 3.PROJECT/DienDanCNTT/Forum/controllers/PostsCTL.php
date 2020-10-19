@@ -14,46 +14,50 @@ class PostsCTL
       // select by id and=>get name of tp_id
         //   select one
         $postModel = new PostModel();
-        $post = $postModel->selectOne($p_id);
+        $post = $postModel->getOne($p_id);
         $commentModel = new CommentModel();
         $comments = $commentModel->selectAll($p_id);
         $userModel = new UserModel();
-        $user = $userModel->selectOne($post['user_id']);
-
+        $user = $userModel->getOne($post['user_id']);
         $us_comment=array();
+        // lay thong tin nguoi dang comment
         foreach($comments as $comment){
+          
             $userModel2 = new UserModel();
-            $user_cm=$userModel2->selectOne($comment['user_id']);
+            $user_cm=$userModel2->getOne($comment['user_id']);
             array_push($us_comment,$user_cm);
         }
         
-        if(isset($_POST['add_comment'])){
-          unset($_POST['add_comment']);
-          $commentModel2 = new CommentModel();
-          $commentModel2->create($_POST);
-          header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$_POST['post_id']);
-        }
+        // XU ly lai
+        
       require_once 'views/post.php';
     }
   }
 
-  public function create(){
+  function addComment(){
+    global $BASE_URL;
+      if(isset($_GET['p_id'])){
+        $p_id=$_GET['p_id'];
+        if(isset($_POST['add_comment'])){
+          unset($_POST['add_comment']);
+          // ($body,$post_id,$user_id,$edit_at="")
+          $commentModel2 = new CommentModel($_POST['body'],$_POST['post_id'],$_POST['user_id']);
+          $commentModel2->create();
+          // echo "location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$p_id;
+          header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$p_id);
+        }
+      }
+  }
+  function create(){
     // if(issetPOST)
     global $BASE_URL;
-    $postModel = new PostModel();
-    $mitopicModel = new MitopicModel();
-    if(isset($_GET['tp_id'])&&isset($_SESSION['id'])){
-      $tp_id=$_GET['tp_id'];
-      if(isset($_POST['add_post'])){
-        $data=[
-            'title'=>$_POST['title'],
-            'body'=>$_POST['body'],
-            'tags'=>$_POST['tags'],
-            'topic_id'=>$tp_id,
-            'user_id'=>$_SESSION['id'],
 
-        ];
-        $postModel->create($data);
+    // function PostModel($title="",$body="",$tags="",$user_id="",$topic_id="",$mitopic_id="")
+    if(isset($_GET['tp_id'])&&isset($_SESSION['id'])){
+      $tp_id=$_GET['tp_id'];   
+      if(isset($_POST['add_post'])){
+        $postModel = new PostModel($_POST['title'],$_POST['body'],$_POST['tags'],$_SESSION['id'],$tp_id);
+        $postModel->create();
         header("location:".$BASE_URL."/index.php?controller=topics&action=index&tp_id=".$tp_id);
       }
       require_once 'views/addpost.php';
@@ -61,21 +65,15 @@ class PostsCTL
 
     if(isset($_GET['mtp_id'])&&isset($_SESSION['id'])){
         $mtp_id=$_GET['mtp_id'];
-        $tp_id=$mitopicModel->selectOne($mtp_id);
-        if(isset($_POST['add_post'])){
-          $data=[
-          'title'=>$_POST['title'],
-          'body'=>$_POST['body'],
-          'tags'=>$_POST['tags'],
-          'topic_id'=>$tp_id['topic_id'],
-          'mitopic_id'=>$mtp_id,
-          'user_id'=>$_SESSION['id'],
+        $mitopicModel = new MitopicModel();
 
-      ];
-      $postModel->create($data);
-      header("location:".$BASE_URL."/index.php?controller=topics&action=mtp_index&mtp_id=".$mtp_id);
-    }
-    require_once 'views/addpost.php';
+        $mtp=$mitopicModel->getOne($mtp_id);
+        if(isset($_POST['add_post'])){
+            $postModel = new PostModel($_POST['title'],$_POST['body'],$_POST['tags'],$_SESSION['id'],$mtp['topic_id'],$mtp_id);
+            $postModel->create();
+            header("location:".$BASE_URL."/index.php?controller=topics&action=mtp_index&mtp_id=".$mtp_id);
+        }
+        require_once 'views/addpost.php';
     }
     
   }
@@ -83,25 +81,25 @@ class PostsCTL
   function edit_p(){
     global $BASE_URL;
     $postModel = new PostModel();
-    $postModel2 = new PostModel();
+    
     if(isset($_GET['p_id'])){
-        $post=$postModel->selectOne($_GET['p_id']);
+        $post=$postModel->getOne($_GET['p_id']);
         if(isset($_SESSION['id'])&&$post['user_id']===$_SESSION['id']){
+          // gan gia tri cua post muon sua vao khung nhap
           $post_id=$post['post_id'];
           $title=$post['title'];
           $body=$post['body'];
           $tags=$post['tags'];
+
+          // lay time
           date_default_timezone_set("Asia/Bangkok");
           $date=getdate();
           $time=$date['year']."-".$date['mon']."-".$date['mday']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
+          // sua
           if(isset($_POST['edit_post'])){
-            $data=[
-              'title'=>$_POST['title'],
-              'body'=>$_POST['body'],
-              'tags'=>$_POST['tags'],
-              'edit_at'=>$time,
-          ];
-            $postModel2->update($post_id,$data);
+          // ($title="",$body="",$tags="",$user_id="",$topic_id="",$mitopic_id="",$edit_at="")
+            $postModel2 = new PostModel($_POST['title'],$_POST['body'],$_POST['tags'],'','','',$time);
+            $postModel2->update($post_id);
             header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$post_id);
           }
           require_once 'views/editpost.php';
@@ -113,31 +111,32 @@ class PostsCTL
 
   function edit_c(){
     global $BASE_URL;
-    $postModel2 = new PostModel();
-    if(isset($_GET['p_id'])){
-        $post=$postModel->selectOne($_GET['p_id']);
-        if(isset($_SESSION['id'])&&$post['user_id']===$_SESSION['id']){
-          $post_id=$post['post_id'];
-          $title=$post['title'];
-          $body=$post['body'];
-          $tags=$post['tags'];
-          date_default_timezone_set("Asia/Bangkok");
-          $date=getdate();
-          $time=$date['year']."-".$date['mon']."-".$date['mday']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
-          if(isset($_POST['edit_post'])){
-            $data=[
-              'title'=>$_POST['title'],
-              'body'=>$_POST['body'],
-              'tags'=>$_POST['tags'],
-              'edit_at'=>$time,
-          ];
-            $postModel2->update($post_id,$data);
-            header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$post_id);
-          }
-          require_once 'views/editpost.php';
-        }
-        else
-        echo "Ban ko co quyen edit";
+    
+    if(isset($_GET['cm_id'])){
+
+      print_r($_POST);
+      // ($body="",$post_id="",$user_id="",$edit_at="")
+        $commentModel = new CommentModel($_POST['body']);
+        $commentModel->update($_GET['cm_id']);
+        header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$_POST['post_id']);
+        // if(isset($_SESSION['id'])&&$comment['user_id']===$_SESSION['id']){
+        //   // $body=$comment['body'];
+        //   date_default_timezone_set("Asia/Bangkok");
+        //   $date=getdate();
+        //   // sua lai cu phap ngan hon lay time
+        //   $time=$date['year']."-".$date['mon']."-".$date['mday']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
+        //   if(isset($_POST['edit_cm'])){
+        //     // ($body="",$post_id="",$user_id="",$edit_at="")
+        //     $commentModel2 = new CommentModel($_POST['body'],'','',$time);
+        //     print_r($_POST);
+        //     echo $comment['cm_id'];
+        //     $commentModel2->update($comment['cm_id']);
+        //     // header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$comment['post_id']);
+        //   }
+        //   // require_once 'views/editpost.php';
+        // }
+        // else
+        // echo "Ban ko co quyen edit";
     }
   }
 
@@ -146,7 +145,7 @@ class PostsCTL
     $postModel = new PostModel();
     $postModel2 = new PostModel();
     if(isset($_GET['p_id'])){
-      $post=$postModel->selectOne($_GET['p_id']);
+      $post=$postModel->getOne($_GET['p_id']);
       $tp_id=$post['topic_id'];
       $mtp_id=$post['mitopic_id'];
       // xac minh dang hoi thua` cho nay co the del luon!
@@ -167,7 +166,7 @@ class PostsCTL
     global $BASE_URL;
     if(isset($_GET['cm_id'])){
     $commentModel = new CommentModel();
-      $cm=$commentModel->selectOne($_GET['cm_id']);
+      $cm=$commentModel->getOne($_GET['cm_id']);
       $p_id=$cm['post_id'];
       if(isset($_SESSION['id'])&&$cm['user_id']===$_SESSION['id']){
         // delete ca comment nua

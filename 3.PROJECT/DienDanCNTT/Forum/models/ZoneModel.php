@@ -1,5 +1,5 @@
 <?php
-    include("model.php");
+    require_once("model.php");
 
 
     class ZoneModel{

@@ -22,6 +22,19 @@ class UsersCTL
 //   $password=$_POST['password'];
   
 // }
+  public function index(){
+    if(isset($_GET['u_id'])){
+      $userModel = new UserModel();
+      $user=$userModel->getOne($_GET['u_id']);
+      if($user!=NULL){
+        require_once 'views/userinfo.php';
+      }
+      else{
+        echo"d co tai khoan";
+      }
+    }
+  }
+
   public function login()
   {
     $username='';
