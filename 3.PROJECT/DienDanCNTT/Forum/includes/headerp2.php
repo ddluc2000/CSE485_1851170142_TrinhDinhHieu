@@ -15,7 +15,7 @@ global $BASE_URL; ?>
                 </li>
 
                 <li class="nav-item">
-                    <a href="#tab5Id" class="nav-link">Term</a>
+                    <a href="http://localhost:88/Forum/index.php?controller=admin&action=index" class="nav-link">Term</a>
                 </li>
                 <?php if(isset($_SESSION['id'])):?>
 

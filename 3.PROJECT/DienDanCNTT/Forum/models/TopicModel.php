@@ -35,10 +35,18 @@
             // chưa xử lý có đk
         }
 
+        function getTpInZn($z_id){
+            $sql="SELECT * FROM ". self::TABLE ." WHERE zone_id='$z_id'";
+            $rs=mysqli_query($this->connection,$sql);
+            $result=mysqli_fetch_all($rs,MYSQLI_ASSOC);
+            closeConnect($this->connection);
+            return $result;
+        }
+
         function getNamebyId($tp_id){
             $sql="SELECT title FROM ". self::TABLE ." WHERE topic_id='$tp_id'";
             $rs=mysqli_query($this->connection,$sql);
-            $result=mysqli_fetch_assoc($rs);
+            $result=mysqli_fetch_assoc($rs,MYSQLI_ASSOC);
             closeConnect($this->connection);
             return $result;
         }

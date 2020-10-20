@@ -1,6 +1,8 @@
-body{
-    padding:0px auto;
-
+html,body{
+    padding:0;
+    margin:0;
+    height: 100%;
+    background:#f6f6f6;
 }
 
 *{
@@ -46,7 +48,8 @@ header .nav li ul{
 
 /* MAIN-PAGE */
 .page-wrapper{
-    min-height: 751px;
+    min-height: calc(100% - 212px);
+    /* height: 50px; */
 }
 .main-page{
     margin-top: 20px;
@@ -124,3 +127,4 @@ header .nav li ul{
 .post-title-tp,.post-info-tp{
     padding-left: 10px;
 }
+

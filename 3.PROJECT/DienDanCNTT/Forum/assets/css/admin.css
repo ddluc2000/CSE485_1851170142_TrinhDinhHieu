@@ -1,0 +1,21 @@
+.fa-search{
+    font-size: 1.5em;
+    padding-top: 10px;
+}
+
+.list-group>ul{
+    list-style: none;
+    padding-left: 0px;
+}
+
+.trchild td{
+    color:rgb(24, 83, 172);
+    padding-left: 40px;
+}
+
+.main-page{
+    padding-right: 15px;
+}
+/* .list-group ul li{
+    margin-left: 0px !important;
+} */
