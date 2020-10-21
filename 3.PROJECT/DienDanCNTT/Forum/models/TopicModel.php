@@ -9,11 +9,19 @@
         public $connection;
         const TABLE="topics";
         
-        function TopicModel(){
+        function TopicModel($title='',$description=''){
+            $this->title=$title;
+            $this->description=$description;
             $this->connection=openConnect();
             if(!$this->connection)
             die("khong ket loi dc");
             
+        }
+
+        function create($z_id){
+            $sql="INSERT INTO ". self::TABLE . " SET title='$this->title' ,description='$this->description', zone_id='$z_id'";
+            $rs=mysqli_query($this->connection,$sql);
+            return 1;
         }
 
         function selectAll($data=[]){
@@ -46,9 +54,24 @@
         function getNamebyId($tp_id){
             $sql="SELECT title FROM ". self::TABLE ." WHERE topic_id='$tp_id'";
             $rs=mysqli_query($this->connection,$sql);
-            $result=mysqli_fetch_assoc($rs,MYSQLI_ASSOC);
+            $result=mysqli_fetch_assoc($rs);
             closeConnect($this->connection);
             return $result;
+        }
+
+        function getOne($tp_id){
+            $sql="SELECT * FROM ". self::TABLE ." WHERE topic_id='$tp_id' LIMIT 1";
+            $rs=mysqli_query($this->connection,$sql);
+            $result=mysqli_fetch_assoc($rs);
+            closeConnect($this->connection);
+            return $result;
+        }
+
+        function delete($tp_id){
+            $sql="DELETE FROM ". self::TABLE . " WHERE topic_id='$tp_id'";
+            $rs=mysqli_query($this->connection,$sql);
+            closeConnect($this->connection);
+            return 1;
         }
     }
 

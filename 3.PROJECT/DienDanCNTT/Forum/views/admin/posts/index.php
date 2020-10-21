@@ -49,7 +49,7 @@ global $ROOT_PATH; ?>
                                         <?php endforeach;?>
                                         <td><?php echo $post['create_at'];?></td>
                                         <td><?php echo $post['tags'];?></td>
-                                        <td><a href="#">Delete</a></td>
+                                        <td><a href="<?php echo $URL."admin&action=del_p&p_id=".$post['post_id'];?>">Delete</a></td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>

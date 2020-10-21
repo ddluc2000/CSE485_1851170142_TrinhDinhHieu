@@ -73,8 +73,20 @@ class UsersCTL
           unset($_SESSION['admin']);
           unset($_SESSION['create_at']);
           // phan van giua require_once home hay dung header
-          header("location:".$ROOT_PATH."index.php");
+          // phai sua laj goi den action index cua parentctl ko chuyen thang trang luon
+          header("location:".$BASE_URL."index.php");
           exit();
+    }
+  }
+
+  public function del(){
+    global $URL;
+    if(isset($_GET['u_id'])){
+      $u_id=$_GET['u_id'];
+      $userModel = new UserModel();
+      $userModel->delete($u_id);
+      header("location:".$URL."admin&action=users_index");
+
     }
   }
 

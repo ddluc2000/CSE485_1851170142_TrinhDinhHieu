@@ -3,8 +3,9 @@ require_once 'models/PostModel.php';
 require_once 'models/CommentModel.php';
 require_once 'models/UserModel.php';
 require_once 'models/MitopicModel.php';
+require_once 'controllers/ParentCTL.php';
 // requuire thang user de lay thong tin
-class PostsCTL
+class PostsCTL extends ParentCTL
 {
   public function index()
   {
@@ -143,23 +144,24 @@ class PostsCTL
   function delete_p(){
     global $BASE_URL;
     $postModel = new PostModel();
-    $postModel2 = new PostModel();
-    if(isset($_GET['p_id'])){
+    // if(isset($_GET['p_id'])){
+
+      // xac minh dang hoi thua` cho nay co the del luon!
+      // if(isset($_SESSION['id'])&&($post['user_id']===$_SESSION['id']||$_SESSION['admin']==1)){
+      //   // delete ca comment nua
+      //     $commentModel = new CommentModel();
+      //     $commentModel->deleteAll($post['post_id']);
+      //     $postModel2->delete($post['post_id']);
+      parent::del_p();
       $post=$postModel->getOne($_GET['p_id']);
       $tp_id=$post['topic_id'];
       $mtp_id=$post['mitopic_id'];
-      // xac minh dang hoi thua` cho nay co the del luon!
-      if(isset($_SESSION['id'])&&($post['user_id']===$_SESSION['id']||$_SESSION['admin']==1)){
-        // delete ca comment nua
-          $commentModel = new CommentModel();
-          $commentModel->deleteAll($post['post_id']);
-          $postModel2->delete($post['post_id']);
-          if($mtp_id!=NULL) header("location:".$BASE_URL."/index.php?controller=topics&action=mtp_index&mtp_id=".$mtp_id);
-          else header("location:".$BASE_URL."/index.php?controller=topics&action=index&tp_id=".$tp_id);
-      }
-      else
-        echo "Ban d du tham quyen";
-    }
+      if($mtp_id!=NULL) header("location:".$BASE_URL."/index.php?controller=topics&action=mtp_index&mtp_id=".$mtp_id);
+      else header("location:".$BASE_URL."/index.php?controller=topics&action=index&tp_id=".$tp_id);
+    //   }
+    //   else
+    //     echo "Ban d du tham quyen";
+    // }
   }
 
   function delete_c(){

@@ -11,7 +11,7 @@ global $ROOT_PATH; ?>
                     
                     <div class="list-posted">
                         <div class="btn-group float float-left" role="group" aria-label="">
-                            <button type="button" class="btn btn-primary">Add</button>
+                            <a class="btn btn-primary" href="<?php echo $URL."admin&action=add_zone"?>" role="button">Add</a>
                             <button type="button" class="btn btn-primary">Manage</button>
                             <button type="button" class="btn btn-primary">Update</button>
                             <button type="button" class="btn btn-primary">Delete</button>
@@ -43,8 +43,8 @@ global $ROOT_PATH; ?>
                                         <td><?php echo $key;?></td>
                                         <td><a href="<?php echo $URL."admin&action=view_z&z_id=".$zone['zone_id'];?>"><?php echo $zone['title'];?></a></td>
                                         <td><?php echo $zone['description'];?></td>
-                                        <td><a href="#">Edit</a></td>
-                                        <td><a href="#">Delete</a></td>
+                                        <td><a href="<?php echo $URL."admin&action=edit_zone&z_id=".$zone['zone_id'];?>">Edit</a></td>
+                                        <td><a href="<?php echo $URL."admin&action=del_z&z_id=".$zone['zone_id'];?>">Delete</a></td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>

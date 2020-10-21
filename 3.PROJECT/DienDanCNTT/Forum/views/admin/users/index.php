@@ -11,21 +11,21 @@ global $ROOT_PATH; ?>
                     
                     <div class="list-posted">
                         <div class="btn-group float float-left" role="group" aria-label="">
-                            <button type="button" class="btn btn-primary">Add</button>
+                            <a class="btn btn-primary" href="<?php echo $URL."admin&action=add_user"?>" role="button">Add</a>
                             <button type="button" class="btn btn-primary">Manage</button>
                             <button type="button" class="btn btn-primary">Update</button>
                             <button type="button" class="btn btn-primary">Delete</button>
                         </div>
                         <form action="" class="d-flex float float-right" method="post">
                             <i class="fa fa-search" aria-hidden="true"></i>
-                            <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                            <input type="text" class="form-control" aria-describedby="helpId" placeholder="">
                         </form>
                         <div class="clearfix"></div>
 
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th><input type="checkbox" name="" id=""></th>
+                                    <th><input type="checkbox"></th>
                                     <th>Stt</th>
                                     <th>Fullname</th>
                                     <th>Username</th>
@@ -49,8 +49,8 @@ global $ROOT_PATH; ?>
                                         <td><?php echo $user['status'];?></td>
                                         <td><a href="#">Active</a></td>
                                         <td><a href="#">Block</a></td>
-                                        <td><a href="#">Edit</a></td>
-                                        <td><a href="#">Delete</a></td>
+                                        <td><a href="<?php echo $URL."admin&action=edit_user&u_id=".$user['user_id'];?>">Edit</a></td>
+                                        <td><a href="<?php echo $URL."users&action=del&u_id=".$user['user_id'];?>">Delete</a></td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>

@@ -45,14 +45,20 @@
         }
         
         // lay thang mi topic theo id;
-        function getOne($mtpid){
-            $sql="SELECT * FROM ". self::TABLE . " WHERE mitopic_id='$mtpid' LIMIT 1";
-
+        function getOne($mtp_id){
+            $sql="SELECT * FROM ". self::TABLE . " WHERE mitopic_id='$mtp_id' LIMIT 1";
             $rs=mysqli_query($this->connection,$sql);
             $result=mysqli_fetch_assoc($rs);
             closeConnect($this->connection);
             return $result;
             // chưa xử lý có đk
+        }
+
+        function delete($mtp_id){
+            $sql="DELETE FROM ". self::TABLE . " WHERE mitopic_id='$mtp_id'";
+            $rs=mysqli_query($this->connection,$sql);
+            closeConnect($this->connection);
+            return 1;
         }
     }
 
