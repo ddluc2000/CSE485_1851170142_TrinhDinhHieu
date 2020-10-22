@@ -46,7 +46,7 @@ global $ROOT_PATH; ?>
                                     }?>
                                     <tr>
                                         <td scope="row"><input type="checkbox" name=""></td>
-                                        <td><?php echo $key;?></td>
+                                        <td><?php echo $key+1;?></td>
                                         <td><a href="<?php echo $URL."users&action=index&u_id=".$user_id['user_id'];?>"><?php echo $user_id['username'];?></a></td>
                                         <td><?php echo $report['content'];?></td>
                                         <td><?php echo $report['post_id'];?></td>

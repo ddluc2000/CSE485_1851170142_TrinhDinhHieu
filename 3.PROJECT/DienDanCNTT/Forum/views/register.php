@@ -11,17 +11,28 @@ global $ROOT_PATH; ?>
 
                 <div class="main-content col-md-4">
                     <form method="post">
-                    <?php include($ROOT_PATH . "/supports/message.php");?>
                     <?php include($ROOT_PATH . "/supports/formErrors.php");?>
-                        <div class="form-group">
+                    <div class="form-group">
                           <label for="username">Username</label>
-                          <input type="text" class="form-control" name="username" aria-describedby="helpId" placeholder="" value="<?php echo $username;?>">
+                          <input type="text" class="form-control" name="username" aria-describedby="helpId" placeholder="">
+                        </div>
+                        <div class="form-group">
+                          <label for="fullname">Fullname</label>
+                          <input type="text" class="form-control" name="fullname" aria-describedby="helpId" placeholder="">
+                        </div>
+                        <div class="form-group">
+                          <label for="email">Email</label>
+                          <input type="email" class="form-control" name="email" aria-describedby="helpId" placeholder="">
                         </div>
                         <div class="form-group">
                           <label for="password">Password</label>
                           <input type="password" class="form-control" name="password" aria-describedby="helpId" placeholder="">
                         </div>
-                        <button type="submit" name="login" class="btn btn-primary">Login</button>
+                        <div class="form-group">
+                          <label for="conf_pass">Confirm Pass</label>
+                          <input type="password" class="form-control" name="conf_pass" aria-describedby="helpId" placeholder="">
+                        </div>
+                        <button type="submit" name="register" class="btn btn-primary">Register</button>
                     </form>
                 </div>
                 

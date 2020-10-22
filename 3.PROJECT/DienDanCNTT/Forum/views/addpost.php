@@ -9,7 +9,7 @@ global $ROOT_PATH;?>
             <div class="row">
                 <div class="col-md-12">
                     <form method="post">
-
+                        <?php include($ROOT_PATH . "/supports/formErrors.php");?>
                         <div class="form-group">
                           <label for="title"><h3>Tiêu đề</h3></label>
                           <input type="text" class="form-control" name="title" aria-describedby="helpId" placeholder="">
@@ -17,7 +17,7 @@ global $ROOT_PATH;?>
 
                         <div class="form-group">
                           <label for="body">Nội dung</label>
-                          <textarea class="form-control" name="body" rows="10"></textarea>
+                          <textarea class="form-control" id="body" name="body" rows="10"></textarea>
                         </div>
 
                         <div class="form-group">

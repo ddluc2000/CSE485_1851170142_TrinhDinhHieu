@@ -40,7 +40,7 @@ global $ROOT_PATH; ?>
                                         <td scope="row">
                                             <input type="checkbox" name="">
                                             </td>
-                                        <td><?php echo $key;?></td>
+                                        <td><?php echo $key+1;?></td>
                                         <td><a href="<?php echo $URL."admin&action=view_z&z_id=".$zone['zone_id'];?>"><?php echo $zone['title'];?></a></td>
                                         <td><?php echo $zone['description'];?></td>
                                         <td><a href="<?php echo $URL."admin&action=edit_zone&z_id=".$zone['zone_id'];?>">Edit</a></td>

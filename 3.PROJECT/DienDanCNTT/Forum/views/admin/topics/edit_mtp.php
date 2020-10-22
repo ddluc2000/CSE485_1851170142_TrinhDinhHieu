@@ -7,18 +7,18 @@ global $ROOT_PATH; ?>
 <?php include($ROOT_PATH."/includes/admin_headerp3.php");?>
 <!-- VIET BODY LUON O DAY -->
                 <div class="col-md-10">
-                    <h2 class="text-center">Add Topic</h2>
-                    <form action="<?php echo $URL."admin&action=add_tp";?>" method="post">
-                        <input type="hidden" name="z_id" value="<?php echo $z_id;?>">
+                    <h2 class="text-center">Edit MiTopic</h2>
+                    <form action="<?php echo $URL."admin&action=update_mtp";?>" method="post">
+                        <input type="hidden" name="mtp_id" value="<?php echo $mtp_id;?>">
                         <div class="form-group">
-                          <label for="title">Topic Title</label>
+                          <label for="title">Mi-Topic Title</label>
                           <input type="text" class="form-control" name="title" aria-describedby="helpId" placeholder="">
                         </div>
                         <div class="form-group">
                           <label for="description">Description</label>
                           <input type="text" class="form-control" name="description" aria-describedby="helpId" placeholder="">
                         </div>
-                        <button type="submit" name="add_topic" class="btn btn-primary">Add</button>
+                        <button type="submit" name="update_mtp" class="btn btn-primary">Save</button>
                     </form> 
                 </div>
 

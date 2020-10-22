@@ -115,6 +115,8 @@ header .nav li ul{
 .comment-body,.post-body{
     min-height: 185px;
 }
+
+
 /* Topics */
 .mtopic-content{
     display: flex;

@@ -10,11 +10,30 @@
         public $connection;
         const TABLE="mitopics";
         
-        function MitopicModel(){
+        function MitopicModel($title='',$description='',$topic_id=''){
+            $this->title=$title;
+            $this->description=$description;
+            $this->topic_id=$topic_id;
             $this->connection=openConnect();
             if(!$this->connection)
             die("khong ket loi dc");
             
+        }
+
+        function create(){
+            $sql="INSERT INTO ". self::TABLE . " SET title='$this->title' ,description='$this->description', topic_id='$this->topic_id'";
+            $rs=mysqli_query($this->connection,$sql);
+            // echo $sql;
+            closeConnect($this->connection);
+            return 1;
+        }
+
+        function update($mtp_id){
+            $sql="UPDATE ". self::TABLE . " SET title='$this->title' ,description='$this->description'";
+            $sql=$sql." WHERE mitopic_id=".$mtp_id;
+            mysqli_query($this->connection,$sql);
+            closeConnect($this->connection);
+            return 1;
         }
 
         function selectAll($data=[]){

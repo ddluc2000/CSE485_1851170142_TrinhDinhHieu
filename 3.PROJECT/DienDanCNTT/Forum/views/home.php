@@ -5,6 +5,7 @@ global $ROOT_PATH; ?>
 <?php include($ROOT_PATH."/includes/headerp2.php");?>
 <!-- VIET BODY LUON O DAY -->
     <div class="page-wrapper">
+        <?php include($ROOT_PATH . "/supports/message.php");?>
         <div class="slider container">
             <h1> Quang cao gi do o day hoac bai viet quan trong</h1>
         </div>

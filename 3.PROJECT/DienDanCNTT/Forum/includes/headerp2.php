@@ -1,5 +1,10 @@
 <?php include_once("path.php");
 global $BASE_URL; ?>
+<style> 
+.ck-editor__editable { 
+    min-height: 200px; 
+} 
+</style> 
 </head>
   <body>
         <header>
@@ -29,6 +34,9 @@ global $BASE_URL; ?>
                 </div>
                 </li>
                 <?php else:?>
+                <li class="nav-item">
+                    <a href="<?php echo $BASE_URL."/index.php?controller=users&action=register";?>" class="nav-link">Register</a>
+                </li>
                 <li class="nav-item">
                     <a href="<?php echo $BASE_URL."/index.php?controller=users&action=login";?>" class="nav-link">Login</a>
                 </li>

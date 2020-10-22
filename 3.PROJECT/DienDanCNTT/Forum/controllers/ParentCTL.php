@@ -22,31 +22,15 @@ class ParentCTL
     $mitopicModel = new MitopicModel();
     $mitopics= $mitopicModel->selectAll();
 
-    // PA2: de xuat voi moi zone thi lay mot mang topic rieng.
-
-    // $topics=array();
-    // foreach($zones as $key=>$zone){
-    //     $i=$key;
-    //     $topicModel = new TopicModel();
-    //     $topics[$i]=$topicModel->selectAll(['zone_id'=>$zone['zone_id']]);
-        
-    // }
-    
-    // DONE
-
-
-
-    
-    //import file view tương ứng, xử lý biến $books tại view này
     // require_once 'views/test.php';
     require_once 'views/home.php';
   }
 
-  function del_p(){
+  function del_p($p_id=''){
     $postModel = new PostModel();
     $postModel2 = new PostModel();
-    if(isset($_GET['p_id'])){
-      $post=$postModel->getOne($_GET['p_id']);
+    {
+      $post=$postModel->getOne($p_id);
           $commentModel = new CommentModel();
           $commentModel->deleteAll($post['post_id']);
           $postModel2->delete($post['post_id']);

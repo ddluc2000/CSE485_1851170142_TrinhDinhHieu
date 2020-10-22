@@ -7,8 +7,10 @@ global $ROOT_PATH; ?>
     <div class="page-wrapper">
         <div class="main-page container">
             <div class="row">
+            
                 <div class="main-content col-md-12 border border-success">
                     <!-- topic header(title) -->
+                    
                     <div class="post-title">
                         <h3><?php echo $post['title']?></h3>
                         <div class="post-info">
@@ -103,6 +105,7 @@ global $ROOT_PATH; ?>
                     phan trang o day
                     <br>
                     <br>
+                    <?php include($ROOT_PATH . "./supports/message.php");?>
                     <?php if(isset($_SESSION['id'])):?>
                     <div class="reply-layout container">
                         <div class="row">
@@ -120,10 +123,13 @@ global $ROOT_PATH; ?>
                             <div class="comment-content col-md-10 border border-success">
                                 <div class="comment-body">
                                     <form id="add_cmt" action="<?php echo $BASE_URL."/index.php?controller=posts&action=addComment&p_id=".$post['post_id'];?>" method="post">                                              
+                                        <?php include($ROOT_PATH . "/supports/formErrors.php");?>
+                                        
                                         <input type="hidden" class="form-control" name="user_id" value="<?php echo $_SESSION['id'];?>">
                                         <input type="hidden" class="form-control" name="post_id" value="<?php echo $post['post_id'];?>">
                                         <div class="form-group">
-                                          <textarea class="form-control" name="body" rows="5"></textarea>
+                                          <textarea id="body" name="body" cols="10"></textarea>
+                                                
                                         </div>
                                         <button type="submit" name="add_comment" class="btn btn-primary float float-right">Comment</button>
                                     </form>

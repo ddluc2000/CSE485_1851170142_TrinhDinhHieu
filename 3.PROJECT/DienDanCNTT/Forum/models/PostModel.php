@@ -34,7 +34,7 @@
 
         function create(){
             $sql="INSERT INTO ". self::TABLE . " SET title='$this->title' ,body='$this->body', tags='$this->tags', user_id='$this->user_id', topic_id='$this->topic_id'";
-            if($this->mitopic_id!="") $sql=$sql." , mitopic_id='$this->mitopic_id'";
+            if($this->mitopic_id!=="") $sql=$sql." , mitopic_id='$this->mitopic_id'";
             $rs=mysqli_query($this->connection,$sql);
             closeConnect($this->connection);
             return 1;

@@ -24,6 +24,14 @@
             return 1;
         }
 
+        function update($tp_id){
+            $sql="UPDATE ". self::TABLE . " SET title='$this->title' ,description='$this->description'";
+            $sql=$sql." WHERE topic_id=".$tp_id;
+            mysqli_query($this->connection,$sql);
+            closeConnect($this->connection);
+            return 1;
+        }
+
         function selectAll($data=[]){
             $sql="SELECT * FROM ". self::TABLE;
             $i=0;

@@ -4,12 +4,15 @@ require_once 'models/CommentModel.php';
 require_once 'models/UserModel.php';
 require_once 'models/MitopicModel.php';
 require_once 'controllers/ParentCTL.php';
+
+require_once 'supports/validatePosts.php';
 // requuire thang user de lay thong tin
 class PostsCTL extends ParentCTL
 {
   public function index()
   {
     global $BASE_URL;
+    $errors=array();
     if(isset($_GET['p_id'])){
         $p_id=$_GET['p_id'];
       // select by id and=>get name of tp_id
@@ -37,29 +40,41 @@ class PostsCTL extends ParentCTL
 
   function addComment(){
     global $BASE_URL;
+    $errors=array();
       if(isset($_GET['p_id'])){
         $p_id=$_GET['p_id'];
         if(isset($_POST['add_comment'])){
           unset($_POST['add_comment']);
-          // ($body,$post_id,$user_id,$edit_at="")
-          $commentModel2 = new CommentModel($_POST['body'],$_POST['post_id'],$_POST['user_id']);
-          $commentModel2->create();
-          // echo "location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$p_id;
-          header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$p_id);
+          $errors=validateCm($_POST);
+          if(count($errors)==0){
+              // ($body,$post_id,$user_id,$edit_at="")
+              $commentModel2 = new CommentModel($_POST['body'],$_POST['post_id'],$_POST['user_id']);
+              $commentModel2->create();
+              // echo "location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$p_id;
+              header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$p_id);
+          }
+          else{
+            $_SESSION['message']="Ban chua nhap gi";
+            header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$p_id);
+          }
         }
       }
   }
   function create(){
     // if(issetPOST)
     global $BASE_URL;
-
+    $errors=array();
     // function PostModel($title="",$body="",$tags="",$user_id="",$topic_id="",$mitopic_id="")
     if(isset($_GET['tp_id'])&&isset($_SESSION['id'])){
       $tp_id=$_GET['tp_id'];   
       if(isset($_POST['add_post'])){
-        $postModel = new PostModel($_POST['title'],$_POST['body'],$_POST['tags'],$_SESSION['id'],$tp_id);
-        $postModel->create();
-        header("location:".$BASE_URL."/index.php?controller=topics&action=index&tp_id=".$tp_id);
+        unset($_POST['add_post']);
+        $errors=validatePost($_POST);
+        if(count($errors)==0){
+            $postModel = new PostModel($_POST['title'],$_POST['body'],$_POST['tags'],$_SESSION['id'],$tp_id);
+            $postModel->create();
+            header("location:".$BASE_URL."/index.php?controller=topics&action=index&tp_id=".$tp_id);
+        }
       }
       require_once 'views/addpost.php';
     }
@@ -144,24 +159,25 @@ class PostsCTL extends ParentCTL
   function delete_p(){
     global $BASE_URL;
     $postModel = new PostModel();
-    // if(isset($_GET['p_id'])){
-
+    if(isset($_GET['p_id'])){
+      $p_id=$_GET['p_id'];
       // xac minh dang hoi thua` cho nay co the del luon!
       // if(isset($_SESSION['id'])&&($post['user_id']===$_SESSION['id']||$_SESSION['admin']==1)){
       //   // delete ca comment nua
       //     $commentModel = new CommentModel();
       //     $commentModel->deleteAll($post['post_id']);
       //     $postModel2->delete($post['post_id']);
-      parent::del_p();
-      $post=$postModel->getOne($_GET['p_id']);
+      
+      $post=$postModel->getOne($p_id);
       $tp_id=$post['topic_id'];
       $mtp_id=$post['mitopic_id'];
+      parent::del_p($p_id);
       if($mtp_id!=NULL) header("location:".$BASE_URL."/index.php?controller=topics&action=mtp_index&mtp_id=".$mtp_id);
       else header("location:".$BASE_URL."/index.php?controller=topics&action=index&tp_id=".$tp_id);
     //   }
     //   else
     //     echo "Ban d du tham quyen";
-    // }
+    }
   }
 
   function delete_c(){

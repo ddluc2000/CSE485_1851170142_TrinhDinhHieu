@@ -87,19 +87,69 @@ class AdminCTL extends ParentCTL
   // TOPICCCC
   public function topics_index(){
     global $URL;
-    $topicModel = new TopicModel();
-    $topics = $topicModel->selectAll();
-    
-    $mitopicModel = new MitopicModel();
-    $mitopics= $mitopicModel->selectAll();
-    require_once 'views/admin/topics/index.php';
+    if(isset($_POST['del_tp'])){
+      unset($_POST['del_tp']);
+      if(isset($_POST['tp_id'])){
+      foreach($_POST['tp_id'] as $tp_id){
+        parent::del_tp($tp_id);
+        }
+      }
+      if(isset($_POST['mtp_id'])){
+        foreach($_POST['mtp_id'] as $mtp_id){
+          parent::del_mtp($mtp_id);
+          }
+      }
+      header("refresh:0");
+    }
+    else
+    if(isset($_POST['update_tp'])){
+      unset($_POST['update_tp']);
+      if(isset($_POST['tp_id'])){
+        $tp=$_POST['tp_id'];
+        if(count($tp)>0) $this->update_tp($tp[0]);
+      }
+      if(isset($_POST['mtp_id'])){
+      $mtp=$_POST['mtp_id'];
+      if(count($mtp)>0) $this->update_mtp($mtp[0]);
+      }
+    }
+    else
+    if(isset($_POST['add_mtp'])){
+      unset($_POST['add_mtp']);
+      $tp=$_POST['tp_id'];
+      $this->add_mtp($tp[0]);
+
+    } 
+    else{
+      $topicModel = new TopicModel();
+      $topics = $topicModel->selectAll();
+      $z_id=isset($_GET['z_id'])?$_GET['z_id']:0;
+      $mitopicModel = new MitopicModel();
+      $mitopics= $mitopicModel->selectAll();
+      require_once 'views/admin/topics/index.php';
+  
+    }
   }
-// ---------------------------------------------------------------------MAI SUA LAI ADD THEO ZONE_ID----------**************************************
-  public function add_tp(){
+
+  public function add_mtp($tp_id=''){
     global $URL;
+    if(isset($_POST['add_mtp'])){
+      print_r($_POST);
+      $mitopicModel = new MitopicModel($_POST['title'],$_POST['description'],$_POST['tp_id']);
+      $mitopicModel->create();
+      header("location:".$URL."admin&action=topics_index");
+    }
+    else{
+      require_once 'views/admin/topics/add_mtp.php';
+    }
+  }
+  
+  public function add_tp($z_id=''){
+    global $URL;
+    if(isset($_GET['z_id'])) $z_id=$_GET['z_id'];
     if(isset($_POST['add_topic'])){
       $topicModel = new TopicModel($_POST['title'],$_POST['description']);
-      $topicModel->create(2);
+      $topicModel->create($_POST['z_id']);
       // $zoneModel = new ZoneModel($_POST['title'],$_POST['description']);
       // $zoneModel->create();
       // set session message gi do
@@ -108,7 +158,10 @@ class AdminCTL extends ParentCTL
       // tra view nao do
     }
     else
-    require_once 'views/admin/topics/add.php';
+    {
+      require_once 'views/admin/topics/add.php';
+    }
+    
   }
 
   public function del_mtp($mtp_id=''){
@@ -130,6 +183,38 @@ class AdminCTL extends ParentCTL
     header("location:".$URL."admin&action=topics_index");
     }
   }
+
+  public function update_tp($tp_id=''){
+    global $URL;
+    if(isset($_GET['tp_id'])){
+      $tp_id=$_GET['tp_id'];
+    }
+      if(isset($_POST['update_tp'])){
+        $topicModel = new TopicModel($_POST['title'],$_POST['description']);
+        // print_r($_POST);
+        $topicModel->update($_POST['tp_id']);
+        header("location:".$URL."admin&action=topics_index");
+      }
+      else
+        require_once 'views/admin/topics/edit_tp.php';
+
+  }
+
+  public function update_mtp($mtp_id=''){
+    global $URL;
+    if(isset($_GET['mtp_id'])){
+      $mtp_id=$_GET['mtp_id'];
+    }
+      if(isset($_POST['update_mtp'])){
+        $mitopicModel = new MitopicModel($_POST['title'],$_POST['description']);
+        $mitopicModel->update($_POST['mtp_id']);
+        header("location:".$URL."admin&action=topics_index");
+      }
+      else
+        require_once 'views/admin/topics/edit_mtp.php';
+
+  }
+
   // POSTSSSSSSSSSSS
   public function posts_index(){
     global $URL;
@@ -140,10 +225,14 @@ class AdminCTL extends ParentCTL
     require_once 'views/admin/posts/index.php';
   }
 
-  function del_p(){
+  function del_p($p_id=''){
     global $URL;
-    parent::del_p();
+    if(isset($_GET['p_id'])) 
+    {
+    $p_id=$_GET['p_id'];
+    parent::del_p($p_id);
     header("location:".$URL."admin&action=posts_index");
+    }
   }
 
   // USERS

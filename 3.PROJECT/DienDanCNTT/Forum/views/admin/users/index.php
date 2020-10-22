@@ -40,7 +40,7 @@ global $ROOT_PATH; ?>
                                 <?php foreach ($users as $key=>$user):?>
                                     <tr>
                                         <td scope="row"><input type="checkbox" name=""></td>
-                                        <td><?php echo $key;?></td>
+                                        <td><?php echo $key+1;?></td>
                                         <td><?php echo $user['fullname'];?></td>
                                         <td><a href="<?php echo $URL."users&action=index&u_id=".$user['user_id'];?>"><?php echo $user['username'];?></a></td>
                                         <td><?php echo $user['email'];?></td>

@@ -8,17 +8,17 @@ global $ROOT_PATH; ?>
 <!-- VIET BODY LUON O DAY -->
                 <div class="col-md-10">
                     <h2 class="text-center">Add Topic</h2>
-                    <form action="<?php echo $URL."admin&action=add_tp";?>" method="post">
-                        <input type="hidden" name="z_id" value="<?php echo $z_id;?>">
+                    <form action="<?php echo $URL."admin&action=add_mtp";?>" method="post">
+                        <input type="hidden" name="tp_id" value="<?php echo $tp_id;?>">
                         <div class="form-group">
-                          <label for="title">Topic Title</label>
+                          <label for="title">MiTopic Title</label>
                           <input type="text" class="form-control" name="title" aria-describedby="helpId" placeholder="">
                         </div>
                         <div class="form-group">
                           <label for="description">Description</label>
                           <input type="text" class="form-control" name="description" aria-describedby="helpId" placeholder="">
                         </div>
-                        <button type="submit" name="add_topic" class="btn btn-primary">Add</button>
+                        <button type="submit" name="add_mtp" class="btn btn-primary">Add</button>
                     </form> 
                 </div>
 

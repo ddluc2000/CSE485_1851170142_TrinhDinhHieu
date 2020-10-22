@@ -40,7 +40,7 @@ global $ROOT_PATH; ?>
                                 <?php foreach ($posts as $key=>$post):?>
                                     <tr>
                                         <td scope="row"><input type="checkbox" name=""></td>
-                                        <td><?php echo $key;?></td>
+                                        <td><?php echo $key+1;?></td>
                                         <td><a href="<?php echo $URL."posts&action=index&p_id=".$post['post_id'];?>"><?php echo $post['title'];?></a></td>
                                         <?php foreach ($users as $user):?>
                                             <?php if($user['user_id']==$post['user_id']):?>
