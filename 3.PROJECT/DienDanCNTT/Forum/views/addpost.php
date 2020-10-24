@@ -21,9 +21,19 @@ global $ROOT_PATH;?>
                         </div>
 
                         <div class="form-group">
+                          <label for="">Tags</label>
+                          <select class="form-control" name="tags">
+                            <option value="badge badge-primary Quest">Quest</option>
+                            <option value="badge badge-success Share">Share</option>
+                            <option value="badge badge-danger Warning">Warning</option>
+                            <option value="badge badge-info Tuturial">Tuturial</option>
+                            <option value="badge badge-warning Study">Study</option>
+                          </select>
+                        </div>
+                        <!-- <div class="form-group">
                           <label for="tags">Tags</label>
                           <input type="text" class="form-control" name="tags" aria-describedby="helpId" placeholder="">
-                        </div>
+                        </div> -->
 
                         <button type="submit" name="add_post" class="btn btn-primary">Post</button>
                     </form>

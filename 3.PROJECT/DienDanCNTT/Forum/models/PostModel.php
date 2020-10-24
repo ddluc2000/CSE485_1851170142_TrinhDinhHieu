@@ -97,7 +97,9 @@
         
 
         function update($p_id){
-            $sql="UPDATE ". self::TABLE . " SET title='$this->title' ,body='$this->body', tags='$this->tags', edit_at='$this->edit_at'";
+            $body=$this->body;
+            $_body = mysqli_real_escape_string($this->connection,$body);
+            $sql = "UPDATE ". self::TABLE . " SET title='$this->title' ,body='$_body', tags='$this->tags', edit_at='$this->edit_at'";
             $sql=$sql." WHERE post_id=".$p_id;
             mysqli_query($this->connection,$sql);
             closeConnect($this->connection);

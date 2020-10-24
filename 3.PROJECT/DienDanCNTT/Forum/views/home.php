@@ -7,7 +7,7 @@ global $ROOT_PATH; ?>
     <div class="page-wrapper">
         <?php include($ROOT_PATH . "/supports/message.php");?>
         <div class="slider container">
-            <h1> Quang cao gi do o day hoac bai viet quan trong</h1>
+            <img src="assets/images/background.jpg" alt="">
         </div>
         
         <div class="main-page container">
@@ -15,14 +15,14 @@ global $ROOT_PATH; ?>
                 <div class="main-content col-md-12">
                     <?php foreach ($zones as $zone):?>
                         <!-- de nghi dung khung khac ko dung media -->
-                        <div class="zone block-container border border-success">
+                        <div class="zone block-container">
                             <!-- header zone -->
-                            <div class="block-header border-bottom border-warning">
+                            <div class="block-header rounded-top">
                             <h5><?php echo $zone['title'];?></h5>
-                            <p><?php echo $zone['description']; ?></p>
+                            <span><i><?php echo $zone['description']; ?></i></span>
                             </div>
                             <!-- body zone -->
-                            <div class="block-body ">
+                            <div class="ztopic-body block-body">
                             <?php foreach ($topics as $topic):?>
                             <?php if($topic['zone_id']===$zone['zone_id']):?>
                                 <div class="topic-content">

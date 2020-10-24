@@ -17,12 +17,18 @@ global $ROOT_PATH;?>
 
                         <div class="form-group">
                           <label for="body">Nội dung</label>
-                          <textarea class="form-control" name="body" rows="10"><?php echo $body?></textarea>
+                          <textarea class="form-control" name="body" id="body" rows="10"><?php echo $body?></textarea>
                         </div>
 
                         <div class="form-group">
-                          <label for="tags">Tags</label>
-                          <input type="text" class="form-control" name="tags" aria-describedby="helpId" placeholder="" value="<?php echo $tags?>">
+                          <label for="">Tags</label>
+                          <select class="form-control" name="tags">
+                            <option value="badge badge-primary Quest">Quest</option>
+                            <option value="badge badge-success Share">Share</option>
+                            <option value="badge badge-danger Warning">Warning</option>
+                            <option value="badge badge-info Tuturial">Tuturial</option>
+                            <option value="badge badge-warning Study">Study</option>
+                          </select>
                         </div>
 
                         <button type="submit" name="edit_post" class="btn btn-primary">Edit Post</button>

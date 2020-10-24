@@ -8,11 +8,13 @@ global $ROOT_PATH; ?>
         <div class="main-page container">
             <div class="row">
             
-                <div class="main-content col-md-12 border border-success">
+                <div class="main-content col-md-12">
                     <!-- topic header(title) -->
                     
                     <div class="post-title">
-                        <h3><?php echo $post['title']?></h3>
+                        <?php $data = explode(' ', $post['tags']);?>
+
+                        <h3><?php if(count($data)>1):?><span class="<?php echo $data[0].' '.$data[1];?>"><?php echo $data[2];?></span><?php endif; echo $post['title']?></h3>
                         <div class="post-info">
                             <span>Posted by: <?php echo $user['username']?></span>
                             <span>Create at: <?php echo $post['create_at']?></span>
@@ -20,22 +22,22 @@ global $ROOT_PATH; ?>
                     </div>
                     
                     <div class="post-layout container">
-                        <div class="row">
-                            <div class="cell-user col-md-2 border border-success">
+                        <div class="row post">
+                            <div class="cell-user col-md-2">
                                 <img src="assets/images/img1.jpeg" alt="" class="img-thumbnail rounded-circle">
                                 <div class="user-info">
                                     <div class="user-name"><a href="http://localhost:88/Forum/index.php?controller=users&action=index&u_id=<?php echo $user['user_id'];?>"><?php echo $user['fullname'];?></a></div>
                                     <div class="role"><?php $role=$user['admin']==1?"Quản trị viên":"Thành viên"; echo $role;?></div>
                                     <div class="created-at">Ngày tham gia:<?php echo $user['create_at'];?></div>
-                                    <div class="link-fb">link gi do</div>
+                                    <span class="badge badge-success">Tác giả</span>
                                 </div>
                             </div>
 
-                            <div class="post-content col-md-10 border border-success">
+                            <div class="post-content col-md-10">
                                 <div class="post-body">
                                     <div class="post-preview">preview gi do</div>
                                     <div><img src="" alt="image nao do"></div>
-                                    <?php echo $post['body']?>
+                                    <?php echo html_entity_decode($post['body'])?>
                                 </div>
 
                                 <footer class="footer-post">
@@ -64,25 +66,27 @@ global $ROOT_PATH; ?>
                     <div><br> <?php echo $comment['cm_id'];?></div>
                     
                     <div class="comment-layout container <?php echo "cmt_id".$comment['cm_id'];?>">
-                        <div class="row">
-                            <div class="cell-user col-md-2 border border-success">
+                        <div class="row post">
+                            <div class="cell-user col-md-2">
                                 <img src="assets/images/img1.jpeg" alt="" class="img-thumbnail rounded-circle">
                                 <div class="user-info">
                                     <!-- lay thong tin ve user!!! -->
                                     <div class="user-name"><a href="http://localhost:88/Forum/index.php?controller=users&action=index&u_id=<?php echo $us_comment[$key]['user_id'];?>"><?php echo $us_comment[$key]['fullname'];?></a></div>
                                     <div class="role"><?php $role=$us_comment[$key]['admin']==1?"Quản trị viên":"Thành viên"; echo $role;?></div>
                                     <div class="created-at">Ngày tham gia:<?php echo $us_comment[$key]['create_at'];?></div>
-                                    <div class="link-fb">link gi do</div>
                                 </div>
                             </div>
 
-                            <div class="comment-content col-md-10 border border-success">
+                            <div class="comment-content col-md-10">
                                 <div class="comment-body">
-                                    <?php echo $comment['body'];?>
+                                    <?php echo html_entity_decode($comment['body']);?>
                                 </div>
 
                                 <footer class="footer-post">
                                     <hr>
+                                    <?php if($comment['edit_at']!=NULL):?>
+                                        <span>Edited at: <?php echo $comment['edit_at'];?></span>
+                                    <?php endif;?>
                                     <div class="grb-post btn-group" role="group" aria-label="">
                                         <!-- check cai gi do trc da -->
                                         <?php if(isset($_SESSION['id'])&&$_SESSION['id']==$comment['user_id']):?>
@@ -108,19 +112,19 @@ global $ROOT_PATH; ?>
                     <?php include($ROOT_PATH . "./supports/message.php");?>
                     <?php if(isset($_SESSION['id'])):?>
                     <div class="reply-layout container">
-                        <div class="row">
-                            <div class="cell-user col-md-2 border border-success">
+                        <div class="row post">
+                            <div class="cell-user col-md-2">
                                 <img src="assets/images/img1.jpeg" alt="" class="img-thumbnail rounded-circle">
                                 <div class="user-info">
                                     <!-- lay thong tin ve user!!! -->
                                     <div class="user-name"><a href="http://localhost:88/Forum/index.php?controller=users&action=index&u_id=<?php echo $_SESSION['id'];?>"><?php echo $_SESSION['username'];?></a></div>
                                     <div class="role"><?php $role=$_SESSION['admin']==1?"Quản trị viên":"Thành viên"; echo $role;?></div>
                                     <div class="created-at"><?php echo $_SESSION['create_at'];?></div>
-                                    <div class="link-fb">link gi do</div>
+                                    
                                 </div>
                             </div>
 
-                            <div class="comment-content col-md-10 border border-success">
+                            <div class="comment-content col-md-10">
                                 <div class="comment-body">
                                     <form id="add_cmt" action="<?php echo $BASE_URL."/index.php?controller=posts&action=addComment&p_id=".$post['post_id'];?>" method="post">                                              
                                         <?php include($ROOT_PATH . "/supports/formErrors.php");?>

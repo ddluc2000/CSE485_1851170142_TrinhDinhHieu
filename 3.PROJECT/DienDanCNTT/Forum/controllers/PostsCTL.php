@@ -48,7 +48,7 @@ class PostsCTL extends ParentCTL
           $errors=validateCm($_POST);
           if(count($errors)==0){
               // ($body,$post_id,$user_id,$edit_at="")
-              $commentModel2 = new CommentModel($_POST['body'],$_POST['post_id'],$_POST['user_id']);
+              $commentModel2 = new CommentModel(htmlentities($_POST['body']),$_POST['post_id'],$_POST['user_id']);
               $commentModel2->create();
               // echo "location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$p_id;
               header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$p_id);
@@ -71,7 +71,7 @@ class PostsCTL extends ParentCTL
         unset($_POST['add_post']);
         $errors=validatePost($_POST);
         if(count($errors)==0){
-            $postModel = new PostModel($_POST['title'],$_POST['body'],$_POST['tags'],$_SESSION['id'],$tp_id);
+            $postModel = new PostModel($_POST['title'],htmlentities($_POST['body']),$_POST['tags'],$_SESSION['id'],$tp_id);
             $postModel->create();
             header("location:".$BASE_URL."/index.php?controller=topics&action=index&tp_id=".$tp_id);
         }
@@ -114,7 +114,7 @@ class PostsCTL extends ParentCTL
           // sua
           if(isset($_POST['edit_post'])){
           // ($title="",$body="",$tags="",$user_id="",$topic_id="",$mitopic_id="",$edit_at="")
-            $postModel2 = new PostModel($_POST['title'],$_POST['body'],$_POST['tags'],'','','',$time);
+            $postModel2 = new PostModel($_POST['title'],htmlentities($_POST['body']),$_POST['tags'],'','','',$time);
             $postModel2->update($post_id);
             header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$post_id);
           }
@@ -132,27 +132,14 @@ class PostsCTL extends ParentCTL
 
       print_r($_POST);
       // ($body="",$post_id="",$user_id="",$edit_at="")
-        $commentModel = new CommentModel($_POST['body']);
+        date_default_timezone_set("Asia/Bangkok");
+        $date=getdate();
+        // sua lai cu phap ngan hon lay time
+        $time=$date['year']."-".$date['mon']."-".$date['mday']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
+        $commentModel = new CommentModel(htmlentities($_POST['body']),'','',$time);
         $commentModel->update($_GET['cm_id']);
         header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$_POST['post_id']);
-        // if(isset($_SESSION['id'])&&$comment['user_id']===$_SESSION['id']){
-        //   // $body=$comment['body'];
-        //   date_default_timezone_set("Asia/Bangkok");
-        //   $date=getdate();
-        //   // sua lai cu phap ngan hon lay time
-        //   $time=$date['year']."-".$date['mon']."-".$date['mday']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
-        //   if(isset($_POST['edit_cm'])){
-        //     // ($body="",$post_id="",$user_id="",$edit_at="")
-        //     $commentModel2 = new CommentModel($_POST['body'],'','',$time);
-        //     print_r($_POST);
-        //     echo $comment['cm_id'];
-        //     $commentModel2->update($comment['cm_id']);
-        //     // header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$comment['post_id']);
-        //   }
-        //   // require_once 'views/editpost.php';
-        // }
-        // else
-        // echo "Ban ko co quyen edit";
+       
     }
   }
 
