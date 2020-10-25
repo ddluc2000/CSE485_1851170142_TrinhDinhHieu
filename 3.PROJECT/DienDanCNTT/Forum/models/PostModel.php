@@ -50,7 +50,7 @@
         //     return $result;
         // }
         function getPostInTP($tp_id){
-            $sql="SELECT p.*,u.username,u.user_id FROM posts As p JOIN users as u ON p.user_id=u.user_id WHERE p.topic_id='$tp_id' ORDER BY p.post_id DESC";
+            $sql="SELECT p.*,u.username,u.user_id,u.avt FROM posts As p JOIN users as u ON p.user_id=u.user_id WHERE p.topic_id='$tp_id' ORDER BY p.post_id DESC";
             $rs=mysqli_query($this->connection,$sql);
             $result=mysqli_fetch_all($rs,MYSQLI_ASSOC);
             closeConnect($this->connection);
@@ -58,7 +58,7 @@
         }
 
         function getPostInMTP($mtp_id){
-            $sql="SELECT p.*,u.username,u.user_id FROM posts As p JOIN users as u ON p.user_id=u.user_id WHERE p.mitopic_id='$mtp_id' ORDER BY p.post_id DESC";
+            $sql="SELECT p.*,u.username,u.user_id,u.avt FROM posts As p JOIN users as u ON p.user_id=u.user_id WHERE p.mitopic_id='$mtp_id' ORDER BY p.post_id DESC";
             $rs=mysqli_query($this->connection,$sql);
             $result=mysqli_fetch_all($rs,MYSQLI_ASSOC);
             closeConnect($this->connection);

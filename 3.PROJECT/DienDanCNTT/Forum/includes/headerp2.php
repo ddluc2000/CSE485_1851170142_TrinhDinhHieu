@@ -20,7 +20,7 @@ global $BASE_URL; ?>
                 </li>
 
                 <li class="nav-item">
-                    <a href="http://localhost:88/Forum/index.php?controller=admin&action=index" class="nav-link">Term</a>
+                    <a href="#" class="nav-link">Term</a>
                 </li>
                 <?php if(isset($_SESSION['id'])):?>
 
@@ -28,7 +28,9 @@ global $BASE_URL; ?>
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['username'];?></a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="http://localhost:88/Forum/index.php?controller=users&action=index&u_id=<?php echo $_SESSION['id'];?>">Profile</a>
-                    <a class="dropdown-item" href="#tab3Id">Another action</a>
+                    <?php if($_SESSION['admin']==1):?>
+                    <a class="dropdown-item" href="http://localhost:88/Forum/index.php?controller=admin&action=index">Dash Board</a>
+                    <?php endif;?>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="<?php echo $BASE_URL."/index.php?controller=users&action=logout";?>">Logout</a>
                 </div>

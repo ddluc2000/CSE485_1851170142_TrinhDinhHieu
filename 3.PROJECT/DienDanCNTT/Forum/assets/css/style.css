@@ -159,6 +159,11 @@ header .nav li ul{
     min-height: 185px;
 }
 
+.avatar{
+    width: 150px;
+    height: 150px;
+}
+
 /* MITOPIC-TOPIC */
 .mitopic-tp{
     border-top-left-radius: 5px;
@@ -195,6 +200,15 @@ header .nav li ul{
 }
 .post-title-tp,.post-info-tp{
     padding-left: 10px;
+}
+.avt-tp{
+    display: block;
+  /* max-width:120px;
+  max-height:95px; */
+  width: 110px;
+  height: 95px;
+  /* min-width:120px;
+  min-height:95px; */
 }
 
 /* POST,COMMENT-POST */

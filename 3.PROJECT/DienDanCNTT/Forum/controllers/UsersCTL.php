@@ -5,10 +5,35 @@ class UsersCTL
 {
   
   public function index(){
+    global $ROOT_PATH;
+    global $URL;
     if(isset($_GET['u_id'])){
       $userModel = new UserModel();
       $user=$userModel->getOne($_GET['u_id']);
       if($user!=NULL){
+        if(isset($_POST['update'])){
+          // sau chinh lai verify
+        
+          if($_POST['password']==$user['password']){
+          //   // ($username='',$fullname='',$email='',$password='',$avt='',$admin='',$status='')
+
+            if(!empty($_FILES['avatar']['tmp_name'])){
+              $file = $_FILES['avatar']['tmp_name'];
+          //     // $path = "file/".$_FILES['myFile']['name'];
+              $image_name=time().'_'.$user['user_id'].'.jpg';
+          //     $file = $_FILES['avatar']['tmp_name'];
+              $path = "assets/images/avt/".$image_name;
+              move_uploaded_file($file, $path);
+              $_SESSION['avt']=$image_name;
+            }
+            $userModel2 = new UserModel($user['username'],$_POST['fullname'],$_POST['email'],$user['password'],$image_name);
+            $userModel2->update($user['user_id']);
+            $_SESSION['fullname']=$_POST['fullname'];
+            
+            $_SESSION['message']="Bạn đã cập nhật thông tin thành công!";
+            header("refresh:2");
+          }
+        }
         require_once 'views/userinfo.php';
       }
       else{
@@ -16,6 +41,15 @@ class UsersCTL
       }
     }
   }
+
+  // public function update($u_id=''){
+  //   global $URL;
+  //   if(isset($_POST['update'])){
+  //     print_r($_FILES);
+  //   }
+  //   else
+  //   require_once 'views/users/edit_user.php';
+  // }
 
   public function login()
   {
@@ -29,23 +63,28 @@ class UsersCTL
         if(count($errors)==0){
           $userModel = new UserModel();
           $user = $userModel->selectByUn($_POST['username']);
-          if($user&&$user['password']===$_POST['password'])
-          {       
-                  $_SESSION['id']=$user['user_id'];
-                  $_SESSION['username']=$user['username'];
-                  $_SESSION['fullname']=$user['fullname'];
-                  $_SESSION['admin']=$user['admin'];
-                  $_SESSION['create_at']=$user['create_at'];
-                  $_SESSION['message']="ban da dang nhap thanh cong!";
-                  // type
-                  header("location:".$ROOT_PATH."index.php");
-                  exit();
-          }
+          if($user['status']==0) $_SESSION['message']="Tài khoản của bạn chưa được kích hoạt hoặc đã bị khóa!";
           else
-              {
-                $username=$_POST['username'];
-                $_SESSION['message']="ban da nhap sai thong tin!";
+          {
+              if($user&&$user['password']===$_POST['password'])
+              {       
+                      $_SESSION['id']=$user['user_id'];
+                      $_SESSION['username']=$user['username'];
+                      $_SESSION['fullname']=$user['fullname'];
+                      $_SESSION['avt']=$user['avt'];
+                      $_SESSION['admin']=$user['admin'];
+                      $_SESSION['create_at']=$user['create_at'];
+                      $_SESSION['message']="ban da dang nhap thanh cong!";
+                      // type
+                      header("location:".$ROOT_PATH."index.php");
+                      exit();
               }
+              else
+                  {
+                    $username=$_POST['username'];
+                    $_SESSION['message']="ban da nhap sai thong tin!";
+                  }
+          }
         }
     }
     require_once 'views/login.php';

@@ -32,10 +32,23 @@ class PostsCTL extends ParentCTL
             array_push($us_comment,$user_cm);
         }
         
+        if(isset($_POST['add_report'])){
+          $this->addReport($_POST);
+        }
         // XU ly lai
         
       require_once 'views/post.php';
     }
+  }
+  // $content="",$post_id="",$user_id="",$cm_id="",$us_reported_id=""
+  function addReport($data=[]){
+    global $URL;
+      if(isset($data['add_report'])){
+      $reportModel= new ReportModel($data['content'],$data['post_id'],$data['user_id'],$data['cm_id'],$data['us_reported_id']);
+      $reportModel->create();
+      $_SESSION['message']="Ban da report thanh cong";
+      header("location:".$URL."posts&action=index&p_id=".$data['post_id']);
+      }
   }
 
   function addComment(){

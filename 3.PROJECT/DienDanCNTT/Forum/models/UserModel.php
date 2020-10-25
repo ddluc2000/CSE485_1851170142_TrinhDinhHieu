@@ -7,6 +7,7 @@
         private $username;
         private $fullname;
         private $email;
+        private $avt;
         private $password;
         private $code;
         private $create_at;
@@ -15,10 +16,11 @@
         public $connection;
         const TABLE="users";
         
-        function UserModel($username='',$fullname='',$email='',$password='',$admin='',$status=''){
+        function UserModel($username='',$fullname='',$email='',$password='',$avt='',$admin='',$status=''){
             $this->username=$username;
             $this->fullname=$fullname;
             $this->email=$email;
+            $this->avt=$avt;
             $this->password=$password;
             $this->admin=$admin;
             $this->status=$status;
@@ -40,6 +42,7 @@
             $sql="UPDATE ". self::TABLE . " SET username='$this->username' ,fullname='$this->fullname', email='$this->email', password='$this->password'";
             if($this->admin!=='') $sql.=", admin='$this->admin'";
             if($this->status!=='') $sql.=", status='$this->status'";
+            if($this->avt!=='') $sql.=", avt='$this->avt'";
             $sql=$sql." WHERE user_id=".$u_id;
             mysqli_query($this->connection,$sql);
             closeConnect($this->connection);

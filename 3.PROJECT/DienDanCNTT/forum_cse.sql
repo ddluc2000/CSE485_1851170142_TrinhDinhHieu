@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 21, 2020 lúc 05:42 PM
+-- Thời gian đã tạo: Th10 25, 2020 lúc 04:48 PM
 -- Phiên bản máy phục vụ: 10.4.14-MariaDB
 -- Phiên bản PHP: 7.2.33
 
@@ -47,10 +47,18 @@ INSERT INTO `comments` (`cm_id`, `body`, `create_at`, `edit_at`, `post_id`, `use
 (37, '333', '2020-10-19 11:06:39', NULL, 22, 2),
 (38, 'defedêđe', '2020-10-19 11:06:47', '0000-00-00 00:00:00', 22, 2),
 (39, 'vdvdd', '2020-10-19 11:08:38', '0000-00-00 00:00:00', 22, 2),
-(40, 'cacacaca2', '2020-10-19 11:08:41', '0000-00-00 00:00:00', 22, 2),
+(40, 'cacacaca266', '2020-10-19 11:08:41', '2020-10-25 14:37:45', 22, 2),
 (44, '666', '2020-10-19 11:33:16', NULL, 25, 2),
 (47, 'eq', '2020-10-19 11:58:29', NULL, 22, 1),
-(62, '6262626', '2020-10-20 14:49:47', NULL, 39, 2);
+(62, '6262626', '2020-10-20 14:49:47', NULL, 39, 2),
+(73, 'wwvdvadvadwwfvdvc', '2020-10-22 14:42:11', '2020-10-24 15:34:23', 68, 2),
+(74, 'acacsf', '2020-10-24 15:34:31', '2020-10-24 15:35:38', 68, 2),
+(75, '&lt;p&gt;ahihi&lt;/p&gt;', '2020-10-25 13:46:08', NULL, 76, 2),
+(76, '&lt;p&gt;69&lt;/p&gt;', '2020-10-25 14:10:02', NULL, 22, 2),
+(77, '&lt;p&gt;avssav&aacute;v&lt;/p&gt;', '2020-10-25 14:39:41', NULL, 79, 2),
+(78, '&lt;p&gt;663&lt;/p&gt;', '2020-10-25 14:41:47', NULL, 22, 2),
+(79, '&lt;p&gt;grhrhrh&lt;/p&gt;', '2020-10-25 14:56:43', NULL, 76, 2),
+(80, '&lt;p&gt;evrgrr&lt;/p&gt;', '2020-10-25 15:24:10', NULL, 78, 2);
 
 -- --------------------------------------------------------
 
@@ -71,11 +79,9 @@ CREATE TABLE `mitopics` (
 
 INSERT INTO `mitopics` (`mitopic_id`, `title`, `description`, `topic_id`) VALUES
 (1, 'Topic con 1', 'gigido', 1),
-(10, 'AVSAVSAV', 'SAVADVADV', 5),
-(11, 'SVSACAS', 'CASCSAC', 6),
-(12, 'A ASCSC', 'CSACSACSAC', 7),
-(13, ' ASCASCSAC', 'SCSACA', 8),
-(14, 'CASCSAC', 'CASCSAC', 9);
+(21, 'kokokoko', 'huhuh', 1),
+(22, 'jijijiji', 'lololo', 21),
+(23, 'kookokikik', 'olokokio', 22);
 
 -- --------------------------------------------------------
 
@@ -101,29 +107,22 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`post_id`, `title`, `create_at`, `edit_at`, `body`, `tags`, `status`, `user_id`, `topic_id`, `mitopic_id`) VALUES
-(22, 'Adu vip', '2020-10-18 14:42:01', '2020-10-18 15:29:51', '12323233errr333wwd33êê', 'eehehehehe', 1, 2, 1, NULL),
-(25, '333', '2020-10-18 16:03:16', '2020-10-18 16:05:15', 'egefegeg99', '22', 1, 1, 1, 1),
-(33, 'hhh', '2020-10-19 09:40:23', NULL, 'ttt', 't', 1, 2, 1, 0),
-(35, '3223', '2020-10-19 09:47:12', NULL, '2525252', '5', 1, 2, 1, 1),
-(39, 'câcca', '2020-10-20 01:38:52', '2020-10-20 01:38:57', 'áéấeww', '2', 1, 1, 1, 1),
-(41, 'hrhrhrhr', '2020-10-20 15:02:33', NULL, 'ehsehsehse', 'eh', 1, 2, 1, 4),
-(43, 'DSẤÉAE', '2020-10-21 15:38:26', NULL, 'DASDSADSADSAD', NULL, 1, 6, 5, NULL),
-(44, 'ADASDSADSAD', '2020-10-21 15:38:41', NULL, 'ASDSADSADSADSA', 'ADASDSA', 1, 2, 5, NULL),
-(45, 'ACSACSACSAC', '2020-10-21 15:38:54', NULL, 'CASCSACSACSA', NULL, 1, 6, 8, NULL),
-(46, 'VAVSAVSAV', '2020-10-21 15:39:07', NULL, 'VASVSAVASVAS', 'ASVSAVA', 1, 13, 9, NULL),
-(47, 'AVSAVA', '2020-10-21 15:39:26', NULL, 'VAVSAVA', 'VASVA', 1, 2, 6, NULL),
-(48, 'ACASCSA', '2020-10-21 15:39:30', NULL, 'ACSACSA', '', 1, 2, 6, NULL),
-(49, 'CASCSAC', '2020-10-21 15:39:33', NULL, 'CASCSAC', '', 1, 2, 6, NULL),
-(50, 'CASCASCSACW', '2020-10-21 15:39:44', NULL, 'CASCSACSAC', 'CSACAS', 1, 2, 7, NULL),
-(51, 'ZAAWAWC', '2020-10-21 15:39:49', NULL, 'CACAW', 'CSAVASVA', 1, 2, 7, NULL),
-(52, 'VAVAEVAC', '2020-10-21 15:39:55', NULL, 'EVEVAVEA', 'VAEVAEVAEV', 1, 2, 7, NULL),
-(53, 'EAVAVD', '2020-10-21 15:40:03', NULL, 'ZVAVAVA', 'ZVAD', 1, 2, 9, NULL),
-(54, 'ASVASCAD', '2020-10-21 15:40:14', NULL, 'ASVSAVSA', 'CASCAV', 1, 2, 8, NULL),
-(55, 'ACSACASC', '2020-10-21 15:41:14', NULL, 'CCASCSAC', 'AC', 1, 2, 5, 10),
-(56, 'CASCSAC', '2020-10-21 15:41:22', NULL, 'SCASCSAC', 'ACSAC', 1, 2, 5, 10),
-(57, 'SACSAC', '2020-10-21 15:41:32', NULL, 'CSACSACS ', 'SCASC', 1, 2, 6, 11),
-(58, 'ACASCSAC', '2020-10-21 15:41:39', NULL, 'CASCSAC', 'SACSACSA', 1, 2, 7, 12),
-(59, 'CASCSAC', '2020-10-21 15:41:47', NULL, 'ASSDASDAS', 'ASDSADCCE', 1, 2, 8, 13);
+(22, 'Adu vip', '2020-10-18 14:42:01', '2020-10-18 15:29:51', '12323233errr333wwd33êê', '', 1, 2, 1, NULL),
+(25, '333', '2020-10-18 16:03:16', '2020-10-18 16:05:15', 'egefegeg99', '', 1, 1, 1, 1),
+(33, 'hhh', '2020-10-19 09:40:23', NULL, 'ttt', '', 1, 2, 1, 0),
+(35, '3223', '2020-10-19 09:47:12', '2020-10-24 16:31:33', '2525252', 'badge badge-success Share', 1, 2, 1, 1),
+(39, 'câcca', '2020-10-20 01:38:52', '2020-10-20 01:38:57', 'áéấeww', '', 1, 1, 1, 1),
+(41, 'hrhrhrhr', '2020-10-20 15:02:33', NULL, 'ehsehsehse', '', 1, 2, 1, 4),
+(64, 'sfefse', '2020-10-22 12:07:56', '2020-10-24 16:25:48', 'fesfesf', 'badge badge-primary Quest', 1, 2, 1, NULL),
+(68, 'eeetoi abc abavácâcscsấccấccâccaavavsavasvadvadvadvadvadveeetoi abc abavácâcscsấccấccâccaavavsava', '2020-10-22 14:28:09', '2020-10-24 16:25:36', '<p>egege</p>', 'badge badge-warning Study', 1, 2, 1, NULL),
+(69, 'cacsavsava', '2020-10-24 15:28:17', NULL, '<p>vdvadvadv</p>', '', 1, 2, 27, NULL),
+(70, 'Đẳng', '2020-10-24 15:58:39', NULL, '<p>đẳng</p>', '', 1, 2, 28, NULL),
+(71, 'sadấda', '2020-10-24 16:02:16', '2020-10-24 16:25:24', '<p>ađâsd</p>', 'badge badge-success Share', 1, 2, 1, NULL),
+(72, 'avsav', '2020-10-24 16:03:07', '2020-10-24 16:25:08', '<p>svavadv</p>', 'badge badge-info Tuturial', 1, 2, 1, NULL),
+(74, 'vavavadvd', '2020-10-24 16:15:28', '2020-10-24 16:44:44', '<p>vdvfvfsvs</p>ce', 'badge badge-primary Quest', 1, 2, 1, NULL),
+(76, 'Công việc cần làm tiếp theo', '2020-10-24 16:44:18', '2020-10-25 08:32:36', '&lt;p&gt;.Th&ecirc;m avatar cho user&lt;/p&gt;&lt;p&gt;*Th&ecirc;m t&iacute;nh năng report&lt;/p&gt;&lt;p&gt;*Th&ecirc;m t&iacute;nh năng block user&lt;/p&gt;&lt;p&gt;*Th&ecirc;m lu&ocirc;n chữ k&yacute;&lt;/p&gt;&lt;p&gt;*Thiết kế footer,header&lt;/p&gt;&lt;p&gt;*Th&ecirc;m t&iacute;nh năng đ&oacute;ng b&agrave;i viết&lt;/p&gt;&lt;p&gt;*Sửa lại crud cho admin chuẩn hơn&lt;/p&gt;&lt;p&gt;*Th&ecirc;m t&iacute;nh năng ph&acirc;n trang&lt;/p&gt;&lt;p&gt;*Box chat &hellip;..&lt;/p&gt;&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://s0ft4pc.com/wp-content/uploads/2020/01/XDNHV.gif?x36652&quot;&gt;&lt;/figure&gt;', 'badge badge-primary Quest', 1, 2, 1, NULL),
+(78, 'avavasv', '2020-10-25 14:23:23', NULL, '&lt;p&gt;avsavavd&lt;/p&gt;', '', 1, 1, 1, NULL),
+(79, 'ahihi', '2020-10-25 14:39:28', '2020-10-25 14:39:38', '&lt;p&gt;vababdba&lt;strong&gt;abababa&lt;/strong&gt;&lt;i&gt;avavsav&lt;/i&gt;&lt;/p&gt;', '', 1, 2, 21, 22);
 
 -- --------------------------------------------------------
 
@@ -146,7 +145,9 @@ CREATE TABLE `reports` (
 --
 
 INSERT INTO `reports` (`rp_id`, `content`, `create_at`, `cm_id`, `post_id`, `user_id`, `us_reported_id`) VALUES
-(4, 'agag', '2020-10-20 12:22:58', 0, 0, 1, 2);
+(4, 'agag', '2020-10-20 12:22:58', 0, 0, 1, 2),
+(6, 'avavsadv', '2020-10-25 15:29:52', 80, 78, 2, 2),
+(7, 'vip', '2020-10-25 15:32:21', 0, 78, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -167,11 +168,15 @@ CREATE TABLE `topics` (
 
 INSERT INTO `topics` (`topic_id`, `title`, `description`, `zone_id`) VALUES
 (1, 'Topic lày', 'adu vip', 1),
-(5, '65626', '65', 2),
-(6, '2265', NULL, 4),
-(7, '265', NULL, 5),
-(8, '98989', NULL, 6),
-(9, '495956', NULL, 5);
+(21, 'gegwga', 'gawgawg', 4),
+(22, 'koko', 'kokok', 4),
+(27, 'hihihih', 'hihihi', 2),
+(28, 'okokoko', 'ijihihi', 7),
+(29, 'lkojoho', 'hihihi', 8),
+(30, 'ahiahia', 'ahihfiòa', 1),
+(31, 'vaváváv', 'davadvadv', 1),
+(32, 'vavavvacd', 'vdvdvav', 1),
+(33, 'verfafr', 'grafeaf', 1);
 
 -- --------------------------------------------------------
 
@@ -184,7 +189,7 @@ CREATE TABLE `users` (
   `username` varchar(60) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `fullname` varchar(60) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `avt` varchar(255) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `avt` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL DEFAULT 'none.jpg',
   `password` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `code` varchar(255) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -197,11 +202,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `fullname`, `email`, `avt`, `password`, `code`, `create_at`, `admin`, `status`) VALUES
-(1, 'hieu2k', 'Hieu Tr', 'hieu207@gmail.com', NULL, '123456', NULL, '2020-10-14 15:08:59', 0, 0),
-(2, 'hieus207', 'Hiếu Trịnh', 'hieus207@gmail.com', NULL, '123', NULL, '2020-10-18 14:41:24', 1, 0),
-(6, 'aeaeae', 'aeaeaea', 'aeae@aeae', NULL, '123', NULL, '2020-10-21 10:27:26', 0, 1),
-(11, 'aduvip', 'Vip', 'ava@gm', NULL, '123', NULL, '2020-10-21 10:37:27', 1, 0),
-(13, 'eee', '222', '22@2', NULL, '222', NULL, '2020-10-21 11:27:38', 0, 1);
+(1, 'hieu2k', 'Hieu Tr', 'hieu207@gmail.com', 'none.jpg', '123456', NULL, '2020-10-14 15:08:59', 0, 1),
+(2, 'hieus207', 'Hiếu Trịnh', 'hieus207@gmail.com', '1603635186_2.jpg', '123', NULL, '2020-10-18 14:41:24', 1, 1),
+(6, 'aeaeae', 'aeaeaea', 'aeae@aeae', 'none.jpg', '123', NULL, '2020-10-21 10:27:26', 0, 1),
+(11, 'aduvip', 'Vip', 'ava@gm', 'none.jpg', '123', NULL, '2020-10-21 10:37:27', 1, 0),
+(13, 'eee', '222', '22@2', 'none.jpg', '222', NULL, '2020-10-21 11:27:38', 0, 1),
+(15, 'eqf', 'qfeeq', 'ae@fef', 'none.jpg', '123', NULL, '2020-10-22 11:31:26', 0, 0),
+(17, 'cacas', 'caca', 'acds@few', 'none.jpg', 'eee', NULL, '2020-10-22 12:40:29', 0, 0),
+(23, 'aavabac', 'Ahiahi', 'acavava@gm', 'none.jpg', '123', NULL, '2020-10-22 13:14:57', 0, 0),
+(24, 'ababac', 'avavav', 'ava@fefa', 'none.jpg', '123', NULL, '2020-10-22 13:17:09', 0, 0),
+(25, 'wwdwd', 'cefe@g', 'ddcefe@g', 'none.jpg', '123', NULL, '2020-10-22 13:18:41', 0, 0),
+(26, 'Aduvouoip', 'fkoeko', 'fkoefko@fmoa', 'none.jpg', '123', NULL, '2020-10-22 13:20:17', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -223,8 +234,8 @@ INSERT INTO `zones` (`zone_id`, `title`, `description`) VALUES
 (1, 'Khu Vực giải trí', 'Nơi vui chơi giải trí'),
 (2, 'đây là zone thứ 2 chẳng hạn', 'mô tả cái zone này'),
 (4, '1112225', '4444'),
-(5, '111222', '4444'),
-(6, '5565', '26');
+(7, 'zoneTest33', '3'),
+(8, 'local', 'hihi');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -289,43 +300,43 @@ ALTER TABLE `zones`
 -- AUTO_INCREMENT cho bảng `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `cm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `cm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT cho bảng `mitopics`
 --
 ALTER TABLE `mitopics`
-  MODIFY `mitopic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `mitopic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT cho bảng `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `rp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `rp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng `zones`
 --
 ALTER TABLE `zones`
-  MODIFY `zone_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `zone_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

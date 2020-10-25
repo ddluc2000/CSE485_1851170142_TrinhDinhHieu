@@ -24,7 +24,8 @@ global $ROOT_PATH; ?>
                     <div class="post-layout container">
                         <div class="row post">
                             <div class="cell-user col-md-2">
-                                <img src="assets/images/img1.jpeg" alt="" class="img-thumbnail rounded-circle">
+                            
+                                <img src="<?php echo $BASE_URL.'/assets/images/avt/'.$user['avt'];?>" alt="" class="img-thumbnail avatar rounded-circle mx-auto d-block" >
                                 <div class="user-info">
                                     <div class="user-name"><a href="http://localhost:88/Forum/index.php?controller=users&action=index&u_id=<?php echo $user['user_id'];?>"><?php echo $user['fullname'];?></a></div>
                                     <div class="role"><?php $role=$user['admin']==1?"Quản trị viên":"Thành viên"; echo $role;?></div>
@@ -35,8 +36,6 @@ global $ROOT_PATH; ?>
 
                             <div class="post-content col-md-10">
                                 <div class="post-body">
-                                    <div class="post-preview">preview gi do</div>
-                                    <div><img src="" alt="image nao do"></div>
                                     <?php echo html_entity_decode($post['body'])?>
                                 </div>
 
@@ -54,7 +53,45 @@ global $ROOT_PATH; ?>
                                         <?php endif;?>
                                         <button type="button" class="btn btn-primary">Like</button>
                                         <button type="button" class="btn btn-primary">Reply</button>
-                                        <button type="button" class="btn btn-primary">Report</button>
+                                        <!-- <button type="button" class="btn btn-primary">Report</button> -->
+                                        
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+                                        Report
+                                        </button>
+                                        
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+
+                                                <form action="" method="post">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Modal title</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                    </div>
+                                                    <input type="hidden" name="post_id" value="<?php echo $p_id;?>">
+                                                    <input type="hidden" name="cm_id" value="">
+                                                    <input type="hidden" name="us_reported_id" value="<?php echo $_SESSION['id'];?>">
+                                                    <input type="hidden" name="user_id" value="<?php echo $user['user_id'];?>">
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                          <label for="content">Lý do</label>
+                                                          <input type="text" class="form-control" name="content" aria-describedby="helpId" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" name="add_report" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </footer>
                             </div>
@@ -68,7 +105,7 @@ global $ROOT_PATH; ?>
                     <div class="comment-layout container <?php echo "cmt_id".$comment['cm_id'];?>">
                         <div class="row post">
                             <div class="cell-user col-md-2">
-                                <img src="assets/images/img1.jpeg" alt="" class="img-thumbnail rounded-circle">
+                                <img src="<?php echo $BASE_URL.'/assets/images/avt/'.$us_comment[$key]['avt'];?>" alt="" class="img-thumbnail avatar rounded-circle mx-auto d-block">
                                 <div class="user-info">
                                     <!-- lay thong tin ve user!!! -->
                                     <div class="user-name"><a href="http://localhost:88/Forum/index.php?controller=users&action=index&u_id=<?php echo $us_comment[$key]['user_id'];?>"><?php echo $us_comment[$key]['fullname'];?></a></div>
@@ -84,7 +121,7 @@ global $ROOT_PATH; ?>
 
                                 <footer class="footer-post">
                                     <hr>
-                                    <?php if($comment['edit_at']!=NULL):?>
+                                    <?php if($comment['edit_at']!==NULL):?>
                                         <span>Edited at: <?php echo $comment['edit_at'];?></span>
                                     <?php endif;?>
                                     <div class="grb-post btn-group" role="group" aria-label="">
@@ -95,7 +132,44 @@ global $ROOT_PATH; ?>
                                         <?php endif;?>
                                         <button type="button" class="btn btn-primary">Like</button>
                                         <button type="button" class="btn btn-primary">Reply</button>
-                                        <button type="button" class="btn btn-primary">Report</button>
+                                        <!-- <button type="button" class="btn btn-primary">Report</button> -->
+
+                                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="<?php echo "#modelId".$comment['cm_id']; ?>">
+                                        Report
+                                        </button>
+                                        
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="<?php echo "modelId".$comment['cm_id'];?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+
+                                                <form action="" method="post">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Modal title</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                    </div>
+                                                    <input type="hidden" name="post_id" value="<?php echo $p_id;?>">
+                                                    <input type="hidden" name="cm_id" value="<?php echo $comment['cm_id'];?>">
+                                                    <input type="hidden" name="us_reported_id" value="<?php echo $_SESSION['id'];?>">
+                                                    <input type="hidden" name="user_id" value="<?php echo $us_comment[$key]['user_id'];?>">
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                          <label for="content">Lý do</label>
+                                                          <input type="text" class="form-control" name="content" aria-describedby="helpId" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" name="add_report" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </footer>
                             </div>
@@ -114,7 +188,7 @@ global $ROOT_PATH; ?>
                     <div class="reply-layout container">
                         <div class="row post">
                             <div class="cell-user col-md-2">
-                                <img src="assets/images/img1.jpeg" alt="" class="img-thumbnail rounded-circle">
+                                <img src="<?php echo $BASE_URL.'/assets/images/avt/'.$_SESSION['avt'];?>" alt="" class="img-thumbnail rounded-circle">
                                 <div class="user-info">
                                     <!-- lay thong tin ve user!!! -->
                                     <div class="user-name"><a href="http://localhost:88/Forum/index.php?controller=users&action=index&u_id=<?php echo $_SESSION['id'];?>"><?php echo $_SESSION['username'];?></a></div>

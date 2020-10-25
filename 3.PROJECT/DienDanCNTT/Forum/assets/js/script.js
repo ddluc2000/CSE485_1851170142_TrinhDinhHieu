@@ -14,7 +14,7 @@ div.innerHTML =
 '<form id="add_cmt" action="http://localhost:88/Forum/index.php?controller=posts&action=edit_c&cm_id='+cm_id+'" method="post">'+
 '<input type="hidden" class="form-control" name="post_id" value="'+p_id+'">'+
 '<div class="form-group">'+
-'<textarea class="form-control" name="body" rows="5">'+test2+'</textarea>'+
+'<textarea class="form-control" name="body" id="body" rows="5">'+test2+'</textarea>'+
 '</div>'+
 '<button type="submit" name="add_comment" class="btn btn-primary float float-right">Comment</button>'+
 '</form>'+

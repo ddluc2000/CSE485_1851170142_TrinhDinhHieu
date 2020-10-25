@@ -26,7 +26,9 @@
         }
 
         function create(){
-            $sql="INSERT INTO ". self::TABLE ." SET content='$this->content', post_id='$this->post_id', user_id='$this->user_id', cm_id='$this->cm_id', us_reported_id='$us_reported_id'";
+            $_content = mysqli_real_escape_string($this->connection,$this->content);
+            $sql="INSERT INTO ". self::TABLE ." SET content='$_content', post_id='$this->post_id', user_id='$this->user_id', cm_id='$this->cm_id', us_reported_id='$this->us_reported_id'";
+            // echo $sql;
             $rs=mysqli_query($this->connection,$sql);
             closeConnect($this->connection);
             return 1;

@@ -27,7 +27,7 @@ global $ROOT_PATH; ?>
                                 <?php foreach ($posts as $post):?>
                                 <?php $data = explode(' ', $post['tags']);?>
                                 <div class="post-content-tp d-flex">
-                                    <img src="assets/images/img1.jpeg" alt="123" height="50px" width="55px" class="rounded-circle">
+                                    <img src="<?php echo $BASE_URL.'/assets/images/avt/'.$post['avt'];?>" alt="123" class="avt-tp rounded-circle">
                                     <div class="post-tp">
                                         <div class="post-title-tp"><a href="<?php echo $BASE_URL."/index.php?controller=posts&action=index&p_id=".$post['post_id'];?>"><?php if(count($data)>1):?><span class="<?php echo $data[0].' '.$data[1];?>"><?php echo $data[2];?></span><?php endif;?><?php echo $post['title'];?></a></div>
                                         <div class="post-info-tp">

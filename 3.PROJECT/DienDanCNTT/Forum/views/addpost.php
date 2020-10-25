@@ -23,6 +23,7 @@ global $ROOT_PATH;?>
                         <div class="form-group">
                           <label for="">Tags</label>
                           <select class="form-control" name="tags">
+                            <option value="">None</option>
                             <option value="badge badge-primary Quest">Quest</option>
                             <option value="badge badge-success Share">Share</option>
                             <option value="badge badge-danger Warning">Warning</option>
