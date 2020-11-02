@@ -6,6 +6,7 @@ require_once 'models/ReportModel.php';
 require_once 'models/ZoneModel.php';
 require_once 'models/TopicModel.php';
 require_once 'models/MitopicModel.php';
+require_once 'models/OtherModel.php';
 class ParentCTL
 {
   public function index()
@@ -89,6 +90,18 @@ class ParentCTL
       }
     $zoneModel = new ZoneModel();
     $zoneModel->delete($z_id);
+  }
+
+  public function about(){
+    $otherModel = new OtherModel();
+    $url=$otherModel->getLink('about')['link'];
+    header("location:".$url);
+  }
+
+  public function rules(){
+    $otherModel = new OtherModel();
+    $url=$otherModel->getLink('rule')['link'];
+    header("location:".$url);
   }
 
 }

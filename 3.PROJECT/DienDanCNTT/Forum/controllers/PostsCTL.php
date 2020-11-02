@@ -37,7 +37,7 @@ class PostsCTL extends ParentCTL
         }
         // XU ly lai
         
-      require_once 'views/post.php';
+      require_once 'views/posts/post.php';
     }
   }
   // $content="",$post_id="",$user_id="",$cm_id="",$us_reported_id=""
@@ -87,9 +87,10 @@ class PostsCTL extends ParentCTL
             $postModel = new PostModel($_POST['title'],htmlentities($_POST['body']),$_POST['tags'],$_SESSION['id'],$tp_id);
             $postModel->create();
             header("location:".$BASE_URL."/index.php?controller=topics&action=index&tp_id=".$tp_id);
+            $_SESSION['message']="Bạn đã đăng bài thành công!";
         }
       }
-      require_once 'views/addpost.php';
+      require_once 'views/posts/addpost.php';
     }
 
     if(isset($_GET['mtp_id'])&&isset($_SESSION['id'])){
@@ -101,8 +102,9 @@ class PostsCTL extends ParentCTL
             $postModel = new PostModel($_POST['title'],$_POST['body'],$_POST['tags'],$_SESSION['id'],$mtp['topic_id'],$mtp_id);
             $postModel->create();
             header("location:".$BASE_URL."/index.php?controller=topics&action=mtp_index&mtp_id=".$mtp_id);
+            $_SESSION['message']="Bạn đã đăng bài thành công!";
         }
-        require_once 'views/addpost.php';
+        require_once 'views/posts/addpost.php';
     }
     
   }
@@ -131,7 +133,7 @@ class PostsCTL extends ParentCTL
             $postModel2->update($post_id);
             header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$post_id);
           }
-          require_once 'views/editpost.php';
+          require_once 'views/posts/editpost.php';
         }
         else
         echo "Ban ko co quyen edit";

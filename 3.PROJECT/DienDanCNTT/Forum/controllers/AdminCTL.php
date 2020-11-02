@@ -6,7 +6,9 @@ require_once 'models/ReportModel.php';
 require_once 'models/ZoneModel.php';
 require_once 'models/TopicModel.php';
 require_once 'models/MitopicModel.php';
+require_once 'models/OtherModel.php';
 require_once 'controllers/ParentCTL.php';
+
 class AdminCTL extends ParentCTL
 {
   public function index()
@@ -16,29 +18,6 @@ class AdminCTL extends ParentCTL
     //khởi tạo model book
     $zoneModel2 = new ZoneModel();
     $zones = $zoneModel2->selectAll();
-
-    // // PA1: LAY TAT SO SANH SAU
-    // $topicModel = new TopicModel();
-    // $topics = $topicModel->selectAll();
-
-    // $mitopicModel = new MitopicModel();
-    // $mitopics= $mitopicModel->selectAll();
-
-    // $postModel = new PostModel();
-    // $posts= $postModel->selectAll();
-
-    // $userModel = new UserModel();
-    // $users = $userModel->selectAll();
-
-    // DONE
-    
-    require_once 'views/admin/dashboard.php';
-  }
-
-  public function zones_index(){
-    global $URL;
-    $zoneModel = new ZoneModel();
-    $zones = $zoneModel->selectAll();
     require_once 'views/admin/dashboard.php';
   }
 
@@ -46,11 +25,25 @@ class AdminCTL extends ParentCTL
     global $URL;
     if(isset($_GET['z_id'])){
       $z_id=$_GET['z_id'];
+    }
     $parentCTL= new ParentCTL();
     $parentCTL->del_z($z_id);
     header("location:".$URL."admin&action=zones_index");
-    }
   }
+
+  public function zones_index(){
+    global $URL;
+    if(isset($_POST['del_zone'])){
+      foreach($_POST['z_id'] as $z_id){
+        $this->del_z($z_id);
+      }
+    }
+    $zoneModel = new ZoneModel();
+    $zones = $zoneModel->selectAll();
+    require_once 'views/admin/dashboard.php';
+  }
+
+
 
   public function add_zone(){
     global $URL;
@@ -218,6 +211,11 @@ class AdminCTL extends ParentCTL
   // POSTSSSSSSSSSSS
   public function posts_index(){
     global $URL;
+    if(isset($_POST['del_post'])){
+      foreach($_POST['p_id'] as $p_id){
+        $this->del_p($p_id);
+      }
+    }
     $postModel = new PostModel();
     $posts = $postModel->selectAll();
     $userModel = new UserModel();
@@ -230,18 +228,34 @@ class AdminCTL extends ParentCTL
     if(isset($_GET['p_id'])) 
     {
     $p_id=$_GET['p_id'];
+    }
     parent::del_p($p_id);
     header("location:".$URL."admin&action=posts_index");
-    }
+    
   }
 
   // USERS
 
   public function users_index(){
     global $URL;
+    if(isset($_POST['del_us'])){
+      foreach($_POST['us_id'] as $us_id){
+        $this->del_us($us_id);
+      }
+    }
     $userModel = new UserModel();
     $users = $userModel->selectAll();
     require_once 'views/admin/users/index.php';
+  }
+
+  public function del_us($u_id=''){
+    global $URL;
+    if(isset($_GET['u_id'])){
+      $u_id=$_GET['u_id'];
+    }
+      $userModel = new UserModel();
+      $userModel->delete($u_id);
+      header("location:".$URL."admin&action=users_index");
   }
 
   public function add_user(){
@@ -279,7 +293,7 @@ class AdminCTL extends ParentCTL
     if(isset($_POST['edit_user'])){
       $role=$_POST['admin']=="Thành viên"?0:1;
       $status=isset($_POST['status'])?1:0;
-      $userModel2 = new UserModel($_POST['username'],$_POST['fullname'],$_POST['email'],$_POST['password'],$role,$status);
+      $userModel2 = new UserModel($_POST['username'],$_POST['fullname'],$_POST['email'],$_POST['password'],'',$role,$status);
       $userModel2->update($_POST['user_id']);
       header("location:".$URL."admin&action=users_index");
     }
@@ -289,11 +303,26 @@ class AdminCTL extends ParentCTL
   // REPORTS
   public function reports_index(){
     global $URL;
+    if(isset($_POST['del_rp'])){
+      foreach($_POST['rp_id'] as $rp_id){
+        $this->del_rp($rp_id);
+      }
+    }
     $reportModel = new ReportModel();
     $reports = $reportModel->selectAll();
     $userModel = new UserModel();
     $users = $userModel->selectAll();
     require_once 'views/admin/reports/index.php';
+  }
+
+  public function del_rp($rp_id=''){
+    global $URL;
+    if(isset($_GET['rp_id'])){
+      $rp_id=$_GET['rp_id'];
+    }
+    $reportModel = new ReportModel();
+    $reportModel->delete($rp_id);
+    header("location:".$URL."admin&action=reports_index");
   }
 
   // 
@@ -327,6 +356,26 @@ class AdminCTL extends ParentCTL
     }
   }
 
+  // ABOUT-------------------------------------------------------------------------------------
+  public function about(){
+    global $URL;
+    if(isset($_POST['ud_about'])){
+      $otherModel = new OtherModel($_POST['link_ab']);
+      $otherModel->update('about');
+      $_SESSION['message']="Bạn đã cập nhật thành công!";
+    }
+    require_once 'views/admin/about.php';
+  }
+
+  public function rules(){
+    global $URL;
+    if(isset($_POST['ud_rule'])){
+      $otherModel = new OtherModel($_POST['link_rule']);
+      $otherModel->update('rule');
+      $_SESSION['message']="Bạn đã cập nhật thành công!";
+    }
+    require_once 'views/admin/rules.php';
+  }
 }
 
 ?>

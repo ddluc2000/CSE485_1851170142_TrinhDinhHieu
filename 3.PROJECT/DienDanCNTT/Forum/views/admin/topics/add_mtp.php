@@ -7,7 +7,7 @@ global $ROOT_PATH; ?>
 <?php include($ROOT_PATH."/includes/admin_headerp3.php");?>
 <!-- VIET BODY LUON O DAY -->
                 <div class="col-md-10">
-                    <h2 class="text-center">Add Topic</h2>
+                    <h2 class="text-center">Thêm Mini-Topic</h2>
                     <form action="<?php echo $URL."admin&action=add_mtp";?>" method="post">
                         <input type="hidden" name="tp_id" value="<?php echo $tp_id;?>">
                         <div class="form-group">

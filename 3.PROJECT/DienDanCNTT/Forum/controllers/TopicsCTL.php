@@ -18,7 +18,8 @@ class TopicsCTL
       $mitopics= $mitopicModel->selectAll($data);
       $topicModel = new TopicModel();
       $tpname = $topicModel->getNamebyId($data['topic_id']);
-      require_once 'views/id_topics.php';
+      
+      require_once 'views/topics/id_topics.php';
     }
   }
 
@@ -35,7 +36,7 @@ class TopicsCTL
       $posts = $postModel->getPostInMTP($data['mitopic_id']);
 
       $mtpname = $mitopicModel->getNamebyId($data['mitopic_id']);
-      require_once 'views/id_mitopics.php';
+      require_once 'views/topics/id_mitopics.php';
     }
     //controller gọi model, model sẽ truy vấn dữ liệu và trả về cho controller
     //khởi tạo model book

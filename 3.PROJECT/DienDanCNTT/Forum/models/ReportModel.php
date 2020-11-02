@@ -45,6 +45,13 @@
             return $result;
             // chưa xử lý có đk
         }
+
+        function delete($rp_id){
+            $sql="DELETE FROM reports WHERE rp_id=".$rp_id;
+            mysqli_query($this->connection,$sql);
+            closeConnect($this->connection);
+            return 1;
+        }
         
         // function getOne($id){
         //     $sql="SELECT * FROM ". self::TABLE . " WHERE cm_id='$id' LIMIT 1";

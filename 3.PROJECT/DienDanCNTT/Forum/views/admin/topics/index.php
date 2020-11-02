@@ -1,5 +1,7 @@
 <?php include_once("path.php");
-global $ROOT_PATH; ?>
+global $ROOT_PATH; 
+global $URL;
+?>
 <?php include($ROOT_PATH."/includes/headerp1.php");?>
 <title>Forum CSE</title>
 <link rel="stylesheet" href="assets/css/admin.css">
@@ -11,18 +13,17 @@ global $ROOT_PATH; ?>
                     
                     <div class="list-posted">
 
+                        
                         <form action="<?php echo $URL."admin&action=topics_index";?>" method="post">
-
                             <div class="btn-group float float-left" role="group" aria-label="">
                                 <a class="btn btn-primary" href="<?php echo $URL."admin&action=add_tp&z_id=".$z_id;?>" role="button">Add</a>
                                 <button type="submit" name="add_mtp" class="btn btn-primary">Add Mini Topic</button>
                                 <button type="submit" name="update_tp" class="btn btn-primary">Update</button>
-                                <button type="submit" name="del_tp" class="btn btn-primary">Delete</button>
-                            
+                                <button type="submit" name="del_tp" class="btn btn-primary" onclick="return confirm('Bạn có chắc muốn xóa những topic đã chọn?')">Delete</button>
                             </div>
                         
-
-                        <div class="d-flex float float-right" method="post">
+                            
+                            <div class="d-flex float float-right" method="post">
                             <i class="fa fa-search" aria-hidden="true"></i>
                             <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
                         </div>
@@ -48,7 +49,7 @@ global $ROOT_PATH; ?>
                                         <td><a href="<?php echo $URL."admin&action=view_tp&tp_id=".$topic['topic_id'];?>"><?php echo $topic['title'];?></a></td>
                                         <td><?php echo $topic['description'];?></td>
                                         <td><a href="<?php echo $URL."admin&action=update_tp&tp_id=".$topic['topic_id'];?>">Edit</a></td>
-                                        <td><a href="<?php echo $URL."admin&action=del_tp&tp_id=".$topic['topic_id'];?>">Delete</a></td>
+                                        <td><a href="<?php echo $URL."admin&action=del_tp&tp_id=".$topic['topic_id'];?>" onclick="return confirm('Bạn có chắc muốn xóa topic này? (Sẽ xóa cả các mini topic và post bên trong)')">Delete</a></td>
                                     </tr>
                                     <?php $i=1;?>
                                     <?php foreach ($mitopics as $mitopic):?>
@@ -59,7 +60,7 @@ global $ROOT_PATH; ?>
                                             <td><a href="<?php echo $URL."admin&action=view_tp&mtp_id=".$mitopic['mitopic_id'];?>"><?php echo $mitopic['title'];?></a></td>
                                             <td><?php echo $mitopic['description'];?></td>
                                             <td><a href="<?php echo $URL."admin&action=update_mtp&mtp_id=".$mitopic['mitopic_id'];?>">Edit</a></td>
-                                            <td><a href="<?php echo $URL."admin&action=del_mtp&mtp_id=".$mitopic['mitopic_id'];?>">Delete</a></td>
+                                            <td><a href="<?php echo $URL."admin&action=del_mtp&mtp_id=".$mitopic['mitopic_id'];?>" onclick="return confirm('Bạn có chắc muốn xóa mini topic đã chọn? (Sẽ xóa cả các post bên trong)')">Delete</a></td>
                                         </tr>
                                         <?php endif; ?>
                                     <?php endforeach;?>

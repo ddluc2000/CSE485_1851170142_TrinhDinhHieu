@@ -16,7 +16,7 @@ class UsersCTL
         
           if($_POST['password']==$user['password']){
           //   // ($username='',$fullname='',$email='',$password='',$avt='',$admin='',$status='')
-
+            $image_name=$_SESSION['avt'];
             if(!empty($_FILES['avatar']['tmp_name'])){
               $file = $_FILES['avatar']['tmp_name'];
           //     // $path = "file/".$_FILES['myFile']['name'];
@@ -26,6 +26,7 @@ class UsersCTL
               move_uploaded_file($file, $path);
               $_SESSION['avt']=$image_name;
             }
+
             $userModel2 = new UserModel($user['username'],$_POST['fullname'],$_POST['email'],$user['password'],$image_name);
             $userModel2->update($user['user_id']);
             $_SESSION['fullname']=$_POST['fullname'];
@@ -34,7 +35,7 @@ class UsersCTL
             header("refresh:2");
           }
         }
-        require_once 'views/userinfo.php';
+        require_once 'views/users/userinfo.php';
       }
       else{
         echo"d co tai khoan";
@@ -59,11 +60,12 @@ class UsersCTL
         unset($_POST['login']);
       // select by id and=>get name of tp_id
         //   select one
+
         $errors=validateLogin($_POST);
         if(count($errors)==0){
           $userModel = new UserModel();
           $user = $userModel->selectByUn($_POST['username']);
-          if($user['status']==0) $_SESSION['message']="Tài khoản của bạn chưa được kích hoạt hoặc đã bị khóa!";
+          if($user!==NULL && $user['status']==0) array_push($errors,'Tài khoản của bạn chưa được kích hoạt hoặc đã bị khóa');
           else
           {
               if($user&&$user['password']===$_POST['password'])
@@ -82,7 +84,7 @@ class UsersCTL
               else
                   {
                     $username=$_POST['username'];
-                    $_SESSION['message']="ban da nhap sai thong tin!";
+                    array_push($errors,'Bạn đã nhập sai tài khoản hoặc mật khẩu');
                   }
           }
         }

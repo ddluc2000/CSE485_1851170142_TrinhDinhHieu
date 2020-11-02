@@ -11,7 +11,7 @@ function Edit_Cm(cm_id,p_id){
     
 div.innerHTML = 
 '<div class="comment-body">'+
-'<form id="add_cmt" action="http://localhost:88/Forum/index.php?controller=posts&action=edit_c&cm_id='+cm_id+'" method="post">'+
+'<form id="add_cmt" action="http://localhost:8080/Forum/index.php?controller=posts&action=edit_c&cm_id='+cm_id+'" method="post">'+
 '<input type="hidden" class="form-control" name="post_id" value="'+p_id+'">'+
 '<div class="form-group">'+
 '<textarea class="form-control" name="body" id="body" rows="5">'+test2+'</textarea>'+
