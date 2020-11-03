@@ -33,7 +33,9 @@
         }
 
         function create(){
-            $sql="INSERT INTO ". self::TABLE . " SET title='$this->title' ,body='$this->body', tags='$this->tags', user_id='$this->user_id', topic_id='$this->topic_id'";
+            $body=$this->body;
+            $_body = mysqli_real_escape_string($this->connection,$body);
+            $sql="INSERT INTO ". self::TABLE . " SET title='$this->title' ,body='$_body', tags='$this->tags', user_id='$this->user_id', topic_id='$this->topic_id'";
             if($this->mitopic_id!=="") $sql=$sql." , mitopic_id='$this->mitopic_id'";
             $rs=mysqli_query($this->connection,$sql);
             closeConnect($this->connection);
@@ -105,7 +107,23 @@
             closeConnect($this->connection);
             return 1;
         }
-        
+
+        function close($p_id){
+            $sql = "UPDATE ". self::TABLE . " SET status='0'";
+            $sql=$sql." WHERE post_id=".$p_id;
+            mysqli_query($this->connection,$sql);
+            closeConnect($this->connection);
+            return 1;
+        }
+
+        function open($p_id){
+            $sql = "UPDATE ". self::TABLE . " SET status='1'";
+            $sql=$sql." WHERE post_id=".$p_id;
+            mysqli_query($this->connection,$sql);
+            closeConnect($this->connection);
+            return 1;
+        }
+
         function delete($p_id){
             $sql="DELETE FROM posts WHERE post_id=".$p_id;
             mysqli_query($this->connection,$sql);

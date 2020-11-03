@@ -51,11 +51,11 @@ global $URL; ?>
                                         <!-- k thi thoi -->
                                         <a name="" id="" class="btn btn-primary" href="<?php echo $BASE_URL."/index.php?controller=posts&action=delete_p&p_id=".$post['post_id'];?>" role="button" onclick="return confirm('Bạn có chắc muốn xóa bài viết này?')">Delete</a>
                                         <a class="btn btn-primary" href="<?php echo $BASE_URL."/index.php?controller=posts&action=edit_p&p_id=".$post['post_id'];?>" role="button">Edit</a>
-                                        <?php endif;?>
+                                        
                                         <!-- <button type="button" class="btn btn-primary">Like</button>
                                         <button type="button" class="btn btn-primary">Reply</button> -->
-                                        <!-- <button type="button" class="btn btn-primary">Report</button> -->
-                                        
+                                        <a class="btn btn-primary" href="<?php echo $BASE_URL."/index.php?controller=posts&action=close_p&p_id=".$post['post_id'];?>" role="button" onclick="return confirm('Bạn có chắc muốn đóng bài viết này? (Không thể mở lại)')">Close</a>
+                                        <?php endif;?>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId">
                                         Report
@@ -68,7 +68,7 @@ global $URL; ?>
                                                 <form action="" method="post">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Modal title</h5>
+                                                        <h5 class="modal-title">Nội dung báo cáo</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -92,7 +92,7 @@ global $URL; ?>
 
                                             </div>
                                         </div>
-
+                                        
                                     </div>
                                 </footer>
                             </div>
@@ -146,7 +146,7 @@ global $URL; ?>
                                                 <form action="" method="post">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Modal title</h5>
+                                                        <h5 class="modal-title">Nội dung báo cáo</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -185,7 +185,7 @@ global $URL; ?>
                     <br>
                     <br>
                     <?php include($ROOT_PATH . "/supports/message.php");?>
-                    <?php if(isset($_SESSION['id'])):?>
+                    <?php if(isset($_SESSION['id'])&&$post['status']):?>
                     <div class="reply-layout container">
                         <div class="row post">
                             <div class="cell-user col-md-2">

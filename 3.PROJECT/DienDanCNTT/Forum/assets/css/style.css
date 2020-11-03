@@ -151,6 +151,9 @@ header .nav li ul{
     width: 100%;
 }
 
+.post-content .post-body .image img{
+    max-width: 100%;
+}
 .footer-post{
     height: 70px;
     position: relative;

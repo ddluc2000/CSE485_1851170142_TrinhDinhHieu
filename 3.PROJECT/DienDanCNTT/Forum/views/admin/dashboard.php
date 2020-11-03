@@ -8,7 +8,7 @@ global $ROOT_PATH; ?>
 <!-- VIET BODY LUON O DAY -->
               <div class="col-md-10">
                     <h2 class="text-center">Quản lý Zones</h2>
-                    
+                    <?php include($ROOT_PATH . "/supports/message.php");?>
                     <div class="list-posted">
 
                     <form action="<?php echo $URL."admin&action=zones_index";?>" method="post">

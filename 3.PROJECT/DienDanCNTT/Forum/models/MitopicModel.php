@@ -56,7 +56,7 @@
         }
 
         function getNamebyId($mtp_id){
-            $sql="SELECT title FROM ". self::TABLE ." WHERE mitopic_id='$mtp_id'";
+            $sql="SELECT title,status FROM ". self::TABLE ." WHERE mitopic_id='$mtp_id'";
             $rs=mysqli_query($this->connection,$sql);
             $result=mysqli_fetch_assoc($rs);
             closeConnect($this->connection);
@@ -76,6 +76,22 @@
         function delete($mtp_id){
             $sql="DELETE FROM ". self::TABLE . " WHERE mitopic_id='$mtp_id'";
             $rs=mysqli_query($this->connection,$sql);
+            closeConnect($this->connection);
+            return 1;
+        }
+
+        function close($mtp_id){
+            $sql = "UPDATE ". self::TABLE . " SET status='0'";
+            $sql=$sql." WHERE mitopic_id=".$mtp_id;
+            mysqli_query($this->connection,$sql);
+            closeConnect($this->connection);
+            return 1;
+        }
+
+        function open($mtp_id){
+            $sql = "UPDATE ". self::TABLE . " SET status='1'";
+            $sql=$sql." WHERE mitopic_id=".$mtp_id;
+            mysqli_query($this->connection,$sql);
             closeConnect($this->connection);
             return 1;
         }

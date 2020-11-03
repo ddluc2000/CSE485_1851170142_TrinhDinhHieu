@@ -80,6 +80,7 @@ class ParentCTL
       $topicModel2->delete($topic['topic_id']);
   }
 
+
   // KE THUA RUT NGAN TIME RAT NHIEU
   function del_z($z_id){
     $topicModel = new TopicModel();

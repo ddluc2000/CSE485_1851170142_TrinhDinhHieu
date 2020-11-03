@@ -27,7 +27,7 @@ global $ROOT_PATH; ?>
                             </div> 
                             <br>
                             <!-- nut dieu huong o day -->
-                            <?php if(isset($_SESSION['id'])):?>
+                            <?php if(isset($_SESSION['id'])&&$tpname['status']):?>
                             <a name="" class="btn btn-primary" href="<?php echo $BASE_URL."/index.php?controller=posts&action=create&tp_id=".$data['topic_id'];?>" role="button">Create Post</a>
                             <br>
                             <?php endif;?>

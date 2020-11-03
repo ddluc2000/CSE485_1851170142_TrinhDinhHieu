@@ -9,13 +9,14 @@ global $URL;?>
 <!-- VIET BODY LUON O DAY -->
                 <div class="col-md-10">
                     <h2 class="text-center">Quản lý Posts</h2>
-                    
+                    <?php include($ROOT_PATH . "/supports/message.php");?>
                     <div class="list-posted">
 
                     <form action="<?php echo $URL."admin&action=posts_index"?>" method="post">
                         <div class="btn-group float float-left" role="group" aria-label="">
                             <button type="submit" class="btn btn-primary">Manage</button>
                             <button type="submit" name="del_post" class="btn btn-primary" onclick="return confirm('Bạn có chắc muốn xóa những post đã chọn?')">Delete</button>
+                            <button type="submit" name="close_post" class="btn btn-primary" onclick="return confirm('Bạn có chắc muốn đóng những post đã chọn?')">Close</button>
                         </div>
 
                         <div class="d-flex float float-right">
@@ -36,7 +37,7 @@ global $URL;?>
                                     <th>Author</th>
                                     <th>Create_at</th>
                                     <th>Tags</th>
-                                    <th colspan="1">Action</th>
+                                    <th colspan="2">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,7 +53,12 @@ global $URL;?>
                                         <?php endforeach;?>
                                         <td><?php echo $post['create_at'];?></td>
                                         <td><?php echo $post['tags'];?></td>
-                                        <td><a href="<?php echo $URL."admin&action=del_p&p_id=".$post['post_id'];?>">Delete</a></td>
+                                        <?php if($post['status']):?>
+                                        <td><a href="<?php echo $URL."admin&action=close_p&p_id=".$post['post_id'];?>" onclick="return confirm('Bạn có chắc muốn đóng bài viết này?')">Close</a></td>
+                                        <?php else:?>
+                                        <td><a href="<?php echo $URL."admin&action=open_p&p_id=".$post['post_id'];?>" style="color:brown;">ReOpen</a></td>
+                                        <?php endif;?>
+                                        <td><a href="<?php echo $URL."admin&action=del_p&p_id=".$post['post_id'];?>" onclick="return confirm('Bạn có chắc muốn xóa bài viết này?')">Delete</a></td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>

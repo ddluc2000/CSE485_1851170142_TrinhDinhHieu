@@ -10,7 +10,7 @@ global $URL;
 <!-- VIET BODY LUON O DAY -->
                 <div class="col-md-10">
                     <h2 class="text-center">Quản lý Topics</h2>
-                    
+                    <?php include($ROOT_PATH . "/supports/message.php");?>
                     <div class="list-posted">
 
                         
@@ -20,6 +20,7 @@ global $URL;
                                 <button type="submit" name="add_mtp" class="btn btn-primary">Add Mini Topic</button>
                                 <button type="submit" name="update_tp" class="btn btn-primary">Update</button>
                                 <button type="submit" name="del_tp" class="btn btn-primary" onclick="return confirm('Bạn có chắc muốn xóa những topic đã chọn?')">Delete</button>
+                                <button type="submit" name="close_tp" class="btn btn-primary" onclick="return confirm('Bạn có chắc muốn đóng những topic đã chọn?')">Close</button>
                             </div>
                         
                             
@@ -33,12 +34,12 @@ global $URL;
                             <thead class="thead-dark">
                                 <tr>
                                     <th>
-                                    <input type="checkbox" name="" id="">
+                                    <input type="checkbox">
                                     </th>
                                     <th>Stt</th>
                                     <th>Title</th>
                                     <th>Info cac thu</th>
-                                    <th colspan="2">Action</th>
+                                    <th colspan="3">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -49,6 +50,11 @@ global $URL;
                                         <td><a href="<?php echo $URL."admin&action=view_tp&tp_id=".$topic['topic_id'];?>"><?php echo $topic['title'];?></a></td>
                                         <td><?php echo $topic['description'];?></td>
                                         <td><a href="<?php echo $URL."admin&action=update_tp&tp_id=".$topic['topic_id'];?>">Edit</a></td>
+                                        <?php if($topic['status']):?>
+                                            <td><a href="<?php echo $URL."admin&action=close_tp&tp_id=".$topic['topic_id'];?>" onclick="return confirm('Bạn có chắc muốn đóng topic này?')">Close</a></td>
+                                            <?php else:?>
+                                            <td><a href="<?php echo $URL."admin&action=open_tp&tp_id=".$topic['topic_id'];?>" style="color:brown;">ReOpen</a></td>
+                                            <?php endif;?>
                                         <td><a href="<?php echo $URL."admin&action=del_tp&tp_id=".$topic['topic_id'];?>" onclick="return confirm('Bạn có chắc muốn xóa topic này? (Sẽ xóa cả các mini topic và post bên trong)')">Delete</a></td>
                                     </tr>
                                     <?php $i=1;?>
@@ -60,6 +66,11 @@ global $URL;
                                             <td><a href="<?php echo $URL."admin&action=view_tp&mtp_id=".$mitopic['mitopic_id'];?>"><?php echo $mitopic['title'];?></a></td>
                                             <td><?php echo $mitopic['description'];?></td>
                                             <td><a href="<?php echo $URL."admin&action=update_mtp&mtp_id=".$mitopic['mitopic_id'];?>">Edit</a></td>
+                                            <?php if($mitopic['status']):?>
+                                                <td><a href="<?php echo $URL."admin&action=close_mtp&mtp_id=".$mitopic['mitopic_id'];?>" onclick="return confirm('Bạn có chắc muốn đóng mini-topic này?')">Close</a></td>
+                                                <?php else:?>
+                                                <td><a href="<?php echo $URL."admin&action=open_mtp&mtp_id=".$mitopic['mitopic_id'];?>" style="color:brown;">ReOpen</a></td>
+                                                <?php endif;?>
                                             <td><a href="<?php echo $URL."admin&action=del_mtp&mtp_id=".$mitopic['mitopic_id'];?>" onclick="return confirm('Bạn có chắc muốn xóa mini topic đã chọn? (Sẽ xóa cả các post bên trong)')">Delete</a></td>
                                         </tr>
                                         <?php endif; ?>

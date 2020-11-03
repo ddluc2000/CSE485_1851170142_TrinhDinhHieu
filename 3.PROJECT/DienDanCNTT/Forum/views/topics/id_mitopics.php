@@ -20,8 +20,10 @@ global $ROOT_PATH; ?>
                             <div class="block-body">   
                             <br>
                             <!-- nut dieu huong o day -->
+                            <?php if($mtpname['status']&&isset($_SESSION['id'])):?>
                             <a name="" class="btn btn-primary" href="<?php echo $BASE_URL."/index.php?controller=posts&action=create&mtp_id=".$data['mitopic_id'];?>" role="button">Create Post</a>
                             <br>
+                            <?php endif;?>
                             <br>
                             <div class="post-body-tp">
                             <!-- post -->

@@ -60,7 +60,7 @@
         }
 
         function getNamebyId($tp_id){
-            $sql="SELECT title FROM ". self::TABLE ." WHERE topic_id='$tp_id'";
+            $sql="SELECT title,status FROM ". self::TABLE ." WHERE topic_id='$tp_id'";
             $rs=mysqli_query($this->connection,$sql);
             $result=mysqli_fetch_assoc($rs);
             closeConnect($this->connection);
@@ -78,6 +78,22 @@
         function delete($tp_id){
             $sql="DELETE FROM ". self::TABLE . " WHERE topic_id='$tp_id'";
             $rs=mysqli_query($this->connection,$sql);
+            closeConnect($this->connection);
+            return 1;
+        }
+
+        function close($tp_id){
+            $sql = "UPDATE ". self::TABLE . " SET status='0'";
+            $sql=$sql." WHERE topic_id=".$tp_id;
+            mysqli_query($this->connection,$sql);
+            closeConnect($this->connection);
+            return 1;
+        }
+
+        function open($tp_id){
+            $sql = "UPDATE ". self::TABLE . " SET status='1'";
+            $sql=$sql." WHERE topic_id=".$tp_id;
+            mysqli_query($this->connection,$sql);
             closeConnect($this->connection);
             return 1;
         }

@@ -28,6 +28,7 @@ class AdminCTL extends ParentCTL
     }
     $parentCTL= new ParentCTL();
     $parentCTL->del_z($z_id);
+    $_SESSION['message']="Xóa zone thành công!";
     header("location:".$URL."admin&action=zones_index");
   }
 
@@ -51,6 +52,7 @@ class AdminCTL extends ParentCTL
       $zoneModel = new ZoneModel($_POST['title'],$_POST['description']);
       $zoneModel->create();
       // set session message gi do
+      $_SESSION['message']="Thêm zone thành công!";
       header("location:".$URL."admin&action=zones_index");
       // UserModel($username='',$fullname='',$email='',$password='',$admin='',$status)
       // tra view nao do
@@ -66,6 +68,7 @@ class AdminCTL extends ParentCTL
       $zoneModel = new ZoneModel($_POST['title'],$_POST['description']);
       $zoneModel->update($_POST['zone_id']);
       // set session message gi do
+      $_SESSION['message']="Cập nhật zone thành công!";
       header("location:".$URL."admin&action=zones_index");
       // UserModel($username='',$fullname='',$email='',$password='',$admin='',$status)
       // tra view nao do
@@ -77,7 +80,7 @@ class AdminCTL extends ParentCTL
     }
   }
 
-  // TOPICCCC
+  // TOPICCCC---------------------------------------------------------------------------------
   public function topics_index(){
     global $URL;
     if(isset($_POST['del_tp'])){
@@ -93,6 +96,19 @@ class AdminCTL extends ParentCTL
           }
       }
       header("refresh:0");
+    }
+    else
+    if(isset($_POST['close_tp'])){
+      if(isset($_POST['tp_id'])){
+        foreach($_POST['tp_id'] as $tp_id){
+          $this->close_tp($tp_id);
+        }
+      }
+      if(isset($_POST['mtp_id'])){
+        foreach($_POST['mtp_id'] as $mtp_id){
+          $this->close_mtp($mtp_id);
+        }
+      }
     }
     else
     if(isset($_POST['update_tp'])){
@@ -130,6 +146,7 @@ class AdminCTL extends ParentCTL
       print_r($_POST);
       $mitopicModel = new MitopicModel($_POST['title'],$_POST['description'],$_POST['tp_id']);
       $mitopicModel->create();
+      $_SESSION['message']="Thêm mini-topic thành công!";
       header("location:".$URL."admin&action=topics_index");
     }
     else{
@@ -146,6 +163,7 @@ class AdminCTL extends ParentCTL
       // $zoneModel = new ZoneModel($_POST['title'],$_POST['description']);
       // $zoneModel->create();
       // set session message gi do
+      $_SESSION['message']="Thêm topic thành công!";
       header("location:".$URL."admin&action=topics_index");
       // UserModel($username='',$fullname='',$email='',$password='',$admin='',$status)
       // tra view nao do
@@ -162,6 +180,7 @@ class AdminCTL extends ParentCTL
     if(isset($_GET['mtp_id'])){
       $mtp_id=$_GET['mtp_id'];
     parent::del_mtp($mtp_id);
+    $_SESSION['message']="Xóa mini-topic thành công!";
     header("location:".$URL."admin&action=topics_index");
     }
   }
@@ -173,6 +192,7 @@ class AdminCTL extends ParentCTL
  
     // nen gan get tp_id o day va truyen bien vao deltp cua cha -> ham del topic cha dung lai de dang hon
     parent::del_tp($tp_id);
+    $_SESSION['message']="Xóa topic thành công!";
     header("location:".$URL."admin&action=topics_index");
     }
   }
@@ -186,6 +206,7 @@ class AdminCTL extends ParentCTL
         $topicModel = new TopicModel($_POST['title'],$_POST['description']);
         // print_r($_POST);
         $topicModel->update($_POST['tp_id']);
+        $_SESSION['message']="Cập nhật topic thành công!";
         header("location:".$URL."admin&action=topics_index");
       }
       else
@@ -201,6 +222,7 @@ class AdminCTL extends ParentCTL
       if(isset($_POST['update_mtp'])){
         $mitopicModel = new MitopicModel($_POST['title'],$_POST['description']);
         $mitopicModel->update($_POST['mtp_id']);
+        $_SESSION['message']="Cập nhật mini-topic thành công!";
         header("location:".$URL."admin&action=topics_index");
       }
       else
@@ -208,12 +230,71 @@ class AdminCTL extends ParentCTL
 
   }
 
-  // POSTSSSSSSSSSSS
+  public function close_tp($tp_id=''){
+    global $URL;
+    if(isset($_GET['tp_id'])){
+      $tp_id=$_GET['tp_id'];
+    }
+    $topicModel = new TopicModel();
+    $topic=$topicModel->getOne($tp_id);
+    $data=['topic_id'=>$topic['topic_id']];
+    $mitopicModel = new MitopicModel();
+    $mitopics=$mitopicModel->selectAll($data);
+      foreach($mitopics as $mitopic){
+        $mitopicModel2 = new MitopicModel();
+        $mitopicModel2->close($mitopic['mitopic_id']);
+      }
+    $topicModel2 = new TopicModel();
+    $topicModel2->close($topic['topic_id']);
+    $_SESSION['message']="Đóng topic thành công!";
+    header("location:".$URL."admin&action=topics_index");
+  }
+
+  public function open_tp($tp_id=''){
+    global $URL;
+    
+    if(isset($_GET['tp_id'])){
+      $tp_id=$_GET['tp_id'];
+    }
+    $topicModel = new TopicModel();
+    $topicModel->open($tp_id);
+    $_SESSION['message']="Mở topic thành công!";
+    header("location:".$URL."admin&action=topics_index");
+  }
+
+  public function close_mtp($mtp_id=''){
+    global $URL;
+    if(isset($_GET['mtp_id'])){
+      $mtp_id=$_GET['mtp_id'];
+    }
+    $mitopicModel = new MitopicModel();
+    $mitopicModel->close($mtp_id);
+    $_SESSION['message']="Đóng mini-topic thành công!";
+    header("location:".$URL."admin&action=topics_index");
+  }
+
+  public function open_mtp($mtp_id=''){
+    global $URL;
+    if(isset($_GET['mtp_id'])){
+      $mtp_id=$_GET['mtp_id'];
+    }
+    $mitopicModel = new MitopicModel();
+    $mitopicModel->open($mtp_id);
+    $_SESSION['message']="Mở mini-topic thành công!";
+    header("location:".$URL."admin&action=topics_index");
+  }
+
+  // POSTSSSSSSSSSSS-------------------------------------------------------------------
   public function posts_index(){
     global $URL;
     if(isset($_POST['del_post'])){
       foreach($_POST['p_id'] as $p_id){
         $this->del_p($p_id);
+      }
+    }
+    if(isset($_POST['close_post'])){
+      foreach($_POST['p_id'] as $p_id){
+        $this->close_p($p_id);
       }
     }
     $postModel = new PostModel();
@@ -230,11 +311,38 @@ class AdminCTL extends ParentCTL
     $p_id=$_GET['p_id'];
     }
     parent::del_p($p_id);
+    $_SESSION['message']="Xóa bài viết thành công!";
     header("location:".$URL."admin&action=posts_index");
     
   }
 
-  // USERS
+  public function close_p($p_id=''){
+    global $URL;
+    $postModel= new PostModel();
+    if(isset($_GET['p_id'])){
+      $p_id=$_GET['p_id'];
+    }
+    $postModel->close($p_id);
+    $_SESSION['message']="Đóng bài viết thành công!";
+    header("location:".$URL."admin&action=posts_index");
+    
+    // exit();
+  }
+
+  public function open_p($p_id=''){
+    global $URL;
+    $postModel= new PostModel();
+    if(isset($_GET['p_id'])){
+      $p_id=$_GET['p_id'];
+    }
+    $postModel->open($p_id);
+    $_SESSION['message']="Mở bài viết thành công!";
+    header("location:".$URL."admin&action=posts_index");
+    
+    // exit();
+  }
+
+  // USERS---------------------------------------------------------------------------
 
   public function users_index(){
     global $URL;

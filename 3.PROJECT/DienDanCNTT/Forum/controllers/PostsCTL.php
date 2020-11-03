@@ -99,7 +99,7 @@ class PostsCTL extends ParentCTL
 
         $mtp=$mitopicModel->getOne($mtp_id);
         if(isset($_POST['add_post'])){
-            $postModel = new PostModel($_POST['title'],$_POST['body'],$_POST['tags'],$_SESSION['id'],$mtp['topic_id'],$mtp_id);
+            $postModel = new PostModel($_POST['title'],htmlentities($_POST['body']),$_POST['tags'],$_SESSION['id'],$mtp['topic_id'],$mtp_id);
             $postModel->create();
             header("location:".$BASE_URL."/index.php?controller=topics&action=mtp_index&mtp_id=".$mtp_id);
             $_SESSION['message']="Bạn đã đăng bài thành công!";
@@ -138,6 +138,18 @@ class PostsCTL extends ParentCTL
         else
         echo "Ban ko co quyen edit";
     }
+  }
+
+  public function close_p($p_id=''){
+    global $URL;
+    $postModel= new PostModel();
+    if(isset($_GET['p_id'])){
+      $p_id=$_GET['p_id'];
+    }
+    $postModel->close($p_id);
+    header("location:".$URL."posts&action=index&p_id=".$p_id);
+    
+    // exit();
   }
 
   function edit_c(){
