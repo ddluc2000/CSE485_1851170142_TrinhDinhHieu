@@ -9,7 +9,19 @@ global $ROOT_PATH; ?>
                 <div class="col-md-10">
                     <h2 class="text-center">Add Topic</h2>
                     <form action="<?php echo $URL."admin&action=add_tp";?>" method="post">
-                        <input type="hidden" name="z_id" value="<?php echo $z_id;?>">
+                        <label for="">Zone</label>
+                        <?php if($z_id!==""):?>
+                          <input type="text" name="z_id" class="form-control" value="<?php echo $z_id;?>" readonly>
+                        <?php else:?>
+                          <div class="form-group">
+                            <select class="form-control" name="z_id" id="">
+                              <?php foreach($zones as $zone):?>
+                              <option value="<?php echo $zone['zone_id'];?>"><?php echo $zone['title'];?></option>
+                              <?php endforeach;?>
+                            </select>
+                          </div>
+                        <?php endif;?>
+
                         <div class="form-group">
                           <label for="title">Topic Title</label>
                           <input type="text" class="form-control" name="title" aria-describedby="helpId" placeholder="">

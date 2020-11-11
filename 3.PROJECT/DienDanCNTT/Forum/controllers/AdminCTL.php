@@ -125,9 +125,10 @@ class AdminCTL extends ParentCTL
     else
     if(isset($_POST['add_mtp'])){
       unset($_POST['add_mtp']);
-      $tp=$_POST['tp_id'];
-      $this->add_mtp($tp[0]);
-
+      $tp_id="";
+      if(isset($_POST['tp_id']))
+      $tp_id=$_POST['tp_id'][0];
+      $this->add_mtp($tp_id);
     } 
     else{
       $topicModel = new TopicModel();
@@ -142,8 +143,12 @@ class AdminCTL extends ParentCTL
 
   public function add_mtp($tp_id=''){
     global $URL;
+    if($tp_id=='') {
+      $topicModel = new TopicModel();
+      $topics = $topicModel->selectAll();
+    }
     if(isset($_POST['add_mtp'])){
-      print_r($_POST);
+      // print_r($_POST);
       $mitopicModel = new MitopicModel($_POST['title'],$_POST['description'],$_POST['tp_id']);
       $mitopicModel->create();
       $_SESSION['message']="Thêm mini-topic thành công!";
@@ -157,6 +162,8 @@ class AdminCTL extends ParentCTL
   public function add_tp($z_id=''){
     global $URL;
     if(isset($_GET['z_id'])) $z_id=$_GET['z_id'];
+    $zoneModel = new ZoneModel();
+    $zones = $zoneModel->selectAll();
     if(isset($_POST['add_topic'])){
       $topicModel = new TopicModel($_POST['title'],$_POST['description']);
       $topicModel->create($_POST['z_id']);
@@ -363,6 +370,7 @@ class AdminCTL extends ParentCTL
     }
       $userModel = new UserModel();
       $userModel->delete($u_id);
+      $_SESSION['message']="Bạn đã xóa tài khoản thành công";
       header("location:".$URL."admin&action=users_index");
   }
 
@@ -374,6 +382,7 @@ class AdminCTL extends ParentCTL
       $userModel = new UserModel($_POST['username'],$_POST['fullname'],$_POST['email'],$_POST['password'],$role,$status);
       $userModel->create();
       // set session message gi do
+      $_SESSION['message']="Thêm tài khoản thành công";
       header("location:".$URL."admin&action=users_index");
       // UserModel($username='',$fullname='',$email='',$password='',$admin='',$status)
       // tra view nao do
@@ -401,8 +410,9 @@ class AdminCTL extends ParentCTL
     if(isset($_POST['edit_user'])){
       $role=$_POST['admin']=="Thành viên"?0:1;
       $status=isset($_POST['status'])?1:0;
-      $userModel2 = new UserModel($_POST['username'],$_POST['fullname'],$_POST['email'],$_POST['password'],'',$role,$status);
+      $userModel2 = new UserModel($_POST['username'],$_POST['fullname'],$_POST['email'],'','',$role,$status);
       $userModel2->update($_POST['user_id']);
+      $_SESSION['message']="Cập nhật tài khoản thành công";
       header("location:".$URL."admin&action=users_index");
     }
 
@@ -430,6 +440,7 @@ class AdminCTL extends ParentCTL
     }
     $reportModel = new ReportModel();
     $reportModel->delete($rp_id);
+    $_SESSION['message']="Đã xóa các báo cáo!";
     header("location:".$URL."admin&action=reports_index");
   }
 

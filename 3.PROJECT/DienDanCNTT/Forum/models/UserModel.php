@@ -39,7 +39,7 @@
         }
 
         function update($u_id){
-            $sql="UPDATE ". self::TABLE . " SET username='$this->username' ,fullname='$this->fullname', email='$this->email', password='$this->password'";
+            $sql="UPDATE ". self::TABLE . " SET username='$this->username' ,fullname='$this->fullname', email='$this->email'";
             if($this->admin!=='') $sql.=", admin='$this->admin'";
             if($this->status!=='') $sql.=", status='$this->status'";
             if($this->avt!=='') $sql.=", avt='$this->avt'";
@@ -77,8 +77,8 @@
         }
 
         function selectByUn($username){
-            $sql="SELECT * FROM ". self::TABLE . " WHERE username='$username' LIMIT 1";
-
+            $_username = mysqli_real_escape_string($this->connection,$username);
+            $sql="SELECT * FROM ". self::TABLE . " WHERE username='$_username' LIMIT 1";
             $rs=mysqli_query($this->connection,$sql);
             $result=mysqli_fetch_assoc($rs);
             closeConnect($this->connection);

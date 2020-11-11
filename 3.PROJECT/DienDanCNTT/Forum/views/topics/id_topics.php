@@ -49,7 +49,8 @@ global $ROOT_PATH; ?>
                                         </div>
                                     </div>
                                     <div class="statics">
-                                        Lượt xem trả lời các thứ
+                                        Lượt xem : <?php echo $post['views'];?>
+                                        Lượt trả lời: <?php echo $post['replys'];?>
                                     </div>
                                 </div>
                                 <?php endif; ?>

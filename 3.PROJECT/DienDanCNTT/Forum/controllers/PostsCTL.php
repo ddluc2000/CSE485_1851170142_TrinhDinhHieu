@@ -19,11 +19,15 @@ class PostsCTL extends ParentCTL
         //   select one
         $postModel = new PostModel();
         $post = $postModel->getOne($p_id);
+        $postModel2 = new PostModel();
+        $postModel2->upviews($p_id);
         $commentModel = new CommentModel();
         $comments = $commentModel->selectAll($p_id);
         $userModel = new UserModel();
         $user = $userModel->getOne($post['user_id']);
         $us_comment=array();
+        $reply=count($comments);
+        // echo $reply;
         // lay thong tin nguoi dang comment
         foreach($comments as $comment){
           
@@ -157,7 +161,6 @@ class PostsCTL extends ParentCTL
     
     if(isset($_GET['cm_id'])){
 
-      print_r($_POST);
       // ($body="",$post_id="",$user_id="",$edit_at="")
         date_default_timezone_set("Asia/Bangkok");
         $date=getdate();
@@ -165,6 +168,7 @@ class PostsCTL extends ParentCTL
         $time=$date['year']."-".$date['mon']."-".$date['mday']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
         $commentModel = new CommentModel(htmlentities($_POST['body']),'','',$time);
         $commentModel->update($_GET['cm_id']);
+
         header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$_POST['post_id']);
        
     }
@@ -207,7 +211,7 @@ class PostsCTL extends ParentCTL
         header("location:".$BASE_URL."/index.php?controller=posts&action=index&p_id=".$p_id);
       }
       else
-        echo "Ban d du tham quyen";
+        echo "Bạn không được phép sửa";
     }
   }
 

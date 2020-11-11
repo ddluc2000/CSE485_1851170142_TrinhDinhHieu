@@ -181,7 +181,7 @@ global $URL; ?>
                     
                     <br>
                     <br>
-                    phan trang o day
+                    <hr>
                     <br>
                     <br>
                     <?php include($ROOT_PATH . "/supports/message.php");?>
@@ -216,6 +216,13 @@ global $URL; ?>
                             </div>
                         </div>
                     </div>
+                    <?php else:?>
+                        <?php if(!$post['status']):?>
+                            <span>Bài viết đã bị đóng! Bạn không thể trả lời.</span>
+                        <?php else:?>
+                        
+                            <span>Bạn phải <a href="<?php echo $URL."users&action=login"?>">đăng nhập</a> hoặc <a href="<?php echo $URL."users&action=register"?>">đăng ký</a> để trả lời bài viết này!</span>
+                        <?php endif;?>
                     <?php endif;?>
                     <!-- end zone -->
                 </div>

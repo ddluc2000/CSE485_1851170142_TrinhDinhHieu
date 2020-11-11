@@ -9,7 +9,18 @@ global $ROOT_PATH; ?>
                 <div class="col-md-10">
                     <h2 class="text-center">Thêm Mini-Topic</h2>
                     <form action="<?php echo $URL."admin&action=add_mtp";?>" method="post">
-                        <input type="hidden" name="tp_id" value="<?php echo $tp_id;?>">
+                        <label for="title">Topic</label>
+                        <?php if($tp_id!=""):?>
+                        <input type="text" name="tp_id" class="form-control" value="<?php echo $tp_id;?>" readonly>
+                        <?php else:?>
+                            <div class="form-group">
+                              <select class="form-control" name="tp_id">
+                                <?php foreach($topics as $topic):?>
+                                <option value="<?php echo $topic['topic_id'];?>"><?php echo $topic['title'];?></option>
+                                <?php endforeach;?>
+                              </select>
+                            </div>
+                        <?php endif;?>
                         <div class="form-group">
                           <label for="title">MiTopic Title</label>
                           <input type="text" class="form-control" name="title" aria-describedby="helpId" placeholder="">

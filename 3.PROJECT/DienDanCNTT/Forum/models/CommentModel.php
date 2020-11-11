@@ -24,13 +24,19 @@
         }
 
         function create(){
-            $sql="INSERT INTO ". self::TABLE ." SET body='$this->body', post_id='$this->post_id', user_id='$this->user_id'";
+            $sql="SELECT replys from posts where post_id='".$this->post_id."'";
             $rs=mysqli_query($this->connection,$sql);
+            $replys=mysqli_fetch_assoc($rs);
+            $reply=$replys['replys']+1;
+            $sql="UPDATE posts SET replys='".$reply."' WHERE post_id='".$this->post_id."'";
+            mysqli_query($this->connection,$sql);
+            $sql="INSERT INTO ". self::TABLE ." SET body='$this->body', post_id='$this->post_id', user_id='$this->user_id'";
+            mysqli_query($this->connection,$sql);
             closeConnect($this->connection);
             return 1;
         }
 
-        
+
         function update($cm_id){
             $sql="UPDATE ". self::TABLE . " SET body='$this->body', edit_at='$this->edit_at'";
             $sql=$sql." WHERE cm_id=".$cm_id;
@@ -69,6 +75,17 @@
         }
 
         function deleteOne($cm_id){
+            $sql="SELECT post_id from comments where cm_id='".$cm_id."'";
+            $rs=mysqli_query($this->connection,$sql);
+            $p_id=mysqli_fetch_assoc($rs)['post_id'];
+            // print_r($rs);
+            $sql="SELECT replys from posts where post_id='".$p_id."'";
+            $rs=mysqli_query($this->connection,$sql);
+            $replys=mysqli_fetch_assoc($rs);
+            $reply=$replys['replys']-1;
+            $sql="UPDATE posts SET replys='".$reply."' WHERE post_id='".$p_id."'";
+            // echo $sql;
+            mysqli_query($this->connection,$sql);
             $sql="DELETE FROM comments WHERE cm_id=".$cm_id;
             mysqli_query($this->connection,$sql);
             closeConnect($this->connection);

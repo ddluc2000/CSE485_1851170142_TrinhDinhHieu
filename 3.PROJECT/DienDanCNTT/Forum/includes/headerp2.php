@@ -10,8 +10,10 @@ global $URL; ?>
 </head>
   <body>
         <header>
+            <a href="<?php echo $BASE_URL; ?>">
             <img src="<?php echo $BASE_URL."/assets/images/logo.png"?>" height="60px">
             <h1 class="logo">Forum</h1>
+            </a>
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" id="navId">
                 <li class="nav-item">

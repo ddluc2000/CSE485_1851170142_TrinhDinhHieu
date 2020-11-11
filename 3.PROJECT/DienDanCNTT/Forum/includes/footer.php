@@ -1,8 +1,12 @@
     <footer class="footer-page">
-          <div class="text-center footer-content"> 
+          <div class="text-center footer-content container">
+          <div class="d-flex justify-content-center align-items-center">
+            <img src="<?php echo $BASE_URL."/assets/images/logoTLU.png";?>" height="100px"> 
             <h1>TRƯỜNG ĐẠI HỌC THỦY LỢI</h1>
+            </div>
+
             <div>Địa chỉ: 175 Tây Sơn, Đống Đa, Hà Nội
-            Điện thoại: (024) 38522201 - Fax: (024) 35633351
+            - Điện thoại: (024) 38522201 - Fax: (024) 35633351
             Email: phonghcth@tlu.edu.vn
             </div>
             <h5>Trang web này không phải kênh thông tin chính thức của trường</h5>

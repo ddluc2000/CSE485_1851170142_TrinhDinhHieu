@@ -14,7 +14,7 @@ class UsersCTL
         if(isset($_POST['update'])){
           // sau chinh lai verify
         
-          if($_POST['password']==$user['password']){
+          if(password_verify($_POST['password'],$user['password'])){
           //   // ($username='',$fullname='',$email='',$password='',$avt='',$admin='',$status='')
             $image_name=$_SESSION['avt'];
             if(!empty($_FILES['avatar']['tmp_name'])){
@@ -54,6 +54,7 @@ class UsersCTL
 
   public function login()
   {
+    global $BASE_URL;
     $username='';
     $errors=array();
     if(isset($_POST['login'])){
@@ -65,10 +66,11 @@ class UsersCTL
         if(count($errors)==0){
           $userModel = new UserModel();
           $user = $userModel->selectByUn($_POST['username']);
+
           if($user!==NULL && $user['status']==0) array_push($errors,'Tài khoản của bạn chưa được kích hoạt hoặc đã bị khóa');
           else
           {
-              if($user&&$user['password']===$_POST['password'])
+              if($user&&password_verify($_POST['password'],$user['password']))
               {       
                       $_SESSION['id']=$user['user_id'];
                       $_SESSION['username']=$user['username'];
@@ -76,9 +78,9 @@ class UsersCTL
                       $_SESSION['avt']=$user['avt'];
                       $_SESSION['admin']=$user['admin'];
                       $_SESSION['create_at']=$user['create_at'];
-                      $_SESSION['message']="ban da dang nhap thanh cong!";
+                      $_SESSION['message']="Bạn đã đăng nhập thành công!";
                       // type
-                      header("location:".$ROOT_PATH."index.php");
+                      header("location:".$BASE_URL."/index.php");
                       exit();
               }
               else
@@ -101,10 +103,11 @@ class UsersCTL
           unset($_POST['register']);
           $errors=validateUser($_POST);
             if(count($errors)==0){
-            $userModel = new UserModel($_POST['username'],$_POST['fullname'],$_POST['email'],$_POST['password']);
+            $pass=password_hash($_POST['password'],PASSWORD_DEFAULT);
+            $userModel = new UserModel($_POST['username'],$_POST['fullname'],$_POST['email'],$pass);
             $userModel->create();
-            $_SESSION['message']="Register successfully";
-            header("location:".$URL."parent&action=index");
+            $_SESSION['message']="Đăng ký tài khoản thành công!";
+            // header("location:".$URL."parent&action=index");
             exit();
             }
           // set session message gi do
@@ -118,6 +121,7 @@ class UsersCTL
   }
 
   public function logout(){
+    global $BASE_URL;
     if(isset($_SESSION['id'])){
           
           unset($_SESSION['id']);
@@ -125,9 +129,10 @@ class UsersCTL
           unset($_SESSION['fullname']);
           unset($_SESSION['admin']);
           unset($_SESSION['create_at']);
+          $_SESSION['message']="Bạn đã đăng xuất thành công!";
           // phan van giua require_once home hay dung header
           // phai sua laj goi den action index cua parentctl ko chuyen thang trang luon
-          header("location:".$BASE_URL."index.php");
+          header("location:".$BASE_URL."/index.php");
           exit();
     }
   }
@@ -138,6 +143,7 @@ class UsersCTL
       $u_id=$_GET['u_id'];
       $userModel = new UserModel();
       $userModel->delete($u_id);
+      $_SESSION['message']="Xóa tài khoản thành công!";
       header("location:".$URL."admin&action=users_index");
 
     }

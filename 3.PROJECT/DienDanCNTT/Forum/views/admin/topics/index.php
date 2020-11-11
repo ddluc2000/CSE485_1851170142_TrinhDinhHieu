@@ -16,7 +16,8 @@ global $URL;
                         
                         <form action="<?php echo $URL."admin&action=topics_index";?>" method="post">
                             <div class="btn-group float float-left" role="group" aria-label="">
-                                <a class="btn btn-primary" href="<?php echo $URL."admin&action=add_tp&z_id=".$z_id;?>" role="button">Add</a>
+                                <?php if($z_id!="") $k="&z_id=".$z_id;else $k="";?>
+                                <a class="btn btn-primary" href="<?php echo $URL."admin&action=add_tp".$k;?>" role="button">Add</a>
                                 <button type="submit" name="add_mtp" class="btn btn-primary">Add Mini Topic</button>
                                 <button type="submit" name="update_tp" class="btn btn-primary">Update</button>
                                 <button type="submit" name="del_tp" class="btn btn-primary" onclick="return confirm('Bạn có chắc muốn xóa những topic đã chọn?')">Delete</button>
