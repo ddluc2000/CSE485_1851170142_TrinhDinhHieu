@@ -10,7 +10,7 @@ global $ROOT_PATH; ?>
             <div class="row">
                 <div class="col-md-12">
                     <?php include($ROOT_PATH . "/supports/message.php");?>
-                    <div class="user-content">
+                    <div class="user-content border border-dark rounded bg-white">
                         
                         <img src="<?php echo $BASE_URL.'/assets/images/avt/'.$user['avt'];?>" alt="image nao do" class="rounded-circle">
                         <div class="user-info">
@@ -41,6 +41,11 @@ global $ROOT_PATH; ?>
                                     </div>
 
                                     <div class="form-group">
+                                      <label for="signature">Chữ ký</label>
+                                      <textarea class="form-control" name="signature" rows="3" value=""></textarea>
+                                    </div>
+
+                                    <div class="form-group">
                                       <label for="password">Password</label>
                                       <input type="password" class="form-control" name="password" aria-describedby="helpId" value="">
                                     </div>
@@ -50,10 +55,23 @@ global $ROOT_PATH; ?>
                             </div>
                             <?php endif;?>
                         </div>
+
+                        <div class="user-signature">
+                            <?php echo $user['signature'];?>
+                        </div>
                     </div>
 
                     <div class="list-posted">
                         Các bài post
+                        <ul class="list-group">
+                            <?php foreach($posts as $post):?>
+                                
+                            <li class="list-group-item"><a href="<?php echo $URL."posts&action=index&p_id=".$post['post_id'];?>"><?php echo $post['title'];?></a>
+                                <br>
+                                <span><?php echo $post['create_at'];?></span>
+                            </li>
+                            <?php endforeach;?>
+                        </ul>
                     </div>
                 </div>
             </div>

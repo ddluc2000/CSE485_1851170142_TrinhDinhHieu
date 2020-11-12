@@ -30,7 +30,7 @@ global $URL;?>
                             <thead class="thead-dark">
                                 <tr>
                                     <th>
-                                    <input type="checkbox" name="" id="">
+                                    <input type="checkbox" class="checkall" onclick="check()">
                                     </th>
                                     <th>Stt</th>
                                     <th>User</th>
@@ -49,7 +49,7 @@ global $URL;?>
                                         if($user['user_id']==$report['us_reported_id']) $us_reported_id=$user;
                                     }?>
                                     <tr>
-                                        <td scope="row"><input type="checkbox" name="rp_id[]" value="<?php echo $report['rp_id'];?>"></td>
+                                        <td scope="row"><input type="checkbox" class="cb1" name="rp_id[]" value="<?php echo $report['rp_id'];?>"></td>
                                         <td><?php echo $key+1;?></td>
                                         <td><a href="<?php echo $URL."users&action=index&u_id=".$user_id['user_id'];?>"><?php echo $user_id['username'];?></a></td>
                                         <td><?php echo $report['content'];?></td>

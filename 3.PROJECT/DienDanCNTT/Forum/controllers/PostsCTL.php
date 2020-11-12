@@ -215,6 +215,16 @@ class PostsCTL extends ParentCTL
     }
   }
 
+  function search($val=''){
+    global $URL;
+    if(isset($_POST['search_post'])){
+      $val=$_POST['val'];
+      $postModel = new PostModel();
+      $posts=$postModel->searchPosts($val);
+    }
+    require_once 'views/search.php';
+  }
+
 }
 
 ?>

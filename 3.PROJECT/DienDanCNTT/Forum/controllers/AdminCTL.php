@@ -379,7 +379,7 @@ class AdminCTL extends ParentCTL
     if(isset($_POST['add_user'])){
       $role=$_POST['admin']=="Thành viên"?0:1;
       $status=isset($_POST['status'])?1:0;
-      $userModel = new UserModel($_POST['username'],$_POST['fullname'],$_POST['email'],$_POST['password'],$role,$status);
+      $userModel = new UserModel($_POST['username'],$_POST['fullname'],$_POST['email'],$_POST['password'],'','',$role,$status);
       $userModel->create();
       // set session message gi do
       $_SESSION['message']="Thêm tài khoản thành công";
@@ -410,7 +410,7 @@ class AdminCTL extends ParentCTL
     if(isset($_POST['edit_user'])){
       $role=$_POST['admin']=="Thành viên"?0:1;
       $status=isset($_POST['status'])?1:0;
-      $userModel2 = new UserModel($_POST['username'],$_POST['fullname'],$_POST['email'],'','',$role,$status);
+      $userModel2 = new UserModel($_POST['username'],$_POST['fullname'],$_POST['email'],'','','',$role,$status);
       $userModel2->update($_POST['user_id']);
       $_SESSION['message']="Cập nhật tài khoản thành công";
       header("location:".$URL."admin&action=users_index");

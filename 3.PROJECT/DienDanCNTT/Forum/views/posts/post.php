@@ -3,6 +3,7 @@ global $ROOT_PATH;
 global $URL; ?>
 <?php include($ROOT_PATH."/includes/headerp1.php");?>
     <title>Forum CSE</title>
+    <link rel="stylesheet" href="assets/css/post.css">
 <?php include($ROOT_PATH."/includes/headerp2.php");?>
 <!-- VIET BODY LUON O DAY -->
     <div class="page-wrapper">
@@ -45,6 +46,7 @@ global $URL; ?>
                                     <?php if($post['edit_at']!=NULL):?>
                                     <span>Edited at: <?php echo $post['edit_at'];?></span>
                                     <?php endif;?>
+                                    <div class="signature"><?php echo $user['signature'];?></div>
                                     <div class="grb-post btn-group" role="group" aria-label="">
                                     <!-- if isset id=post id -->
                                         <?php if(isset($_SESSION['id'])&&($_SESSION['id']==$post['user_id']||$_SESSION['admin']==1)):?>
@@ -125,6 +127,7 @@ global $URL; ?>
                                     <?php if($comment['edit_at']!==NULL):?>
                                         <span>Edited at: <?php echo $comment['edit_at'];?></span>
                                     <?php endif;?>
+                                    <div class="signature"><?php echo $us_comment[$key]['signature'];?></div>
                                     <div class="grb-post btn-group" role="group" aria-label="">
                                         <!-- check cai gi do trc da -->
                                         <?php if(isset($_SESSION['id'])&&$_SESSION['id']==$comment['user_id']):?>

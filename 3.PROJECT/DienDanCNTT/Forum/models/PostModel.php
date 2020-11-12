@@ -88,6 +88,15 @@
             // chưa xử lý có đk
         }
 
+        function getNewPost(){
+            $sql="SELECT p.title,p.post_id,u.username,p.user_id,p.create_at FROM posts As p JOIN users As u ON p.user_id=u.user_id ORDER BY post_id DESC LIMIT 7";
+            $rs=mysqli_query($this->connection,$sql);
+            $result=mysqli_fetch_all($rs,MYSQLI_ASSOC);
+            closeConnect($this->connection);
+            return $result;
+            // chưa xử lý có đk
+        }
+
         public function upviews($p_id){
             $sql = "SELECT views FROM ".self::TABLE." WHERE post_id=".$p_id;
             $result=mysqli_query($this->connection,$sql);
@@ -132,12 +141,24 @@
             closeConnect($this->connection);
             return 1;
         }
-    }
 
+        public function searchPosts($val){
+            global $conn;
+            $match = '%' . $val . '%';
+            $sql="SELECT p.*,u.username,u.avt 
+                    FROM posts As p 
+                    JOIN users as u 
+                    ON p.user_id=u.user_id 
+                    WHERE p.title like '".$match."' OR p.body like '".$match."'";
+            $rs=mysqli_query($this->connection,$sql);
+            $result=mysqli_fetch_all($rs,MYSQLI_ASSOC);
+            closeConnect($this->connection);
+            return $result;
+        }
     // $tp=new PostModel();
     // $rs=$tp->selectOne(3);
     // print_r($rs);
 
-
+    }
 
 ?>

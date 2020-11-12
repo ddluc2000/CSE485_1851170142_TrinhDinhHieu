@@ -1,5 +1,6 @@
 <?php
 require_once 'models/UserModel.php';
+require_once 'models/PostModel.php';
 require_once 'supports/validateUser.php';
 class UsersCTL
 {
@@ -10,6 +11,8 @@ class UsersCTL
     if(isset($_GET['u_id'])){
       $userModel = new UserModel();
       $user=$userModel->getOne($_GET['u_id']);
+      $postModel = new PostModel();
+      $posts=$postModel->selectAll(['user_id'=>$_GET['u_id']]);
       if($user!=NULL){
         if(isset($_POST['update'])){
           // sau chinh lai verify
@@ -26,8 +29,9 @@ class UsersCTL
               move_uploaded_file($file, $path);
               $_SESSION['avt']=$image_name;
             }
-
-            $userModel2 = new UserModel($user['username'],$_POST['fullname'],$_POST['email'],$user['password'],$image_name);
+            $signature="";
+            $signature=$_POST['signature'];
+            $userModel2 = new UserModel($user['username'],$_POST['fullname'],$_POST['email'],$user['password'],$image_name,$signature);
             $userModel2->update($user['user_id']);
             $_SESSION['fullname']=$_POST['fullname'];
             
@@ -107,7 +111,7 @@ class UsersCTL
             $userModel = new UserModel($_POST['username'],$_POST['fullname'],$_POST['email'],$pass);
             $userModel->create();
             $_SESSION['message']="Đăng ký tài khoản thành công!";
-            // header("location:".$URL."parent&action=index");
+            header("location:".$URL."parent&action=index");
             exit();
             }
           // set session message gi do

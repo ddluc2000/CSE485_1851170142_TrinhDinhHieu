@@ -30,7 +30,7 @@ global $URL;?>
                             <thead class="thead-dark">
                                 <tr>
                                     <th>
-                                    <input type="checkbox" name="" id="">
+                                    <input type="checkbox" class="checkall" onclick="check()">
                                     </th>
                                     <th>Stt</th>
                                     <th>Title</th>
@@ -43,7 +43,7 @@ global $URL;?>
                             <tbody>
                                 <?php foreach ($posts as $key=>$post):?>
                                     <tr>
-                                        <td scope="row"><input type="checkbox" name="p_id[]" value="<?php echo $post['post_id'];?>"></td>
+                                        <td scope="row"><input type="checkbox" name="p_id[]" class="cb1" value="<?php echo $post['post_id'];?>"></td>
                                         <td><?php echo $key+1;?></td>
                                         <td><a href="<?php echo $URL."posts&action=index&p_id=".$post['post_id'];?>"><?php echo $post['title'];?></a></td>
                                         <?php foreach ($users as $user):?>

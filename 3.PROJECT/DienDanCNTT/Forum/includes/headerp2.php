@@ -19,7 +19,17 @@ global $URL; ?>
                 <li class="nav-item">
                     <a href="<?php echo $BASE_URL."/index.php";?>" class="nav-link">Home</a>
                 </li>
-
+                <li class="nav-item"> 
+                        <a class="nav-link" href="#" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Search
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                            <form action="<?php echo $URL."posts&action=search"?>" method="post">
+                            <input type="text" class="form-control" name="val" aria-describedby="helpId" placeholder="">
+                            <button type="submit" name="search_post" class="btn btn-primary">search</button>
+                            </form>
+                        </div>
+                </li>
                 <li class="nav-item">
                     <a href="<?php echo $URL."parent&action=about";?>" class="nav-link">About</a>
                 </li>

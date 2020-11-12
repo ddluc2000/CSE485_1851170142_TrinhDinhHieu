@@ -11,17 +11,19 @@
         private $password;
         private $code;
         private $create_at;
+        private $signature;
         private $admin;
         private $status;
         public $connection;
         const TABLE="users";
         
-        function UserModel($username='',$fullname='',$email='',$password='',$avt='',$admin='',$status=''){
+        function UserModel($username='',$fullname='',$email='',$password='',$avt='',$signature='',$admin='',$status=''){
             $this->username=$username;
             $this->fullname=$fullname;
             $this->email=$email;
             $this->avt=$avt;
             $this->password=$password;
+            $this->signature=$signature;
             $this->admin=$admin;
             $this->status=$status;
             $this->connection=openConnect();
@@ -40,6 +42,7 @@
 
         function update($u_id){
             $sql="UPDATE ". self::TABLE . " SET username='$this->username' ,fullname='$this->fullname', email='$this->email'";
+            if($this->signature!=='')  $sql.=", signature='$this->signature'";
             if($this->admin!=='') $sql.=", admin='$this->admin'";
             if($this->status!=='') $sql.=", status='$this->status'";
             if($this->avt!=='') $sql.=", avt='$this->avt'";

@@ -40,13 +40,32 @@ header .nav li ul{
 }
 
 /* SLIDER */
+.preview{
+    margin-top: 20px; 
+}
 .slider{
-    margin-top: 20px;
+    /* margin-top: 20px; */
     border: 1px solid #727777;
     width: 100%;
     padding: 0px;
     height: 350px;
     /* background-image: url("../images/background2.jpg"); */
+}
+
+.post-new{
+    font-size: 0.9rem;
+}
+.icon-new{
+    color:orange;
+    font-size: 1rem;
+}
+.post-new a{
+    color:black;
+}
+.post-new .author{
+    font-size: 0.75rem;
+    font-style: italic;
+    color:blue;
 }
 .slider img{
     width: 100%;
@@ -56,7 +75,7 @@ header .nav li ul{
 
 /* MAIN-PAGE */
 .page-wrapper{
-    min-height: calc(100% - 292px);
+    min-height: calc(100% - 336px);
     /* height: 50px; */
 }
 .main-page{

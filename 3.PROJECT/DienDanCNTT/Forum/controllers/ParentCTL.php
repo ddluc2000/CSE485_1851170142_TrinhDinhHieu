@@ -23,6 +23,9 @@ class ParentCTL
     $mitopicModel = new MitopicModel();
     $mitopics= $mitopicModel->selectAll();
 
+    $postModel = new PostModel();
+    $posts= $postModel->getNewPost();
+
     // require_once 'views/test.php';
     require_once 'views/home.php';
   }

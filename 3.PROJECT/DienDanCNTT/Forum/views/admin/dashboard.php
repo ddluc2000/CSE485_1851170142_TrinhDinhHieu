@@ -29,7 +29,7 @@ global $ROOT_PATH; ?>
                             <thead class="thead-dark">
                                 <tr>
                                     <th>
-                                    <input type="checkbox" name="" id="">
+                                    <input type="checkbox" class="checkall" onclick="check()">
                                     </th>
                                     <th>Stt</th>
                                     <th>Title</th>
@@ -41,7 +41,7 @@ global $ROOT_PATH; ?>
                                 <?php foreach ($zones as $key=>$zone):?>
                                     <tr>
                                         <td scope="row">
-                                            <input type="checkbox" name="z_id[]" value="<?php echo $zone['zone_id'];?>">
+                                            <input type="checkbox" name="z_id[]" class="cb1" value="<?php echo $zone['zone_id'];?>">
                                             </td>
                                         <td><?php echo $key+1;?></td>
                                         <td><a href="<?php echo $URL."admin&action=view_z&z_id=".$zone['zone_id'];?>"><?php echo $zone['title'];?></a></td>

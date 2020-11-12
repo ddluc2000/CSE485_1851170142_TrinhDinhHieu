@@ -27,7 +27,7 @@ global $URL;?>
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th><input type="checkbox"></th>
+                                    <th><input type="checkbox" class="checkall" onclick="check()"></th>
                                     <th>Stt</th>
                                     <th>Fullname</th>
                                     <th>Username</th>
@@ -41,7 +41,7 @@ global $URL;?>
                             <tbody>
                                 <?php foreach ($users as $key=>$user):?>
                                     <tr>
-                                        <td scope="row"><input type="checkbox" name="us_id[]" value="<?php echo $user['user_id'];?>"></td>
+                                        <td scope="row"><input type="checkbox" class="cb1" name="us_id[]" value="<?php echo $user['user_id'];?>"></td>
                                         <td><?php echo $key+1;?></td>
                                         <td><?php echo $user['fullname'];?></td>
                                         <td><a href="<?php echo $URL."users&action=index&u_id=".$user['user_id'];?>"><?php echo $user['username'];?></a></td>

@@ -1,4 +1,6 @@
 
+
+
 function Edit_Cm(cm_id,p_id){
     var jParent=document.getElementsByClassName('cmt_id'+cm_id);
     // Thang nao bi tac dong
@@ -23,4 +25,31 @@ div.innerHTML =
     // console.log(test2);
 }
 
-  
+function check(){
+    var cball = document.getElementsByClassName("checkall");
+    var checkbox = document.getElementsByClassName("cb1");
+    for(i=0;i<checkbox.length;i++)
+    {
+        if(cball[0].checked==true)
+        checkbox[i].checked=true;
+        else
+        checkbox[i].checked=false;
+    }
+    
+}
+$(document).ready(function(){
+    $('.nav-bar a').click(function(){
+        $('.nav-bar a').removeClass('active');
+        $(this).addClass('active');
+    })
+
+    $('.newest').click(function(){
+        $('.slider').hide();
+        $('.post-new').show();
+    })
+
+    $('.home').click(function(){
+        $('.slider').show();
+        $('.post-new').hide();
+    })
+})

@@ -6,6 +6,25 @@ global $ROOT_PATH; ?>
 <!-- VIET BODY LUON O DAY -->
     <div class="page-wrapper">
         <?php include($ROOT_PATH . "/supports/message.php");?>
+        <ul class="nav nav-tabs preview container">
+            <li class="nav-item nav-bar home">
+                <a class="nav-link active" href="#">Trang chủ</a>
+            </li>
+            <li class="nav-item nav-bar newest">
+                <a class="nav-link" href="#">Bài viết mới</a>
+            </li>
+        </ul>
+        <div class="post-new" style="display:none">
+            <ul class="list-group container">
+                <?php foreach($posts as $post):?>
+                <li class="list-group-item">
+                <i class="fab fa-gripfire icon-new"></i><a href="<?php echo $URL."posts&action=index&p_id=".$post['post_id'];?>"><?php echo $post['title'];?></a>
+                <br>
+                <a class="author" href="<?php echo $URL."users&action=index&u_id=".$post['user_id'];?>"><?php echo $post['username'];?></a> <span><?php echo $post['create_at'];?></span>
+                </li>
+                <?php endforeach;?>
+            </ul>
+        </div>
         <div class="slider container">
             <img src="assets/images/background.jpg" alt="">
         </div>
